@@ -14,8 +14,11 @@ Who changed what in the Magento admin, who signed in from where, and who is sign
   parameters; records saved by the mass action are logged individually and linked through the request ID.
 - **Imports** (System > Data Transfer > Import): entity, behaviour, processed rows, created/updated/deleted counts.
 - **Configuration changes from the command line** (`bin/magento config:set`) are logged as well (admin page "cli: config:set").
-- **Secrets are masked**: passwords, tokens, hashes, encrypted/obscured config fields and config paths that look
-  like keys or passwords are stored as `******` (you still see that they changed).
+- **Secrets are masked**: passwords, tokens, API/private/licence keys, card fields, hashes, encrypted/obscured
+  config fields, config paths Magento declares sensitive and config paths that look like keys or passwords are
+  stored as `******` (you still see that they changed). Nested mass-action parameters are masked the same way.
+  A failed sign-in with an unknown username that could be a password (7+ characters with letters and digits, not
+  an email address) is stored partly masked, e.g. `Se*** (masked, may be a password)`.
 - **Login log**: successful and failed sign-ins (with reason: unknown username, wrong password, inactive account,
   CAPTCHA, ...), account lockouts, sign-ins refused by the IP allowlist, sign-outs; IP address, browser,
   and country from Cloudflare's `CF-IPCountry` header when present.
@@ -27,7 +30,10 @@ Who changed what in the Magento admin, who signed in from where, and who is sign
   your own IP, and has a CLI way back in.
 - **Grids** with filters (admin user, entity type, action, date range, IP, entity, admin page), **detail view**
   of each change with links to the record, **CSV/XML export**.
-- **Retention**: entries older than N days are deleted by a daily cron job (in batches).
+- **Retention**: entries older than N days are deleted by a daily cron job (in batches). Changes to the Activity
+  Log's own settings are always kept, so shortening the retention or switching logging off stays on record.
+- **Client IP behind Cloudflare**: "Client IP Address From" can be set to Cloudflare. The `CF-Connecting-IP` header
+  (and `CF-IPCountry`) is then trusted only on requests that come from Cloudflare's published address ranges.
 - **Exclusions**: entity types and configuration paths (with `*` wildcards) that are never logged.
 - **Low overhead**: tracking runs in the admin area only; the diff is built from data Magento already loaded
   (one extra load only for repositories that build a fresh model, such as customers); entries are kept in memory,
@@ -46,6 +52,7 @@ Who changed what in the Magento admin, who signed in from where, and who is sign
 | `softaware_activitylog/general/enabled` | 1 | Master switch (logging, alerts and allowlist) |
 | `softaware_activitylog/general/log_actions` | 1 | Admin action log |
 | `softaware_activitylog/general/log_logins` | 1 | Login log (needed for alerts) |
+| `softaware_activitylog/general/ip_source` | server | `server` (REMOTE_ADDR) or `cloudflare` (CF-Connecting-IP from Cloudflare ranges only) |
 | `softaware_activitylog/general/retention_days` | 90 | 0 = keep forever |
 | `softaware_activitylog/exclude/entity_types` | – | Comma-separated entity type codes |
 | `softaware_activitylog/exclude/config_paths` | – | One pattern per line, `*` wildcard |
@@ -81,7 +88,11 @@ Magento_Security (admin session records). No storefront code.
 - Changes written with direct SQL by Magento or third-party modules (for example stock updates, some
   "Update attributes" paths that run through the message queue) only appear as the mass action that started them.
 - Very large field values are truncated to 5,000 characters in the diff.
-- The client IP is taken from `REMOTE_ADDR`. Behind a proxy or CDN configure the web server to pass the real IP
-  (for example nginx `real_ip` with Cloudflare's ranges), otherwise the allowlist and IP alerts see the proxy IP.
+- By default the client IP is taken from `REMOTE_ADDR`. Behind Cloudflare either configure the web server to pass the
+  real IP (nginx `real_ip` with Cloudflare's ranges) or set "Client IP Address From" to Cloudflare. Behind other
+  proxies or CDNs configure the web server; otherwise the allowlist and IP alerts see the proxy IP. The built-in list
+  of Cloudflare ranges is updated with the module.
+- Entries are written in groups of up to 500 during long requests (bulk saves in the admin area, CLI runs in the
+  admin area), so memory stays flat.
 - "New country" alerts need Cloudflare with IP geolocation (`CF-IPCountry`).
 - Terminating a session takes effect on the admin's next request (Magento_Security behaviour).

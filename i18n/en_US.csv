@@ -136,3 +136,9 @@ Country,Country
 "Last Name","Last Name"
 "Signed In","Signed In"
 "Last Activity","Last Activity"
+Client IP Address From,Client IP Address From
+"Used for the logs, alerts and the IP allowlist. Keep ""Web server"" when the web server already passes the real client IP (for example nginx <code>real_ip</code>). Choose ""Cloudflare"" if the store is behind Cloudflare and the logs show Cloudflare addresses: the CF-Connecting-IP header is then used, but only on requests that come from Cloudflare's own address ranges, so it cannot be faked by connecting to the server directly.","Used for the logs, alerts and the IP allowlist. Keep ""Web server"" when the web server already passes the real client IP (for example nginx <code>real_ip</code>). Choose ""Cloudflare"" if the store is behind Cloudflare and the logs show Cloudflare addresses: the CF-Connecting-IP header is then used, but only on requests that come from Cloudflare's own address ranges, so it cannot be faked by connecting to the server directly."
+"Older entries are deleted by a daily cron job. 0 keeps everything. Changes to these Activity Log settings are always kept, so shortening the retention or switching logging off stays on record.","Older entries are deleted by a daily cron job. 0 keeps everything. Changes to these Activity Log settings are always kept, so shortening the retention or switching logging off stays on record."
+" (masked, may be a password)"," (masked, may be a password)"
+Web server (REMOTE_ADDR),Web server (REMOTE_ADDR)
+"Cloudflare (CF-Connecting-IP, only from Cloudflare addresses)","Cloudflare (CF-Connecting-IP, only from Cloudflare addresses)"
