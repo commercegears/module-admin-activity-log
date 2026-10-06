@@ -17,6 +17,8 @@ use Softaware\ActivityLog\Model\ResourceModel\Log as LogResource;
  */
 class LogBuffer
 {
+    private const MAX_BUFFERED = 500;
+
     /** @var array<int, array<string, mixed>> object id => entry waiting for the transaction commit */
     private array $staged = [];
 
@@ -67,6 +69,10 @@ class LogBuffer
         $key = $entry['key'] ?? ($entry['entity_type'] . '|' . ($entry['entity_id'] ?? uniqid('', true)));
         $entry['key'] = $key;
         $this->entries[$key] = isset($this->entries[$key]) ? $this->merge($this->entries[$key], $entry) : $entry;
+        if (count($this->entries) >= self::MAX_BUFFERED) {
+            // Long admin requests and CLI runs in the admin area (bulk saves) must not keep everything in memory.
+            $this->flush();
+        }
         if (!$this->shutdownRegistered) {
             // Safety net for requests that end with an exception before the front controller plugin flushes.
             register_shutdown_function([$this, 'flush']);
