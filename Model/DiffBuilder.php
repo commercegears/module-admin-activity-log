@@ -142,8 +142,30 @@ class DiffBuilder
 
     public function isSensitive(string $field): bool
     {
-        return in_array($field, self::SENSITIVE_FIELDS, true)
-            || (bool)preg_match('/(^|_)(password|passwd|secret|token)(_|$)/i', $field);
+        return in_array(strtolower($field), self::SENSITIVE_FIELDS, true)
+            || (bool)preg_match(
+                '/(^|_)(password|passwd|passphrase|secret|token|apikey|cvv|cvc|cc_number|cc_cid|card_number)(_|$)/i',
+                $field
+            )
+            || (bool)preg_match('/(^|_)(api|private|secret|access|license|licence|signing|encryption)_?key(_|$)/i', $field);
+    }
+
+    /**
+     * Copy of a nested array (for example posted form data) with the values of sensitive keys masked.
+     */
+    public function maskNested(mixed $value, int $depth = 0): mixed
+    {
+        if (!is_array($value) || $depth > 10) {
+            return $value;
+        }
+        foreach ($value as $key => $item) {
+            if (is_string($key) && $this->isSensitive($key) && !is_array($item)) {
+                $value[$key] = ($item === null || $item === '') ? $item : self::MASK;
+            } else {
+                $value[$key] = $this->maskNested($item, $depth + 1);
+            }
+        }
+        return $value;
     }
 
     /**

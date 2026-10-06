@@ -9,6 +9,7 @@ declare(strict_types=1);
 namespace Softaware\ActivityLog\Model;
 
 use Magento\Config\Model\Config\Backend\Encrypted;
+use Magento\Config\Model\Config\TypePool;
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Framework\App\Config\Value as ConfigValue;
 use Magento\Framework\Model\AbstractModel;
@@ -29,7 +30,8 @@ class ChangeTracker
         private readonly SnapshotLoader $snapshotLoader,
         private readonly DiffBuilder $diffBuilder,
         private readonly LogBuffer $buffer,
-        private readonly StoreManagerInterface $storeManager
+        private readonly StoreManagerInterface $storeManager,
+        private readonly TypePool $typePool
     ) {
     }
 
@@ -133,8 +135,7 @@ class ChangeTracker
         if ($old === null || $this->diffBuilder->isEqual($old, $new)) {
             return;
         }
-        $mask = $value instanceof Encrypted
-            || (bool)preg_match('/(pass(word|wd)?|secret|token|key|credential|signature|salt|hash)[^\/]*$/i', $path);
+        $mask = $this->isSecretConfig($value, $path);
         $scope = (string)($value->getScope() ?: ScopeConfigInterface::SCOPE_TYPE_DEFAULT);
         $scopeId = (int)$value->getScopeId();
         $section = strtok($path, '/');
@@ -147,6 +148,28 @@ class ChangeTracker
             'scope' => $scope === ScopeConfigInterface::SCOPE_TYPE_DEFAULT ? 'default' : $scope . ':' . $scopeId,
             'changes' => [$path => $this->diffBuilder->protect($path, $old, $new, $mask)],
         ]);
+    }
+
+    /**
+     * Encrypted or obscured fields, paths Magento declares sensitive, and paths that look like keys or passwords.
+     */
+    private function isSecretConfig(ConfigValue $value, string $path): bool
+    {
+        if ($value instanceof Encrypted) {
+            return true;
+        }
+        $fieldConfig = $value->getData('field_config');
+        if (is_array($fieldConfig) && in_array($fieldConfig['type'] ?? '', ['obscure', 'password'], true)) {
+            return true;
+        }
+        try {
+            if ($this->typePool->isPresent($path, TypePool::TYPE_SENSITIVE)) {
+                return true;
+            }
+        } catch (\Throwable) {
+            return true;
+        }
+        return (bool)preg_match('/(pass(word|wd|phrase)?|secret|token|key|credential|signature|salt|hash)[^\/]*$/i', $path);
     }
 
     private function isPathExcluded(string $path): bool

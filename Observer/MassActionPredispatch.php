@@ -84,7 +84,10 @@ class MassActionPredispatch implements ObserverInterface
             }
             $normalized = $this->diffBuilder->normalize($value);
             if ($normalized === null) {
-                $normalized = (string)json_encode($value, JSON_UNESCAPED_UNICODE | JSON_PARTIAL_OUTPUT_ON_ERROR);
+                $normalized = (string)json_encode(
+                    $this->diffBuilder->maskNested($value),
+                    JSON_UNESCAPED_UNICODE | JSON_PARTIAL_OUTPUT_ON_ERROR
+                );
             }
             if ($normalized !== '') {
                 $changes[(string)$name] = $this->diffBuilder->protect((string)$name, '', $normalized);
