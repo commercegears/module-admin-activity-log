@@ -33,8 +33,19 @@ class Cleaner
         }
         $date = gmdate('Y-m-d H:i:s', time() - $days * 86400);
         return [
-            'actions' => $this->logResource->deleteOlderThan(LogResource::TABLE, 'log_id', $date),
+            // Changes to the Activity Log's own settings are kept, so lowering the retention or switching logging
+            // off cannot remove the record of who did it.
+            'actions' => $this->logResource->deleteOlderThan(LogResource::TABLE, 'log_id', $date, 5000, [
+                $this->getKeepOwnSettingsCondition(),
+            ]),
             'logins' => $this->logResource->deleteOlderThan(LoginResource::TABLE, 'login_id', $date),
         ];
+    }
+
+    private function getKeepOwnSettingsCondition(): string
+    {
+        $connection = $this->logResource->getConnection();
+        return 'NOT (' . $connection->quoteInto('entity_type = ?', 'config')
+            . ' AND ' . $connection->quoteInto("COALESCE(entity_id, '') = ?", Config::SECTION) . ')';
     }
 }
