@@ -3,7 +3,7 @@
     <acl>
         <resources>
             <resource id="Magento_Backend::admin">
-                <resource id="Softaware_Base::base">
+                <resource id="Softaware_Core::core">
                     <resource id="Softaware_ActivityLog::activity_log" title="Admin Activity Log" translate="title" sortOrder="40">
                         <resource id="Softaware_ActivityLog::actions" title="View Admin Actions" translate="title" sortOrder="10"/>
                         <resource id="Softaware_ActivityLog::logins" title="View Login Log" translate="title" sortOrder="20"/>

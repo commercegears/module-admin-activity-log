@@ -2,7 +2,7 @@
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
     <menu>
         <add id="Softaware_ActivityLog::activity_log" title="Admin Activity Log" translate="title" module="Softaware_ActivityLog"
-             sortOrder="40" parent="Softaware_Base::base" resource="Softaware_ActivityLog::activity_log"/>
+             sortOrder="40" parent="Softaware_Core::core" resource="Softaware_ActivityLog::activity_log"/>
         <add id="Softaware_ActivityLog::actions" title="Admin Actions" translate="title" module="Softaware_ActivityLog"
              sortOrder="10" parent="Softaware_ActivityLog::activity_log" action="softaware_activitylog/log/index"
              resource="Softaware_ActivityLog::actions"/>
