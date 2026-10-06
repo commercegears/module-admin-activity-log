@@ -98,6 +98,9 @@ class LoginLogger
         } else {
             $reason = (string)__('Wrong password');
         }
+        if (!$user->getId()) {
+            $username = $this->maskPossiblePassword($username);
+        }
         $this->write([
             'user_id' => $user->getId() ? (int)$user->getId() : null,
             'username' => mb_substr($username, 0, 255),
@@ -113,8 +116,12 @@ class LoginLogger
         if (!$this->config->isLoginLogEnabled()) {
             return;
         }
+        $user = $this->userFactory->create();
+        if ($username !== '') {
+            $this->userResource->load($user, $username, 'username');
+        }
         $this->write([
-            'username' => mb_substr($username, 0, 255),
+            'username' => mb_substr($user->getId() ? $username : $this->maskPossiblePassword($username), 0, 255),
             'status' => Login::STATUS_BLOCKED,
             'country' => $this->context->getCountry(),
             'reason' => (string)__('IP address is not on the admin allowlist'),
@@ -135,6 +142,23 @@ class LoginLogger
             'reason' => mb_substr($reason, 0, 255) ?: null,
             'session_info_id' => $sessionInfoId ?? ($this->authSession->getAdminSessionInfoId() ?: null),
         ]);
+    }
+
+    /**
+     * An unknown "username" is often a password typed into the wrong field. Magento admin passwords have at
+     * least 7 characters with letters and digits; such values are partly masked (unless they are an email
+     * address), anything else cannot be an admin password and is kept for spotting attacks.
+     */
+    public function maskPossiblePassword(string $username): string
+    {
+        if (mb_strlen($username) < 7
+            || !preg_match('/\p{L}/u', $username)
+            || !preg_match('/\d/', $username)
+            || filter_var($username, FILTER_VALIDATE_EMAIL)
+        ) {
+            return $username;
+        }
+        return mb_substr($username, 0, 2) . '***' . (string)__(' (masked, may be a password)');
     }
 
     private function isLocked(User $user): bool
