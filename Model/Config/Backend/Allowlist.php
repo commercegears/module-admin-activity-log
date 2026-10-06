@@ -13,11 +13,11 @@ use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Framework\App\Config\Value;
 use Magento\Framework\Data\Collection\AbstractDb;
 use Magento\Framework\Exception\LocalizedException;
-use Magento\Framework\HTTP\PhpEnvironment\RemoteAddress;
 use Magento\Framework\Model\Context;
 use Magento\Framework\Model\ResourceModel\AbstractResource;
 use Magento\Framework\Registry;
 use Softaware\ActivityLog\Model\IpMatcher;
+use Softaware\ActivityLog\Model\RequestContext;
 
 /**
  * Validates the allowlist and refuses to enable it when the current admin's own IP is not on it.
@@ -30,7 +30,7 @@ class Allowlist extends Value
         ScopeConfigInterface $config,
         TypeListInterface $cacheTypeList,
         private readonly IpMatcher $ipMatcher,
-        private readonly RemoteAddress $remoteAddress,
+        private readonly RequestContext $requestContext,
         ?AbstractResource $resource = null,
         ?AbstractDb $resourceCollection = null,
         array $data = []
@@ -52,7 +52,9 @@ class Allowlist extends Value
             $rules[] = $rule;
         }
         $enabled = (bool)$this->getFieldsetDataValue('enabled');
-        $ip = (string)$this->remoteAddress->getRemoteAddress();
+        // Check with the IP source that is being saved in the same form, so switching it cannot lock you out.
+        $postedSource = $this->getData('groups')['general']['fields']['ip_source']['value'] ?? null;
+        $ip = $this->requestContext->getIp(is_string($postedSource) ? $postedSource : null);
         if ($enabled && $rules !== [] && $ip !== '' && !$this->ipMatcher->matches($ip, $rules)) {
             throw new LocalizedException(
                 __('Your current IP address %1 is not on the allowlist. Add it first so you do not lock yourself out.', $ip)

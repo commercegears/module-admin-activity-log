@@ -20,10 +20,24 @@ class RequestContext
 {
     private ?string $requestId = null;
 
+    /**
+     * Cloudflare's published edge ranges (https://www.cloudflare.com/ips/). CF-Connecting-IP and CF-IPCountry are
+     * only trusted from these addresses when the IP source is "Cloudflare".
+     */
+    public const CLOUDFLARE_RANGES = [
+        '173.245.48.0/20', '103.21.244.0/22', '103.22.200.0/22', '103.31.4.0/22', '141.101.64.0/18',
+        '108.162.192.0/18', '190.93.240.0/20', '188.114.96.0/20', '197.234.240.0/22', '198.41.128.0/17',
+        '162.158.0.0/15', '104.16.0.0/13', '104.24.0.0/14', '172.64.0.0/13', '131.0.72.0/22',
+        '2400:cb00::/32', '2606:4700::/32', '2803:f800::/32', '2405:b500::/32', '2405:8100::/32',
+        '2a06:98c0::/29', '2c0f:f248::/32',
+    ];
+
     public function __construct(
         private readonly AuthSession $authSession,
         private readonly RemoteAddress $remoteAddress,
-        private readonly RequestInterface $request
+        private readonly RequestInterface $request,
+        private readonly Config $config,
+        private readonly IpMatcher $ipMatcher
     ) {
     }
 
@@ -39,9 +53,32 @@ class RequestContext
         return $user && $user->getId() ? (string)$user->getUserName() : null;
     }
 
-    public function getIp(): string
+    /**
+     * Client IP. With the IP source "Cloudflare", the CF-Connecting-IP header is used when the request comes
+     * from a Cloudflare edge address; otherwise (and by default) the web server's REMOTE_ADDR.
+     *
+     * @param string|null $source IP source to use instead of the configured one (for checks before saving it)
+     */
+    public function getIp(?string $source = null): string
     {
-        return (string)$this->remoteAddress->getRemoteAddress();
+        $remote = (string)$this->remoteAddress->getRemoteAddress();
+        if (($source ?? $this->config->getIpSource()) !== Config::IP_SOURCE_CLOUDFLARE || !$this->isFromCloudflare()) {
+            return $remote;
+        }
+        $header = trim((string)$this->request->getHeader('CF-Connecting-IP'));
+        return filter_var($header, FILTER_VALIDATE_IP) ? $header : $remote;
+    }
+
+    /**
+     * Whether the connection comes straight from a Cloudflare edge server.
+     */
+    public function isFromCloudflare(): bool
+    {
+        if (!$this->request instanceof HttpRequest) {
+            return false;
+        }
+        $remote = (string)$this->remoteAddress->getRemoteAddress();
+        return $remote !== '' && $this->ipMatcher->matches($remote, self::CLOUDFLARE_RANGES);
     }
 
     public function getUserAgent(): string
@@ -56,6 +93,10 @@ class RequestContext
     public function getCountry(): ?string
     {
         if (!$this->request instanceof HttpRequest) {
+            return null;
+        }
+        if ($this->config->getIpSource() === Config::IP_SOURCE_CLOUDFLARE && !$this->isFromCloudflare()) {
+            // The request did not pass through Cloudflare, so the header could have been set by the client.
             return null;
         }
         $country = strtoupper(trim((string)$this->request->getHeader('CF-IPCountry')));

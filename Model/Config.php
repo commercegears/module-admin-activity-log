@@ -18,9 +18,13 @@ class Config
 {
     public const SECTION = 'softaware_activitylog';
 
+    public const IP_SOURCE_SERVER = 'server';
+    public const IP_SOURCE_CLOUDFLARE = 'cloudflare';
+
     private const XML_ENABLED = 'softaware_activitylog/general/enabled';
     private const XML_LOG_ACTIONS = 'softaware_activitylog/general/log_actions';
     private const XML_LOG_LOGINS = 'softaware_activitylog/general/log_logins';
+    private const XML_IP_SOURCE = 'softaware_activitylog/general/ip_source';
     private const XML_RETENTION_DAYS = 'softaware_activitylog/general/retention_days';
     private const XML_EXCLUDE_TYPES = 'softaware_activitylog/exclude/entity_types';
     private const XML_EXCLUDE_PATHS = 'softaware_activitylog/exclude/config_paths';
@@ -59,6 +63,16 @@ class Config
     public function isLoginLogEnabled(): bool
     {
         return $this->isEnabled() && $this->scopeConfig->isSetFlag(self::XML_LOG_LOGINS);
+    }
+
+    /**
+     * Where the client IP comes from: the web server (REMOTE_ADDR) or Cloudflare's CF-Connecting-IP header.
+     */
+    public function getIpSource(): string
+    {
+        return (string)$this->scopeConfig->getValue(self::XML_IP_SOURCE) === self::IP_SOURCE_CLOUDFLARE
+            ? self::IP_SOURCE_CLOUDFLARE
+            : self::IP_SOURCE_SERVER;
     }
 
     public function getRetentionDays(): int

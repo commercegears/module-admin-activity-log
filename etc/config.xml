@@ -6,6 +6,7 @@
                 <enabled>1</enabled>
                 <log_actions>1</log_actions>
                 <log_logins>1</log_logins>
+                <ip_source>server</ip_source>
                 <retention_days>90</retention_days>
             </general>
             <exclude>

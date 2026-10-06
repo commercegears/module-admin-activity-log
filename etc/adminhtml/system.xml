@@ -25,10 +25,16 @@
                     <comment>Successful and failed sign-ins, lockouts, blocked IPs and sign-outs. Required for security notifications.</comment>
                     <depends><field id="enabled">1</field></depends>
                 </field>
+                <field id="ip_source" translate="label comment" type="select" sortOrder="35" showInDefault="1" canRestore="1">
+                    <label>Client IP Address From</label>
+                    <source_model>Softaware\ActivityLog\Model\Source\IpSource</source_model>
+                    <comment><![CDATA[Used for the logs, alerts and the IP allowlist. Keep "Web server" when the web server already passes the real client IP (for example nginx <code>real_ip</code>). Choose "Cloudflare" if the store is behind Cloudflare and the logs show Cloudflare addresses: the CF-Connecting-IP header is then used, but only on requests that come from Cloudflare's own address ranges, so it cannot be faked by connecting to the server directly.]]></comment>
+                    <depends><field id="enabled">1</field></depends>
+                </field>
                 <field id="retention_days" translate="label comment" type="text" sortOrder="40" showInDefault="1" canRestore="1">
                     <label>Keep Log Entries For (Days)</label>
                     <validate>validate-digits validate-zero-or-greater</validate>
-                    <comment>Older entries are deleted by a daily cron job. 0 keeps everything.</comment>
+                    <comment>Older entries are deleted by a daily cron job. 0 keeps everything. Changes to these Activity Log settings are always kept, so shortening the retention or switching logging off stays on record.</comment>
                     <depends><field id="enabled">1</field></depends>
                 </field>
             </group>
