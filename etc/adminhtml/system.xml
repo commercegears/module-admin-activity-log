@@ -1,0 +1,127 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <section id="softaware_activitylog" translate="label" sortOrder="40" showInDefault="1" showInWebsite="0" showInStore="0">
+            <class>separator-top</class>
+            <label>Admin Activity Log</label>
+            <tab>softaware</tab>
+            <resource>Softaware_ActivityLog::config</resource>
+            <group id="general" translate="label" sortOrder="10" showInDefault="1">
+                <label>General</label>
+                <field id="enabled" translate="label comment" type="select" sortOrder="10" showInDefault="1" canRestore="1">
+                    <label>Enabled</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>When off, nothing is logged, no alerts are sent and the IP allowlist is not enforced.</comment>
+                </field>
+                <field id="log_actions" translate="label comment" type="select" sortOrder="20" showInDefault="1" canRestore="1">
+                    <label>Log Admin Actions</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Create, update and delete of catalog, CMS, customers, sales documents, price rules, configuration, admin users and roles, plus mass actions and imports.</comment>
+                    <depends><field id="enabled">1</field></depends>
+                </field>
+                <field id="log_logins" translate="label comment" type="select" sortOrder="30" showInDefault="1" canRestore="1">
+                    <label>Log Admin Sign-ins</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Successful and failed sign-ins, lockouts, blocked IPs and sign-outs. Required for security notifications.</comment>
+                    <depends><field id="enabled">1</field></depends>
+                </field>
+                <field id="retention_days" translate="label comment" type="text" sortOrder="40" showInDefault="1" canRestore="1">
+                    <label>Keep Log Entries For (Days)</label>
+                    <validate>validate-digits validate-zero-or-greater</validate>
+                    <comment>Older entries are deleted by a daily cron job. 0 keeps everything.</comment>
+                    <depends><field id="enabled">1</field></depends>
+                </field>
+            </group>
+            <group id="exclude" translate="label" sortOrder="20" showInDefault="1">
+                <label>Exclusions</label>
+                <depends><field id="softaware_activitylog/general/enabled">1</field></depends>
+                <field id="entity_types" translate="label comment" type="multiselect" sortOrder="10" showInDefault="1" canRestore="1">
+                    <label>Do Not Log These Entities</label>
+                    <source_model>Softaware\ActivityLog\Model\Source\EntityType</source_model>
+                    <can_be_empty>1</can_be_empty>
+                </field>
+                <field id="config_paths" translate="label comment" type="textarea" sortOrder="20" showInDefault="1" canRestore="1">
+                    <label>Do Not Log These Configuration Paths</label>
+                    <comment><![CDATA[One path per line, <code>*</code> is a wildcard, for example <code>design/*</code> or <code>catalog/frontend/list_per_page</code>. Secret values (passwords, keys, tokens, encrypted fields) are always masked.]]></comment>
+                </field>
+            </group>
+            <group id="notifications" translate="label" sortOrder="30" showInDefault="1">
+                <label>Security Notifications</label>
+                <depends><field id="softaware_activitylog/general/enabled">1</field></depends>
+                <field id="enabled" translate="label" type="select" sortOrder="10" showInDefault="1" canRestore="1">
+                    <label>Enabled</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="admin_notice" translate="label comment" type="select" sortOrder="20" showInDefault="1" canRestore="1">
+                    <label>Add Admin Notification</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Shows the alert in the admin notification inbox (bell icon).</comment>
+                    <depends><field id="enabled">1</field></depends>
+                </field>
+                <field id="recipients" translate="label comment" type="text" sortOrder="30" showInDefault="1">
+                    <label>Email Recipients</label>
+                    <comment>Comma-separated email addresses. Leave empty for admin notifications only.</comment>
+                    <depends><field id="enabled">1</field></depends>
+                </field>
+                <field id="sender" translate="label" type="select" sortOrder="40" showInDefault="1" canRestore="1">
+                    <label>Email Sender</label>
+                    <source_model>Magento\Config\Model\Config\Source\Email\Identity</source_model>
+                    <depends><field id="enabled">1</field></depends>
+                </field>
+                <field id="failed_threshold" translate="label comment" type="text" sortOrder="50" showInDefault="1" canRestore="1">
+                    <label>Alert After Failed Sign-ins From One IP</label>
+                    <validate>required-entry validate-digits validate-greater-than-zero</validate>
+                    <comment>Lockouts of an admin account are always reported.</comment>
+                    <depends><field id="enabled">1</field></depends>
+                </field>
+                <field id="failed_window" translate="label" type="text" sortOrder="60" showInDefault="1" canRestore="1">
+                    <label>Within (Minutes)</label>
+                    <validate>required-entry validate-digits validate-greater-than-zero</validate>
+                    <depends><field id="enabled">1</field></depends>
+                </field>
+                <field id="new_ip" translate="label comment" type="select" sortOrder="70" showInDefault="1" canRestore="1">
+                    <label>Alert on Sign-in From a New IP</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>When an admin signs in from an IP address they have not used before.</comment>
+                    <depends><field id="enabled">1</field></depends>
+                </field>
+                <field id="new_country" translate="label comment" type="select" sortOrder="80" showInDefault="1" canRestore="1">
+                    <label>Alert on Sign-in From a New Country</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Uses the CF-IPCountry header, so it only works when the store is behind Cloudflare with IP geolocation on.</comment>
+                    <depends><field id="enabled">1</field></depends>
+                </field>
+                <field id="notify_user" translate="label comment" type="select" sortOrder="90" showInDefault="1" canRestore="1">
+                    <label>Also Email the Admin User</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Sends the new IP / new country alert to the admin account's own email address too.</comment>
+                    <depends><field id="enabled">1</field></depends>
+                </field>
+                <field id="failed_template" translate="label" type="select" sortOrder="100" showInDefault="1" canRestore="1">
+                    <label>Failed Sign-in Email Template</label>
+                    <source_model>Magento\Config\Model\Config\Source\Email\Template</source_model>
+                    <depends><field id="enabled">1</field></depends>
+                </field>
+                <field id="new_ip_template" translate="label" type="select" sortOrder="110" showInDefault="1" canRestore="1">
+                    <label>New IP / Country Email Template</label>
+                    <source_model>Magento\Config\Model\Config\Source\Email\Template</source_model>
+                    <depends><field id="enabled">1</field></depends>
+                </field>
+            </group>
+            <group id="allowlist" translate="label comment" sortOrder="40" showInDefault="1">
+                <label>Admin IP Allowlist</label>
+                <comment><![CDATA[Only these IP addresses can use the admin panel. If you lock yourself out, run <code>bin/magento softaware:activity-log:allowlist --disable</code>. Behind a proxy or CDN make sure the web server passes the real client IP (for example nginx <code>real_ip</code> with Cloudflare's ranges).]]></comment>
+                <depends><field id="softaware_activitylog/general/enabled">1</field></depends>
+                <field id="enabled" translate="label" type="select" sortOrder="10" showInDefault="1" canRestore="1">
+                    <label>Enabled</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="ips" translate="label comment" type="textarea" sortOrder="20" showInDefault="1">
+                    <label>Allowed IP Addresses</label>
+                    <backend_model>Softaware\ActivityLog\Model\Config\Backend\Allowlist</backend_model>
+                    <comment><![CDATA[One IPv4/IPv6 address or CIDR range per line (for example <code>203.0.113.10</code> or <code>198.51.100.0/24</code>). Text after <code>#</code> is a comment. An empty list allows everyone.]]></comment>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

@@ -1,0 +1,126 @@
+<?php
+/**
+ * Softaware Admin Activity Log
+ *
+ * @var \Softaware\ActivityLog\Block\Adminhtml\Log\View $block
+ * @var \Magento\Framework\Escaper $escaper
+ */
+$entry = $block->getEntry();
+if (!$entry) {
+    return;
+}
+$changes = $entry->getChangeList();
+$entityUrl = $block->getEntityUrl($entry) ?? $block->getConfigUrl($entry);
+$related = $block->getRelatedEntries($entry);
+?>
+<div class="softaware-activitylog-view">
+    <p><a href="<?= $escaper->escapeUrl($block->getBackUrl()) ?>">&larr; <?= $escaper->escapeHtml(__('Back to Admin Actions')) ?></a></p>
+
+    <section class="admin__page-section">
+        <div class="admin__page-section-title"><span class="title"><?= $escaper->escapeHtml(__('Summary')) ?></span></div>
+        <table class="admin__table-secondary">
+            <tbody>
+            <tr>
+                <th><?= $escaper->escapeHtml(__('Time')) ?></th>
+                <td><?= $escaper->escapeHtml($block->formatUtcTime((string)$entry->getData('created_at'))) ?></td>
+            </tr>
+            <tr>
+                <th><?= $escaper->escapeHtml(__('Admin user')) ?></th>
+                <td><?= $escaper->escapeHtml($entry->getData('username') ?: __('(not signed in)')) ?></td>
+            </tr>
+            <tr>
+                <th><?= $escaper->escapeHtml(__('IP address')) ?></th>
+                <td><?= $escaper->escapeHtml($entry->getData('ip')) ?></td>
+            </tr>
+            <tr>
+                <th><?= $escaper->escapeHtml(__('Action')) ?></th>
+                <td><?= $escaper->escapeHtml($block->getActionLabel((string)$entry->getData('action'))) ?></td>
+            </tr>
+            <tr>
+                <th><?= $escaper->escapeHtml(__('Entity')) ?></th>
+                <td>
+                    <?= $escaper->escapeHtml($block->getTypeLabel((string)$entry->getData('entity_type'))) ?>
+                    <?php if ($entry->getData('entity_id')): ?>
+                        #<?= $escaper->escapeHtml($entry->getData('entity_id')) ?>
+                    <?php endif; ?>
+                    <?php if ($entry->getData('entity_label')): ?>
+                        &ndash; <?= $escaper->escapeHtml($entry->getData('entity_label')) ?>
+                    <?php endif; ?>
+                    <?php if ($entityUrl): ?>
+                        (<a href="<?= $escaper->escapeUrl($entityUrl) ?>"><?= $escaper->escapeHtml(__('open')) ?></a>)
+                    <?php endif; ?>
+                </td>
+            </tr>
+            <?php if ($entry->getData('scope')): ?>
+                <tr>
+                    <th><?= $escaper->escapeHtml(__('Scope')) ?></th>
+                    <td><?= $escaper->escapeHtml($entry->getData('scope')) ?></td>
+                </tr>
+            <?php endif; ?>
+            <tr>
+                <th><?= $escaper->escapeHtml(__('Admin page')) ?></th>
+                <td><code><?= $escaper->escapeHtml($entry->getData('request_path')) ?></code></td>
+            </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <section class="admin__page-section">
+        <div class="admin__page-section-title"><span class="title"><?= $escaper->escapeHtml(__('Changes')) ?></span></div>
+        <?php if (!$changes): ?>
+            <p><?= $escaper->escapeHtml(
+                $entry->getData('action') === 'delete' ? __('The record was deleted.') : __('No field changes were recorded.')
+            ) ?></p>
+        <?php else: ?>
+            <table class="data-table admin__table-primary softaware-activitylog-diff">
+                <thead>
+                <tr>
+                    <th><?= $escaper->escapeHtml(__('Field')) ?></th>
+                    <th><?= $escaper->escapeHtml(__('Old value')) ?></th>
+                    <th><?= $escaper->escapeHtml(__('New value')) ?></th>
+                </tr>
+                </thead>
+                <tbody>
+                <?php foreach ($changes as $change): ?>
+                    <tr>
+                        <td><code><?= $escaper->escapeHtml($change['field'] ?? '') ?></code></td>
+                        <td class="softaware-activitylog-old"><?= nl2br($escaper->escapeHtml((string)($change['old'] ?? ''))) ?></td>
+                        <td class="softaware-activitylog-new"><?= nl2br($escaper->escapeHtml((string)($change['new'] ?? ''))) ?></td>
+                    </tr>
+                <?php endforeach; ?>
+                </tbody>
+            </table>
+        <?php endif; ?>
+    </section>
+
+    <?php if ($related): ?>
+        <section class="admin__page-section">
+            <div class="admin__page-section-title">
+                <span class="title"><?= $escaper->escapeHtml(__('Other changes in the same request')) ?></span>
+            </div>
+            <table class="data-table admin__table-primary">
+                <thead>
+                <tr>
+                    <th><?= $escaper->escapeHtml(__('ID')) ?></th>
+                    <th><?= $escaper->escapeHtml(__('Action')) ?></th>
+                    <th><?= $escaper->escapeHtml(__('Entity')) ?></th>
+                    <th><?= $escaper->escapeHtml(__('Changed fields')) ?></th>
+                </tr>
+                </thead>
+                <tbody>
+                <?php foreach ($related as $item): ?>
+                    <tr>
+                        <td><a href="<?= $escaper->escapeUrl($block->getViewUrl((int)$item->getId())) ?>">#<?= (int)$item->getId() ?></a></td>
+                        <td><?= $escaper->escapeHtml($block->getActionLabel((string)$item->getData('action'))) ?></td>
+                        <td>
+                            <?= $escaper->escapeHtml($block->getTypeLabel((string)$item->getData('entity_type'))) ?>
+                            <?= $escaper->escapeHtml($item->getData('entity_label')) ?>
+                        </td>
+                        <td><?= (int)$item->getData('changes_count') ?></td>
+                    </tr>
+                <?php endforeach; ?>
+                </tbody>
+            </table>
+        </section>
+    <?php endif; ?>
+</div>

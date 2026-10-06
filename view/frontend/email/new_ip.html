@@ -1,0 +1,21 @@
+<!--@subject {{trans "Security notice: %title" title=$title}} @-->
+<!--@vars {
+"var title":"Alert title",
+"var description":"Alert description",
+"var username":"Username",
+"var ip":"IP address",
+"var time":"Time (UTC)",
+"var log_url":"Login log URL"
+} @-->
+{{template config_path="design/email/header_template"}}
+
+<h1>{{var title}}</h1>
+<p>{{var description}}</p>
+<table>
+    <tr><th align="left">{{trans "Username"}}</th><td>{{var username}}</td></tr>
+    <tr><th align="left">{{trans "IP address"}}</th><td>{{var ip}}</td></tr>
+    <tr><th align="left">{{trans "Time"}}</th><td>{{var time}}</td></tr>
+</table>
+<p><a href="{{var log_url}}">{{trans "Open the login log"}}</a></p>
+
+{{template config_path="design/email/footer_template"}}

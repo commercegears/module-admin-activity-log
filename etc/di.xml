@@ -1,0 +1,155 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <!-- Tracked entities. Other modules can add items: class (comma-separated), label, label_fields, extra_fields, ignore_fields. -->
+    <type name="Softaware\ActivityLog\Model\EntityTypeResolver">
+        <arguments>
+            <argument name="types" xsi:type="array">
+                <item name="product" xsi:type="array">
+                    <item name="class" xsi:type="string">Magento\Catalog\Model\Product</item>
+                    <item name="label" xsi:type="string">Product</item>
+                    <item name="label_fields" xsi:type="string">sku,name</item>
+                    <item name="extra_fields" xsi:type="string">category_ids,website_ids</item>
+                    <item name="ignore_fields" xsi:type="string">has_options,required_options,url_path,media_gallery,quantity_and_stock_status,image_label,small_image_label,thumbnail_label</item>
+                </item>
+                <item name="category" xsi:type="array">
+                    <item name="class" xsi:type="string">Magento\Catalog\Model\Category</item>
+                    <item name="label" xsi:type="string">Category</item>
+                    <item name="label_fields" xsi:type="string">name</item>
+                    <item name="ignore_fields" xsi:type="string">children_count,url_path,all_children,children,path_ids</item>
+                </item>
+                <item name="cms_page" xsi:type="array">
+                    <item name="class" xsi:type="string">Magento\Cms\Model\Page</item>
+                    <item name="label" xsi:type="string">CMS Page</item>
+                    <item name="label_fields" xsi:type="string">title,identifier</item>
+                </item>
+                <item name="cms_block" xsi:type="array">
+                    <item name="class" xsi:type="string">Magento\Cms\Model\Block</item>
+                    <item name="label" xsi:type="string">CMS Block</item>
+                    <item name="label_fields" xsi:type="string">title,identifier</item>
+                </item>
+                <item name="customer" xsi:type="array">
+                    <item name="class" xsi:type="string">Magento\Customer\Model\Customer</item>
+                    <item name="label" xsi:type="string">Customer</item>
+                    <item name="label_fields" xsi:type="string">email</item>
+                    <item name="ignore_fields" xsi:type="string">created_in,increment_id</item>
+                </item>
+                <item name="order" xsi:type="array">
+                    <item name="class" xsi:type="string">Magento\Sales\Model\Order</item>
+                    <item name="label" xsi:type="string">Order</item>
+                    <item name="label_fields" xsi:type="string">increment_id</item>
+                    <item name="ignore_fields" xsi:type="string">protect_code,send_email,email_sent,customer_note_notify,edit_increment,remote_ip,x_forwarded_for</item>
+                </item>
+                <item name="invoice" xsi:type="array">
+                    <item name="class" xsi:type="string">Magento\Sales\Model\Order\Invoice</item>
+                    <item name="label" xsi:type="string">Invoice</item>
+                    <item name="label_fields" xsi:type="string">increment_id</item>
+                    <item name="ignore_fields" xsi:type="string">send_email,email_sent</item>
+                </item>
+                <item name="shipment" xsi:type="array">
+                    <item name="class" xsi:type="string">Magento\Sales\Model\Order\Shipment</item>
+                    <item name="label" xsi:type="string">Shipment</item>
+                    <item name="label_fields" xsi:type="string">increment_id</item>
+                    <item name="ignore_fields" xsi:type="string">send_email,email_sent,packages</item>
+                </item>
+                <item name="creditmemo" xsi:type="array">
+                    <item name="class" xsi:type="string">Magento\Sales\Model\Order\Creditmemo</item>
+                    <item name="label" xsi:type="string">Credit Memo</item>
+                    <item name="label_fields" xsi:type="string">increment_id</item>
+                    <item name="ignore_fields" xsi:type="string">send_email,email_sent</item>
+                </item>
+                <item name="order_comment" xsi:type="array">
+                    <item name="class" xsi:type="string">Magento\Sales\Model\Order\Status\History,Magento\Sales\Model\Order\Invoice\Comment,Magento\Sales\Model\Order\Shipment\Comment,Magento\Sales\Model\Order\Creditmemo\Comment</item>
+                    <item name="label" xsi:type="string">Order / Document Comment</item>
+                    <item name="ignore_fields" xsi:type="string">is_customer_notified</item>
+                </item>
+                <item name="cart_price_rule" xsi:type="array">
+                    <item name="class" xsi:type="string">Magento\SalesRule\Model\Rule</item>
+                    <item name="label" xsi:type="string">Cart Price Rule</item>
+                    <item name="label_fields" xsi:type="string">name</item>
+                    <item name="ignore_fields" xsi:type="string">times_used</item>
+                </item>
+                <item name="catalog_price_rule" xsi:type="array">
+                    <item name="class" xsi:type="string">Magento\CatalogRule\Model\Rule</item>
+                    <item name="label" xsi:type="string">Catalog Price Rule</item>
+                    <item name="label_fields" xsi:type="string">name</item>
+                </item>
+                <item name="admin_user" xsi:type="array">
+                    <item name="class" xsi:type="string">Magento\User\Model\User</item>
+                    <item name="label" xsi:type="string">Admin User</item>
+                    <item name="label_fields" xsi:type="string">username</item>
+                    <item name="ignore_fields" xsi:type="string">extra,lognum,logdate,modified,reload_acl_flag,interface_locale_changed</item>
+                </item>
+                <item name="admin_role" xsi:type="array">
+                    <item name="class" xsi:type="string">Magento\Authorization\Model\Role</item>
+                    <item name="label" xsi:type="string">Admin Role</item>
+                    <item name="label_fields" xsi:type="string">role_name</item>
+                    <item name="ignore_fields" xsi:type="string">tree_level,sort_order</item>
+                </item>
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string">Configuration</item>
+                </item>
+                <item name="import" xsi:type="array">
+                    <item name="label" xsi:type="string">Import</item>
+                </item>
+                <item name="other" xsi:type="array">
+                    <item name="label" xsi:type="string">Other</item>
+                </item>
+            </argument>
+        </arguments>
+    </type>
+
+    <!-- Admin grids -->
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="softaware_activitylog_log_listing_data_source" xsi:type="string">Softaware\ActivityLog\Model\ResourceModel\Log\Grid\Collection</item>
+                <item name="softaware_activitylog_login_listing_data_source" xsi:type="string">Softaware\ActivityLog\Model\ResourceModel\Login\Grid\Collection</item>
+                <item name="softaware_activitylog_session_listing_data_source" xsi:type="string">Softaware\ActivityLog\Model\ResourceModel\Session\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+    <virtualType name="Softaware\ActivityLog\Model\ResourceModel\Log\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">softaware_activity_log</argument>
+            <argument name="resourceModel" xsi:type="string">Softaware\ActivityLog\Model\ResourceModel\Log</argument>
+            <argument name="identifierName" xsi:type="string">log_id</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Softaware\ActivityLog\Model\ResourceModel\Login\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">softaware_activity_log_login</argument>
+            <argument name="resourceModel" xsi:type="string">Softaware\ActivityLog\Model\ResourceModel\Login</argument>
+            <argument name="identifierName" xsi:type="string">login_id</argument>
+        </arguments>
+    </virtualType>
+
+    <type name="Softaware\ActivityLog\Model\RequestContext">
+        <arguments>
+            <argument name="authSession" xsi:type="object">Magento\Backend\Model\Auth\Session\Proxy</argument>
+        </arguments>
+    </type>
+    <type name="Softaware\ActivityLog\Model\LoginLogger">
+        <arguments>
+            <argument name="authSession" xsi:type="object">Magento\Backend\Model\Auth\Session\Proxy</argument>
+        </arguments>
+    </type>
+    <type name="Softaware\ActivityLog\Model\SessionTerminator">
+        <arguments>
+            <argument name="authSession" xsi:type="object">Magento\Backend\Model\Auth\Session\Proxy</argument>
+        </arguments>
+    </type>
+
+    <type name="Magento\Framework\Console\CommandListInterface">
+        <arguments>
+            <argument name="commands" xsi:type="array">
+                <item name="softaware_activitylog_clean" xsi:type="object">Softaware\ActivityLog\Console\Command\CleanCommand</item>
+                <item name="softaware_activitylog_allowlist" xsi:type="object">Softaware\ActivityLog\Console\Command\AllowlistCommand\Proxy</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Softaware\ActivityLog\Console\Command\CleanCommand">
+        <arguments>
+            <argument name="cleaner" xsi:type="object">Softaware\ActivityLog\Model\Cleaner\Proxy</argument>
+        </arguments>
+    </type>
+</config>

@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Email:etc/email_templates.xsd">
+    <template id="softaware_activitylog_notifications_failed_template" label="Admin Activity Log: Failed Sign-ins / Lockout"
+              file="failed_logins.html" type="html" module="Softaware_ActivityLog" area="frontend"/>
+    <template id="softaware_activitylog_notifications_new_ip_template" label="Admin Activity Log: Sign-in From New IP or Country"
+              file="new_ip.html" type="html" module="Softaware_ActivityLog" area="frontend"/>
+</config>

@@ -1,0 +1,138 @@
+"Admin Actions","Admin Actions"
+"This log entry no longer exists.","This log entry no longer exists."
+"Admin Action #%1","Admin Action #%1"
+"Admin Login Log","Admin Login Log"
+"Active Admin Sessions","Active Admin Sessions"
+"%1 session(s) terminated.","%1 session(s) terminated."
+"%1 session(s) skipped (your own session or already ended).","%1 session(s) skipped (your own session or already ended)."
+"The session was terminated. The admin is signed out on their next click.","The session was terminated. The admin is signed out on their next click."
+"(use parent scope)","(use parent scope)"
+"Website: %1","Website: %1"
+"Store view: %1","Store view: %1"
+"Default Config","Default Config"
+"""%1"" is not a valid IP address or CIDR range.","""%1"" is not a valid IP address or CIDR range."
+"Your current IP address %1 is not on the allowlist. Add it first so you do not lock yourself out.","Your current IP address %1 is not on the allowlist. Add it first so you do not lock yourself out."
+"Order #%1","Order #%1"
+label,label
+"Unknown username","Unknown username"
+"Account locked until %1 (UTC)","Account locked until %1 (UTC)"
+"Account is inactive","Account is inactive"
+"Wrong password","Wrong password"
+"IP address is not on the admin allowlist","IP address is not on the admin allowlist"
+"Admin account ""%1"" was locked after failed sign-in attempts","Admin account ""%1"" was locked after failed sign-in attempts"
+"The last attempt came from IP %1.","The last attempt came from IP %1."
+"%1 failed admin sign-in attempts from IP %2","%1 failed admin sign-in attempts from IP %2"
+"%1 failed sign-in attempts from IP %2 in the last %3 minutes. Last username tried: ""%4"".","%1 failed sign-in attempts from IP %2 in the last %3 minutes. Last username tried: ""%4""."
+"new IP address %1","new IP address %1"
+"new country %1","new country %1"
+"Admin ""%1"" signed in from a %2","Admin ""%1"" signed in from a %2"
+"Sign-in by %1 from IP %2%3. If this was not expected, terminate the session under Softaware > Admin Activity Log > Active Sessions and change the password.","Sign-in by %1 from IP %2%3. If this was not expected, terminate the session under Softaware > Admin Activity Log > Active Sessions and change the password."
+"This is your own session. Use ""Sign Out"" instead.","This is your own session. Use ""Sign Out"" instead."
+"The session no longer exists.","The session no longer exists."
+"Session terminated by %1","Session terminated by %1"
+Create,Create
+Update,Update
+Delete,Delete
+Move,Move
+"Mass action","Mass action"
+Import,Import
+"Signed in","Signed in"
+Failed,Failed
+"Locked out","Locked out"
+"Blocked (IP)","Blocked (IP)"
+"Signed out","Signed out"
+"%1 (%2)","%1 (%2)"
+"%1 selected","%1 selected"
+"all records matching the grid filter","all records matching the grid filter"
+"all records matching the grid filter except %1","all records matching the grid filter except %1"
+"selection not specified","selection not specified"
+"Admin sign-in from your IP address (%1) is not allowed.","Admin sign-in from your IP address (%1) is not allowed."
+"Bulk attribute update of %1 product(s)","Bulk attribute update of %1 product(s)"
+View,View
+"(this session)","(this session)"
+Terminate,Terminate
+"Terminate session","Terminate session"
+"Sign out %1 (IP %2)?","Sign out %1 (IP %2)?"
+"Back to Admin Actions","Back to Admin Actions"
+Summary,Summary
+Time,Time
+"Admin user","Admin user"
+"(not signed in)","(not signed in)"
+"IP address","IP address"
+Action,Action
+Entity,Entity
+open,open
+Scope,Scope
+"Admin page","Admin page"
+Changes,Changes
+"The record was deleted.","The record was deleted."
+"No field changes were recorded.","No field changes were recorded."
+Field,Field
+"Old value","Old value"
+"New value","New value"
+"Other changes in the same request","Other changes in the same request"
+ID,ID
+"Changed fields","Changed fields"
+"Security alert: %title","Security alert: %title"
+Username,Username
+"If you do not recognise this activity, consider adding the admin IP allowlist and changing the affected passwords.","If you do not recognise this activity, consider adding the admin IP allowlist and changing the affected passwords."
+"Open the login log","Open the login log"
+"Security notice: %title","Security notice: %title"
+"Admin Activity Log","Admin Activity Log"
+"View Admin Actions","View Admin Actions"
+"View Login Log","View Login Log"
+"Manage Active Sessions","Manage Active Sessions"
+Settings,Settings
+"Login Log","Login Log"
+"Active Sessions","Active Sessions"
+General,General
+Enabled,Enabled
+"When off, nothing is logged, no alerts are sent and the IP allowlist is not enforced.","When off, nothing is logged, no alerts are sent and the IP allowlist is not enforced."
+"Log Admin Actions","Log Admin Actions"
+"Create, update and delete of catalog, CMS, customers, sales documents, price rules, configuration, admin users and roles, plus mass actions and imports.","Create, update and delete of catalog, CMS, customers, sales documents, price rules, configuration, admin users and roles, plus mass actions and imports."
+"Log Admin Sign-ins","Log Admin Sign-ins"
+"Successful and failed sign-ins, lockouts, blocked IPs and sign-outs. Required for security notifications.","Successful and failed sign-ins, lockouts, blocked IPs and sign-outs. Required for security notifications."
+"Keep Log Entries For (Days)","Keep Log Entries For (Days)"
+"Older entries are deleted by a daily cron job. 0 keeps everything.","Older entries are deleted by a daily cron job. 0 keeps everything."
+Exclusions,Exclusions
+"Do Not Log These Entities","Do Not Log These Entities"
+"Do Not Log These Configuration Paths","Do Not Log These Configuration Paths"
+"One path per line, <code>*</code> is a wildcard, for example <code>design/*</code> or <code>catalog/frontend/list_per_page</code>. Secret values (passwords, keys, tokens, encrypted fields) are always masked.","One path per line, <code>*</code> is a wildcard, for example <code>design/*</code> or <code>catalog/frontend/list_per_page</code>. Secret values (passwords, keys, tokens, encrypted fields) are always masked."
+"Security Notifications","Security Notifications"
+"Add Admin Notification","Add Admin Notification"
+"Shows the alert in the admin notification inbox (bell icon).","Shows the alert in the admin notification inbox (bell icon)."
+"Email Recipients","Email Recipients"
+"Comma-separated email addresses. Leave empty for admin notifications only.","Comma-separated email addresses. Leave empty for admin notifications only."
+"Email Sender","Email Sender"
+"Alert After Failed Sign-ins From One IP","Alert After Failed Sign-ins From One IP"
+"Lockouts of an admin account are always reported.","Lockouts of an admin account are always reported."
+"Within (Minutes)","Within (Minutes)"
+"Alert on Sign-in From a New IP","Alert on Sign-in From a New IP"
+"When an admin signs in from an IP address they have not used before.","When an admin signs in from an IP address they have not used before."
+"Alert on Sign-in From a New Country","Alert on Sign-in From a New Country"
+"Uses the CF-IPCountry header, so it only works when the store is behind Cloudflare with IP geolocation on.","Uses the CF-IPCountry header, so it only works when the store is behind Cloudflare with IP geolocation on."
+"Also Email the Admin User","Also Email the Admin User"
+"Sends the new IP / new country alert to the admin account's own email address too.","Sends the new IP / new country alert to the admin account's own email address too."
+"Failed Sign-in Email Template","Failed Sign-in Email Template"
+"New IP / Country Email Template","New IP / Country Email Template"
+"Admin IP Allowlist","Admin IP Allowlist"
+"Only these IP addresses can use the admin panel. If you lock yourself out, run <code>bin/magento softaware:activity-log:allowlist --disable</code>. Behind a proxy or CDN make sure the web server passes the real client IP (for example nginx <code>real_ip</code> with Cloudflare's ranges).","Only these IP addresses can use the admin panel. If you lock yourself out, run <code>bin/magento softaware:activity-log:allowlist --disable</code>. Behind a proxy or CDN make sure the web server passes the real client IP (for example nginx <code>real_ip</code> with Cloudflare's ranges)."
+"Allowed IP Addresses","Allowed IP Addresses"
+"One IPv4/IPv6 address or CIDR range per line (for example <code>203.0.113.10</code> or <code>198.51.100.0/24</code>). Text after <code>#</code> is a comment. An empty list allows everyone.","One IPv4/IPv6 address or CIDR range per line (for example <code>203.0.113.10</code> or <code>198.51.100.0/24</code>). Text after <code>#</code> is a comment. An empty list allows everyone."
+"Admin User","Admin User"
+"Entity Type","Entity Type"
+"Entity ID","Entity ID"
+"Changed Fields","Changed Fields"
+"IP Address","IP Address"
+"Admin Page","Admin Page"
+"Request ID","Request ID"
+Result,Result
+Reason,Reason
+Country,Country
+"Browser (User Agent)","Browser (User Agent)"
+"Sign out the selected admin sessions? Your own session is skipped.","Sign out the selected admin sessions? Your own session is skipped."
+"Terminate sessions","Terminate sessions"
+"First Name","First Name"
+"Last Name","Last Name"
+"Signed In","Signed In"
+"Last Activity","Last Activity"

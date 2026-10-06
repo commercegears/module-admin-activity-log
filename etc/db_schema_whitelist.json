@@ -1,0 +1,53 @@
+{
+    "softaware_activity_log": {
+        "column": {
+            "log_id": true,
+            "created_at": true,
+            "user_id": true,
+            "username": true,
+            "ip": true,
+            "action": true,
+            "entity_type": true,
+            "entity_id": true,
+            "entity_label": true,
+            "scope": true,
+            "request_path": true,
+            "request_id": true,
+            "changes_count": true,
+            "changes": true
+        },
+        "index": {
+            "SOFTAWARE_ACTIVITY_LOG_CREATED_AT": true,
+            "SOFTAWARE_ACTIVITY_LOG_USER_ID": true,
+            "SOFTAWARE_ACTIVITY_LOG_ENTITY_TYPE_ENTITY_ID": true,
+            "SOFTAWARE_ACTIVITY_LOG_REQUEST_ID": true,
+            "SOFTAWARE_ACTIVITY_LOG_IP": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    },
+    "softaware_activity_log_login": {
+        "column": {
+            "login_id": true,
+            "created_at": true,
+            "user_id": true,
+            "username": true,
+            "status": true,
+            "ip": true,
+            "country": true,
+            "user_agent": true,
+            "reason": true,
+            "session_info_id": true
+        },
+        "index": {
+            "SOFTAWARE_ACTIVITY_LOG_LOGIN_CREATED_AT": true,
+            "SOFTAWARE_ACTIVITY_LOG_LOGIN_USER_ID_STATUS": true,
+            "SOFTAWARE_ACTIVITY_LOG_LOGIN_IP_CREATED_AT": true,
+            "SOFTAWARE_ACTIVITY_LOG_LOGIN_SESSION_INFO_ID": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    }
+}

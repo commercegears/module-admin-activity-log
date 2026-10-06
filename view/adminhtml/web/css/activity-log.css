@@ -1,0 +1,4 @@
+.softaware-activitylog-view .admin__table-secondary th { width: 180px; }
+.softaware-activitylog-diff td { vertical-align: top; word-break: break-word; max-width: 520px; }
+.softaware-activitylog-diff td.softaware-activitylog-old { background: #fdf0ef; }
+.softaware-activitylog-diff td.softaware-activitylog-new { background: #eef7ec; }

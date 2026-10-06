@@ -1,0 +1,38 @@
+{
+    "name": "softaware/module-admin-activity-log",
+    "description": "Admin activity log for Magento 2: field-level change history, admin login log, active session control, security notifications and an admin IP allowlist.",
+    "type": "magento2-module",
+    "license": "proprietary",
+    "require": {
+        "php": "~8.2.0||~8.3.0||~8.4.0||~8.5.0",
+        "magento/framework": "~103.0.7",
+        "softaware/module-base": "^1.2",
+        "magento/module-admin-notification": "*",
+        "magento/module-authorization": "*",
+        "magento/module-backend": "*",
+        "magento/module-config": "*",
+        "magento/module-cron": "*",
+        "magento/module-email": "*",
+        "magento/module-security": "*",
+        "magento/module-store": "*",
+        "magento/module-ui": "*",
+        "magento/module-user": "*"
+    },
+    "suggest": {
+        "magento/module-catalog": "Logs product and category changes",
+        "magento/module-cms": "Logs CMS page and block changes",
+        "magento/module-customer": "Logs customer changes",
+        "magento/module-sales": "Logs order, invoice, shipment, credit memo and comment changes",
+        "magento/module-sales-rule": "Logs cart price rule changes",
+        "magento/module-catalog-rule": "Logs catalog price rule changes",
+        "magento/module-import-export": "Logs imports"
+    },
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "Softaware\\ActivityLog\\": ""
+        }
+    }
+}

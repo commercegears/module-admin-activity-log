@@ -1,0 +1,115 @@
+<?xml version="1.0"?>
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">softaware_activitylog_session_listing.softaware_activitylog_session_listing_data_source</item>
+        </item>
+    </argument>
+    <settings>
+        <spinner>softaware_activitylog_session_columns</spinner>
+        <deps>
+            <dep>softaware_activitylog_session_listing.softaware_activitylog_session_listing_data_source</dep>
+        </deps>
+    </settings>
+    <dataSource name="softaware_activitylog_session_listing_data_source" component="Magento_Ui/js/grid/provider">
+        <settings>
+            <storageConfig>
+                <param name="indexField" xsi:type="string">id</param>
+            </storageConfig>
+            <updateUrl path="mui/index/render"/>
+        </settings>
+        <aclResource>Softaware_ActivityLog::sessions</aclResource>
+        <dataProvider class="Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider" name="softaware_activitylog_session_listing_data_source">
+            <settings>
+                <requestFieldName>id</requestFieldName>
+                <primaryFieldName>id</primaryFieldName>
+            </settings>
+        </dataProvider>
+    </dataSource>
+    <listingToolbar name="listing_top">
+        <settings>
+            <sticky>true</sticky>
+        </settings>
+        <bookmark name="bookmarks"/>
+        <columnsControls name="columns_controls"/>
+        <filters name="listing_filters"/>
+        <massaction name="listing_massaction">
+            <action name="terminate">
+                <settings>
+                    <confirm>
+                        <message translate="true">Sign out the selected admin sessions? Your own session is skipped.</message>
+                        <title translate="true">Terminate sessions</title>
+                    </confirm>
+                    <url path="softaware_activitylog/session/massTerminate"/>
+                    <type>terminate</type>
+                    <label translate="true">Terminate</label>
+                </settings>
+            </action>
+        </massaction>
+        <paging name="listing_paging"/>
+    </listingToolbar>
+    <columns name="softaware_activitylog_session_columns">
+        <selectionsColumn name="ids">
+            <settings>
+                <indexField>id</indexField>
+            </settings>
+        </selectionsColumn>
+        <column name="id" sortOrder="10">
+            <settings>
+                <label translate="true">ID</label>
+            </settings>
+        </column>
+        <column name="username" sortOrder="20">
+            <settings>
+                <filter>text</filter>
+                <label translate="true">Username</label>
+            </settings>
+        </column>
+        <column name="firstname" sortOrder="30">
+            <settings>
+                <filter>text</filter>
+                <label translate="true">First Name</label>
+            </settings>
+        </column>
+        <column name="lastname" sortOrder="40">
+            <settings>
+                <filter>text</filter>
+                <label translate="true">Last Name</label>
+            </settings>
+        </column>
+        <column name="ip" sortOrder="50">
+            <settings>
+                <filter>text</filter>
+                <label translate="true">IP Address</label>
+            </settings>
+        </column>
+        <column name="country" sortOrder="60">
+            <settings>
+                <label translate="true">Country</label>
+            </settings>
+        </column>
+        <column name="user_agent" sortOrder="70">
+            <settings>
+                <label translate="true">Browser (User Agent)</label>
+            </settings>
+        </column>
+        <column name="created_at" class="Magento\Ui\Component\Listing\Columns\Date" component="Magento_Ui/js/grid/columns/date" sortOrder="80">
+            <settings>
+                <dataType>date</dataType>
+                <label translate="true">Signed In</label>
+                <sorting>desc</sorting>
+            </settings>
+        </column>
+        <column name="updated_at" class="Magento\Ui\Component\Listing\Columns\Date" component="Magento_Ui/js/grid/columns/date" sortOrder="90">
+            <settings>
+                <dataType>date</dataType>
+                <label translate="true">Last Activity</label>
+            </settings>
+        </column>
+        <actionsColumn name="actions" class="Softaware\ActivityLog\Ui\Component\Listing\Column\SessionActions" sortOrder="200">
+            <settings>
+                <indexField>id</indexField>
+            </settings>
+        </actionsColumn>
+    </columns>
+</listing>

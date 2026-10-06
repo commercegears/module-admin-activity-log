@@ -1,0 +1,67 @@
+<?xml version="1.0"?>
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="softaware_activity_log" resource="default" engine="innodb" comment="Softaware admin activity log">
+        <column xsi:type="int" name="log_id" unsigned="true" nullable="false" identity="true" comment="Log ID"/>
+        <column xsi:type="timestamp" name="created_at" on_update="false" nullable="false" default="CURRENT_TIMESTAMP" comment="Created at (UTC)"/>
+        <column xsi:type="int" name="user_id" unsigned="true" nullable="true" comment="Admin user ID"/>
+        <column xsi:type="varchar" name="username" nullable="true" length="40" comment="Admin username"/>
+        <column xsi:type="varchar" name="ip" nullable="true" length="45" comment="IP address"/>
+        <column xsi:type="varchar" name="action" nullable="false" length="32" comment="Action"/>
+        <column xsi:type="varchar" name="entity_type" nullable="false" length="64" comment="Entity type"/>
+        <column xsi:type="varchar" name="entity_id" nullable="true" length="64" comment="Entity ID"/>
+        <column xsi:type="varchar" name="entity_label" nullable="true" length="255" comment="Entity label"/>
+        <column xsi:type="varchar" name="scope" nullable="true" length="64" comment="Scope"/>
+        <column xsi:type="varchar" name="request_path" nullable="true" length="255" comment="Admin action (route)"/>
+        <column xsi:type="varchar" name="request_id" nullable="true" length="32" comment="Request ID"/>
+        <column xsi:type="smallint" name="changes_count" unsigned="true" nullable="false" default="0" comment="Number of changed fields"/>
+        <column xsi:type="mediumtext" name="changes" nullable="true" comment="Field changes (JSON)"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="log_id"/>
+        </constraint>
+        <index referenceId="SOFTAWARE_ACTIVITY_LOG_CREATED_AT" indexType="btree">
+            <column name="created_at"/>
+        </index>
+        <index referenceId="SOFTAWARE_ACTIVITY_LOG_USER_ID" indexType="btree">
+            <column name="user_id"/>
+        </index>
+        <index referenceId="SOFTAWARE_ACTIVITY_LOG_ENTITY_TYPE_ENTITY_ID" indexType="btree">
+            <column name="entity_type"/>
+            <column name="entity_id"/>
+        </index>
+        <index referenceId="SOFTAWARE_ACTIVITY_LOG_REQUEST_ID" indexType="btree">
+            <column name="request_id"/>
+        </index>
+        <index referenceId="SOFTAWARE_ACTIVITY_LOG_IP" indexType="btree">
+            <column name="ip"/>
+        </index>
+    </table>
+    <table name="softaware_activity_log_login" resource="default" engine="innodb" comment="Softaware admin login log">
+        <column xsi:type="int" name="login_id" unsigned="true" nullable="false" identity="true" comment="Login log ID"/>
+        <column xsi:type="timestamp" name="created_at" on_update="false" nullable="false" default="CURRENT_TIMESTAMP" comment="Created at (UTC)"/>
+        <column xsi:type="int" name="user_id" unsigned="true" nullable="true" comment="Admin user ID"/>
+        <column xsi:type="varchar" name="username" nullable="true" length="255" comment="Username entered"/>
+        <column xsi:type="varchar" name="status" nullable="false" length="16" comment="success, failure, locked, blocked, logout"/>
+        <column xsi:type="varchar" name="ip" nullable="true" length="45" comment="IP address"/>
+        <column xsi:type="varchar" name="country" nullable="true" length="2" comment="Country code (CF-IPCountry)"/>
+        <column xsi:type="varchar" name="user_agent" nullable="true" length="255" comment="User agent"/>
+        <column xsi:type="varchar" name="reason" nullable="true" length="255" comment="Reason"/>
+        <column xsi:type="int" name="session_info_id" unsigned="true" nullable="true" comment="admin_user_session ID"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="login_id"/>
+        </constraint>
+        <index referenceId="SOFTAWARE_ACTIVITY_LOG_LOGIN_CREATED_AT" indexType="btree">
+            <column name="created_at"/>
+        </index>
+        <index referenceId="SOFTAWARE_ACTIVITY_LOG_LOGIN_USER_ID_STATUS" indexType="btree">
+            <column name="user_id"/>
+            <column name="status"/>
+        </index>
+        <index referenceId="SOFTAWARE_ACTIVITY_LOG_LOGIN_IP_CREATED_AT" indexType="btree">
+            <column name="ip"/>
+            <column name="created_at"/>
+        </index>
+        <index referenceId="SOFTAWARE_ACTIVITY_LOG_LOGIN_SESSION_INFO_ID" indexType="btree">
+            <column name="session_info_id"/>
+        </index>
+    </table>
+</schema>

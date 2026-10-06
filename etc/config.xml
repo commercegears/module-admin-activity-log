@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <softaware_activitylog>
+            <general>
+                <enabled>1</enabled>
+                <log_actions>1</log_actions>
+                <log_logins>1</log_logins>
+                <retention_days>90</retention_days>
+            </general>
+            <exclude>
+                <entity_types/>
+                <config_paths/>
+            </exclude>
+            <notifications>
+                <enabled>1</enabled>
+                <admin_notice>1</admin_notice>
+                <recipients/>
+                <sender>general</sender>
+                <failed_threshold>5</failed_threshold>
+                <failed_window>15</failed_window>
+                <new_ip>1</new_ip>
+                <new_country>1</new_country>
+                <notify_user>0</notify_user>
+                <failed_template>softaware_activitylog_notifications_failed_template</failed_template>
+                <new_ip_template>softaware_activitylog_notifications_new_ip_template</new_ip_template>
+            </notifications>
+            <allowlist>
+                <enabled>0</enabled>
+                <ips/>
+            </allowlist>
+        </softaware_activitylog>
+    </default>
+</config>
