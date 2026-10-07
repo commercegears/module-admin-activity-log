@@ -10,6 +10,8 @@ namespace Softaware\ActivityLog\Block\Adminhtml\Log;
 
 use Magento\Backend\Block\Template;
 use Magento\Backend\Block\Template\Context;
+use Magento\Backend\Block\Widget\Button;
+use Magento\Framework\Locale\ResolverInterface;
 use Magento\Framework\Registry;
 use Magento\Framework\Stdlib\DateTime\TimezoneInterface;
 use Softaware\ActivityLog\Controller\Adminhtml\Log\View as ViewController;
@@ -24,6 +26,12 @@ use Softaware\ActivityLog\Model\Source\Action as ActionSource;
 class View extends Template
 {
     protected $_template = 'Softaware_ActivityLog::log/view.phtml';
+
+    /** Number of related entries listed on the page. */
+    public const RELATED_LIMIT = 100;
+
+    /** Actions whose entries hold old and new values; the others hold a single value per field. */
+    private const DIFF_ACTIONS = ['update', 'move'];
 
     /** Admin edit routes per entity type (ID parameter name in brackets). */
     private const EDIT_ROUTES = [
@@ -49,9 +57,23 @@ class View extends Template
         private readonly ActionSource $actionSource,
         private readonly CollectionFactory $collectionFactory,
         private readonly TimezoneInterface $timezone,
+        private readonly ResolverInterface $localeResolver,
         array $data = []
     ) {
         parent::__construct($context, $data);
+    }
+
+    protected function _prepareLayout()
+    {
+        $toolbar = $this->getLayout()->getBlock('page.actions.toolbar');
+        if ($toolbar) {
+            $toolbar->addChild('softaware_activitylog_back', Button::class, [
+                'label' => __('Back'),
+                'class' => 'back',
+                'on_click' => sprintf("setLocation('%s')", $this->_escaper->escapeJs($this->getBackUrl())),
+            ]);
+        }
+        return parent::_prepareLayout();
     }
 
     public function getEntry(): ?Log
@@ -82,6 +104,44 @@ class View extends Template
             \IntlDateFormatter::MEDIUM,
             \IntlDateFormatter::MEDIUM
         );
+    }
+
+    /**
+     * Whether the entry is shown as old value / new value pairs (updates and moves) or as a list of values
+     * (created records, mass action parameters, import results).
+     *
+     * @param array<int, array<string, mixed>> $changes
+     */
+    public function isDiff(Log $entry, array $changes): bool
+    {
+        if (in_array((string)$entry->getData('action'), self::DIFF_ACTIONS, true)) {
+            return true;
+        }
+        foreach ($changes as $change) {
+            if ((string)($change['old'] ?? '') !== '') {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public function getChangesTitle(Log $entry, bool $isDiff): string
+    {
+        if ($isDiff) {
+            return (string)__('Changes');
+        }
+        return (string)match ((string)$entry->getData('action')) {
+            'create' => __('Saved Values'),
+            'mass_action' => __('Mass Action Parameters'),
+            'import' => __('Import Result'),
+            default => __('Values'),
+        };
+    }
+
+    public function formatNumber(int $number): string
+    {
+        $formatter = new \NumberFormatter($this->localeResolver->getLocale(), \NumberFormatter::DECIMAL);
+        return (string)$formatter->format($number);
     }
 
     public function getEntityUrl(Log $entry): ?string
@@ -116,8 +176,19 @@ class View extends Template
             ->addFieldToFilter('request_id', $entry->getData('request_id'))
             ->addFieldToFilter('log_id', ['neq' => $entry->getId()])
             ->setOrder('log_id', 'ASC')
-            ->setPageSize(100);
+            ->setPageSize(self::RELATED_LIMIT);
         return array_values($collection->getItems());
+    }
+
+    public function getRelatedCount(Log $entry): int
+    {
+        if (!$entry->getData('request_id')) {
+            return 0;
+        }
+        return $this->collectionFactory->create()
+            ->addFieldToFilter('request_id', $entry->getData('request_id'))
+            ->addFieldToFilter('log_id', ['neq' => $entry->getId()])
+            ->getSize();
     }
 
     public function getViewUrl(int $id): string
