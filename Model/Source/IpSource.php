@@ -20,7 +20,7 @@ class IpSource implements OptionSourceInterface
     {
         return [
             ['value' => Config::IP_SOURCE_SERVER, 'label' => __('Web server (REMOTE_ADDR)')],
-            ['value' => Config::IP_SOURCE_CLOUDFLARE, 'label' => __('Cloudflare (CF-Connecting-IP, only from Cloudflare addresses)')],
+            ['value' => Config::IP_SOURCE_CLOUDFLARE, 'label' => __('Cloudflare (CF-Connecting-IP)')],
         ];
     }
 }

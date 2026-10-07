@@ -7,6 +7,7 @@
             <tab>softaware</tab>
             <resource>Softaware_ActivityLog::config</resource>
             <group id="general" translate="label" sortOrder="10" showInDefault="1">
+                <attribute type="expanded">1</attribute>
                 <label>General</label>
                 <field id="enabled" translate="label comment" type="select" sortOrder="10" showInDefault="1" canRestore="1">
                     <label>Enabled</label>
@@ -28,13 +29,13 @@
                 <field id="ip_source" translate="label comment" type="select" sortOrder="35" showInDefault="1" canRestore="1">
                     <label>Client IP Address From</label>
                     <source_model>Softaware\ActivityLog\Model\Source\IpSource</source_model>
-                    <comment><![CDATA[Used for the logs, alerts and the IP allowlist. Keep "Web server" when the web server already passes the real client IP (for example nginx <code>real_ip</code>). Choose "Cloudflare" if the store is behind Cloudflare and the logs show Cloudflare addresses: the CF-Connecting-IP header is then used, but only on requests that come from Cloudflare's own address ranges, so it cannot be faked by connecting to the server directly.]]></comment>
+                    <comment><![CDATA[Used for the logs, alerts and IP allowlist. Default: Web server. Choose Cloudflare only if the logs show Cloudflare addresses; the <code>CF-Connecting-IP</code> header is then trusted on requests from Cloudflare's address ranges only.]]></comment>
                     <depends><field id="enabled">1</field></depends>
                 </field>
                 <field id="retention_days" translate="label comment" type="text" sortOrder="40" showInDefault="1" canRestore="1">
                     <label>Keep Log Entries For (Days)</label>
                     <validate>validate-digits validate-zero-or-greater</validate>
-                    <comment>Older entries are deleted by a daily cron job. 0 keeps everything. Changes to these Activity Log settings are always kept, so shortening the retention or switching logging off stays on record.</comment>
+                    <comment>Default: 90. Older entries are deleted daily; 0 keeps everything. Changes to these settings are always kept.</comment>
                     <depends><field id="enabled">1</field></depends>
                 </field>
             </group>
@@ -45,18 +46,20 @@
                     <label>Do Not Log These Entities</label>
                     <source_model>Softaware\ActivityLog\Model\Source\EntityType</source_model>
                     <can_be_empty>1</can_be_empty>
+                    <comment>Changes to the selected record types are not logged. Default: none, so everything is logged. Hold Ctrl (Cmd on a Mac) to select several.</comment>
                 </field>
                 <field id="config_paths" translate="label comment" type="textarea" sortOrder="20" showInDefault="1" canRestore="1">
                     <label>Do Not Log These Configuration Paths</label>
-                    <comment><![CDATA[One path per line, <code>*</code> is a wildcard, for example <code>design/*</code> or <code>catalog/frontend/list_per_page</code>. Secret values (passwords, keys, tokens, encrypted fields) are always masked.]]></comment>
+                    <comment><![CDATA[One path per line, <code>*</code> is a wildcard, for example <code>design/*</code>. Secret values such as passwords and API keys are always masked, so they do not need to be listed here.]]></comment>
                 </field>
             </group>
             <group id="notifications" translate="label" sortOrder="30" showInDefault="1">
                 <label>Security Notifications</label>
                 <depends><field id="softaware_activitylog/general/enabled">1</field></depends>
-                <field id="enabled" translate="label" type="select" sortOrder="10" showInDefault="1" canRestore="1">
+                <field id="enabled" translate="label comment" type="select" sortOrder="10" showInDefault="1" canRestore="1">
                     <label>Enabled</label>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Alerts for repeated failed sign-ins, lockouts and sign-ins from a new IP or country. Needs "Log Admin Sign-ins".</comment>
                 </field>
                 <field id="admin_notice" translate="label comment" type="select" sortOrder="20" showInDefault="1" canRestore="1">
                     <label>Add Admin Notification</label>
@@ -66,23 +69,26 @@
                 </field>
                 <field id="recipients" translate="label comment" type="text" sortOrder="30" showInDefault="1">
                     <label>Email Recipients</label>
-                    <comment>Comma-separated email addresses. Leave empty for admin notifications only.</comment>
+                    <validate>validate-emails</validate>
+                    <comment>Comma-separated, for example security@example.com, it@example.com. Leave empty to send no emails.</comment>
                     <depends><field id="enabled">1</field></depends>
                 </field>
-                <field id="sender" translate="label" type="select" sortOrder="40" showInDefault="1" canRestore="1">
+                <field id="sender" translate="label comment" type="select" sortOrder="40" showInDefault="1" canRestore="1">
                     <label>Email Sender</label>
+                    <comment>Store email address the alerts are sent from. Default: General Contact.</comment>
                     <source_model>Magento\Config\Model\Config\Source\Email\Identity</source_model>
                     <depends><field id="enabled">1</field></depends>
                 </field>
                 <field id="failed_threshold" translate="label comment" type="text" sortOrder="50" showInDefault="1" canRestore="1">
                     <label>Alert After Failed Sign-ins From One IP</label>
                     <validate>required-entry validate-digits validate-greater-than-zero</validate>
-                    <comment>Lockouts of an admin account are always reported.</comment>
+                    <comment>Default: 5. Lockouts of an admin account are always reported.</comment>
                     <depends><field id="enabled">1</field></depends>
                 </field>
-                <field id="failed_window" translate="label" type="text" sortOrder="60" showInDefault="1" canRestore="1">
+                <field id="failed_window" translate="label comment" type="text" sortOrder="60" showInDefault="1" canRestore="1">
                     <label>Within (Minutes)</label>
                     <validate>required-entry validate-digits validate-greater-than-zero</validate>
+                    <comment>Default: 15.</comment>
                     <depends><field id="enabled">1</field></depends>
                 </field>
                 <field id="new_ip" translate="label comment" type="select" sortOrder="70" showInDefault="1" canRestore="1">
@@ -103,29 +109,35 @@
                     <comment>Sends the new IP / new country alert to the admin account's own email address too.</comment>
                     <depends><field id="enabled">1</field></depends>
                 </field>
-                <field id="failed_template" translate="label" type="select" sortOrder="100" showInDefault="1" canRestore="1">
+                <field id="failed_template" translate="label comment" type="select" sortOrder="100" showInDefault="1" canRestore="1">
                     <label>Failed Sign-in Email Template</label>
+                    <comment>Used for failed sign-in and lockout alerts. Copy it under Marketing > Email Templates to change the wording.</comment>
                     <source_model>Magento\Config\Model\Config\Source\Email\Template</source_model>
                     <depends><field id="enabled">1</field></depends>
                 </field>
-                <field id="new_ip_template" translate="label" type="select" sortOrder="110" showInDefault="1" canRestore="1">
+                <field id="new_ip_template" translate="label comment" type="select" sortOrder="110" showInDefault="1" canRestore="1">
                     <label>New IP / Country Email Template</label>
+                    <comment>Used for sign-ins from a new IP address or country.</comment>
                     <source_model>Magento\Config\Model\Config\Source\Email\Template</source_model>
                     <depends><field id="enabled">1</field></depends>
                 </field>
             </group>
             <group id="allowlist" translate="label comment" sortOrder="40" showInDefault="1">
                 <label>Admin IP Allowlist</label>
-                <comment><![CDATA[Only these IP addresses can use the admin panel. If you lock yourself out, run <code>bin/magento softaware:activity-log:allowlist --disable</code>. Behind a proxy or CDN make sure the web server passes the real client IP (for example nginx <code>real_ip</code> with Cloudflare's ranges).]]></comment>
+                <comment><![CDATA[Only the listed IP addresses can use the admin panel. Locked out? Run <code>bin/magento softaware:activity-log:allowlist --disable</code>.]]></comment>
                 <depends><field id="softaware_activitylog/general/enabled">1</field></depends>
-                <field id="enabled" translate="label" type="select" sortOrder="10" showInDefault="1" canRestore="1">
+                <field id="enabled" translate="label comment" type="select" sortOrder="10" showInDefault="1" canRestore="1">
                     <label>Enabled</label>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Default: No. Your own IP address must be on the list before it can be switched on.</comment>
                 </field>
-                <field id="ips" translate="label comment" type="textarea" sortOrder="20" showInDefault="1">
+                <field id="ips" translate="label" type="textarea" sortOrder="20" showInDefault="1">
                     <label>Allowed IP Addresses</label>
                     <backend_model>Softaware\ActivityLog\Model\Config\Backend\Allowlist</backend_model>
-                    <comment><![CDATA[One IPv4/IPv6 address or CIDR range per line (for example <code>203.0.113.10</code> or <code>198.51.100.0/24</code>). Text after <code>#</code> is a comment. An empty list allows everyone.]]></comment>
+                    <comment>
+                        <model>Softaware\ActivityLog\Model\Config\Comment\AllowlistIps</model>
+                    </comment>
+                    <depends><field id="enabled">1</field></depends>
                 </field>
             </group>
         </section>
