@@ -21,7 +21,8 @@
             "SOFTAWARE_ACTIVITY_LOG_USER_ID": true,
             "SOFTAWARE_ACTIVITY_LOG_ENTITY_TYPE_ENTITY_ID": true,
             "SOFTAWARE_ACTIVITY_LOG_REQUEST_ID": true,
-            "SOFTAWARE_ACTIVITY_LOG_IP": true
+            "SOFTAWARE_ACTIVITY_LOG_IP": true,
+            "FTI_DC61672A47FE761032259D364FD725C4": true
         },
         "constraint": {
             "PRIMARY": true
@@ -44,7 +45,8 @@
             "SOFTAWARE_ACTIVITY_LOG_LOGIN_CREATED_AT": true,
             "SOFTAWARE_ACTIVITY_LOG_LOGIN_USER_ID_STATUS": true,
             "SOFTAWARE_ACTIVITY_LOG_LOGIN_IP_CREATED_AT": true,
-            "SOFTAWARE_ACTIVITY_LOG_LOGIN_SESSION_INFO_ID": true
+            "SOFTAWARE_ACTIVITY_LOG_LOGIN_SESSION_INFO_ID": true,
+            "SOFTAWARE_ACTIVITY_LOG_LOGIN_USERNAME_IP_REASON_USER_AGENT": true
         },
         "constraint": {
             "PRIMARY": true

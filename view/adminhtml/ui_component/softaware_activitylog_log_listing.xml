@@ -33,6 +33,7 @@
         <bookmark name="bookmarks"/>
         <columnsControls name="columns_controls"/>
         <exportButton name="export_button"/>
+        <filterSearch name="fulltext"/>
         <filters name="listing_filters"/>
         <paging name="listing_paging"/>
     </listingToolbar>
@@ -51,7 +52,7 @@
                 <label translate="true">Time</label>
             </settings>
         </column>
-        <column name="username" sortOrder="30">
+        <column name="username" class="Softaware\ActivityLog\Ui\Component\Listing\Column\AdminUser" sortOrder="30">
             <settings>
                 <filter>text</filter>
                 <label translate="true">Admin User</label>
@@ -77,10 +78,14 @@
             <settings>
                 <filter>text</filter>
                 <label translate="true">Entity ID</label>
+                <visible>false</visible>
             </settings>
         </column>
         <column name="entity_label" sortOrder="70">
             <settings>
+                <fieldClass>
+                    <class name="softaware-activitylog-wrap">true</class>
+                </fieldClass>
                 <filter>text</filter>
                 <label translate="true">Entity</label>
             </settings>
@@ -106,6 +111,9 @@
         </column>
         <column name="request_path" sortOrder="110">
             <settings>
+                <fieldClass>
+                    <class name="softaware-activitylog-wrap">true</class>
+                </fieldClass>
                 <filter>text</filter>
                 <label translate="true">Admin Page</label>
                 <visible>false</visible>
@@ -121,6 +129,7 @@
         <actionsColumn name="actions" class="Softaware\ActivityLog\Ui\Component\Listing\Column\LogActions" sortOrder="200">
             <settings>
                 <indexField>log_id</indexField>
+                <label translate="true">Details</label>
             </settings>
         </actionsColumn>
     </columns>

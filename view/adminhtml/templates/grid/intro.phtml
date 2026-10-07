@@ -1,0 +1,46 @@
+<?php
+/**
+ * Softaware Admin Activity Log
+ *
+ * @var \Softaware\ActivityLog\Block\Adminhtml\GridIntro $block
+ * @var \Magento\Framework\Escaper $escaper
+ */
+$page = $block->getPage();
+$settingsUrl = $block->getSettingsUrl();
+$days = $block->getRetentionDays();
+$retention = $days > 0
+    ? __('Entries older than %1 days are deleted automatically.', $days)
+    : __('Entries are never deleted automatically.');
+?>
+<?php if (!$block->isLogging()): ?>
+    <div class="messages">
+        <div class="message message-warning warning">
+            <div>
+                <?= $escaper->escapeHtml($page === 'logins'
+                    ? __('The login log is switched off: sign-ins are not recorded and no security notifications are sent.')
+                    : __('Logging of admin actions is switched off: new changes are not recorded.')) ?>
+                <?php if ($settingsUrl): ?>
+                    <a href="<?= $escaper->escapeUrl($settingsUrl) ?>"><?= $escaper->escapeHtml(__('Open Settings')) ?></a>
+                <?php endif; ?>
+            </div>
+        </div>
+    </div>
+<?php endif; ?>
+<p class="softaware-activitylog-intro">
+    <?php if ($page === 'sessions'): ?>
+        <?php $minutes = $block->getSessionLifetimeMinutes(); ?>
+        <?= $escaper->escapeHtml(__(
+            'Admins who used the admin panel within the session lifetime (%1). Terminate signs an admin out on their next click; your own session cannot be terminated.',
+            $minutes % 60 === 0 ? __('%1 hour(s)', $minutes / 60) : __('%1 minutes', $minutes)
+        )) ?>
+    <?php elseif ($page === 'logins'): ?>
+        <?= $escaper->escapeHtml(__('Admin sign-ins, failed attempts, lockouts and sign-outs with IP address and browser, newest first.')) ?>
+        <?= $escaper->escapeHtml($retention) ?>
+    <?php else: ?>
+        <?= $escaper->escapeHtml(__('Changes made in the admin panel, newest first. View an entry to see the old and new value of each field.')) ?>
+        <?= $escaper->escapeHtml($retention) ?>
+    <?php endif; ?>
+    <?php if ($settingsUrl && $block->isLogging() && $page !== 'sessions'): ?>
+        <a href="<?= $escaper->escapeUrl($settingsUrl) ?>"><?= $escaper->escapeHtml(__('Settings')) ?></a>
+    <?php endif; ?>
+</p>

@@ -37,8 +37,8 @@
             <action name="terminate">
                 <settings>
                     <confirm>
-                        <message translate="true">Sign out the selected admin sessions? Your own session is skipped.</message>
-                        <title translate="true">Terminate sessions</title>
+                        <message translate="true">Sign out the selected admins? They are signed out on their next click. Your own session is skipped.</message>
+                        <title translate="true">Terminate Sessions</title>
                     </confirm>
                     <url path="softaware_activitylog/session/massTerminate"/>
                     <type>terminate</type>
@@ -57,6 +57,7 @@
         <column name="id" sortOrder="10">
             <settings>
                 <label translate="true">ID</label>
+                <visible>false</visible>
             </settings>
         </column>
         <column name="username" sortOrder="20">
@@ -69,12 +70,14 @@
             <settings>
                 <filter>text</filter>
                 <label translate="true">First Name</label>
+                <visible>false</visible>
             </settings>
         </column>
         <column name="lastname" sortOrder="40">
             <settings>
                 <filter>text</filter>
                 <label translate="true">Last Name</label>
+                <visible>false</visible>
             </settings>
         </column>
         <column name="ip" sortOrder="50">
@@ -85,11 +88,15 @@
         </column>
         <column name="country" sortOrder="60">
             <settings>
+                <filter>text</filter>
                 <label translate="true">Country</label>
             </settings>
         </column>
         <column name="user_agent" sortOrder="70">
             <settings>
+                <fieldClass>
+                    <class name="softaware-activitylog-wrap">true</class>
+                </fieldClass>
                 <label translate="true">Browser (User Agent)</label>
             </settings>
         </column>

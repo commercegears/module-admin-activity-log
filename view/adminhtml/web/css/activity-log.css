@@ -1,4 +1,31 @@
-.softaware-activitylog-view .admin__table-secondary th { width: 180px; }
-.softaware-activitylog-diff td { vertical-align: top; word-break: break-word; max-width: 520px; }
-.softaware-activitylog-diff td.softaware-activitylog-old { background: #fdf0ef; }
-.softaware-activitylog-diff td.softaware-activitylog-new { background: #eef7ec; }
+/* Softaware Admin Activity Log: grid pages and entry detail. Colours from the Magento admin palette. */
+
+.softaware-activitylog-intro { margin: 0 0 2rem; color: #303030; }
+.softaware-activitylog-intro a { margin-left: .3rem; }
+
+/* Grids: long values such as browser strings and admin paths wrap instead of widening the table. */
+.data-grid td.softaware-activitylog-wrap { overflow-wrap: break-word; word-break: normal; }
+.data-grid td.softaware-activitylog-badge > div { white-space: nowrap; }
+
+/* Entry detail */
+.softaware-activitylog-summary {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(32rem, 1fr));
+    column-gap: 4rem;
+}
+.softaware-activitylog-summary .admin__table-secondary { margin-bottom: 0; }
+.softaware-activitylog-summary .admin__table-secondary th { width: 14rem; }
+.softaware-activitylog-summary td { overflow-wrap: anywhere; }
+
+.softaware-activitylog-diff { table-layout: fixed; width: 100%; }
+.softaware-activitylog-diff th.softaware-activitylog-field { width: 26%; }
+.softaware-activitylog-diff td { vertical-align: top; overflow-wrap: anywhere; }
+.softaware-activitylog-diff td.softaware-activitylog-field code { overflow-wrap: break-word; }
+.softaware-activitylog-diff td.softaware-activitylog-old { background: #fae5e5; }
+.softaware-activitylog-diff td.softaware-activitylog-new { background: #e5efe5; }
+.softaware-activitylog-values td.softaware-activitylog-new { background: transparent; }
+.softaware-activitylog-value { white-space: pre-wrap; max-height: 24rem; overflow-y: auto; }
+.softaware-activitylog-value:focus { outline: 2px solid #007bdb; outline-offset: 2px; }
+.softaware-activitylog-empty { color: #666; font-style: italic; }
+.softaware-activitylog-note { margin: 0 0 1.5rem; color: #666; }
+.softaware-activitylog-related { width: 100%; }

@@ -33,6 +33,7 @@
         <bookmark name="bookmarks"/>
         <columnsControls name="columns_controls"/>
         <exportButton name="export_button"/>
+        <filterSearch name="fulltext"/>
         <filters name="listing_filters"/>
         <paging name="listing_paging"/>
     </listingToolbar>
@@ -53,20 +54,37 @@
         </column>
         <column name="username" sortOrder="30">
             <settings>
+                <fieldClass>
+                    <class name="softaware-activitylog-wrap">true</class>
+                </fieldClass>
                 <filter>text</filter>
                 <label translate="true">Username</label>
             </settings>
         </column>
-        <column name="status" component="Magento_Ui/js/grid/columns/select" sortOrder="40">
+        <column name="status" class="Softaware\ActivityLog\Ui\Component\Listing\Column\SeverityBadge" component="Magento_Ui/js/grid/columns/column" sortOrder="40">
+            <argument name="data" xsi:type="array">
+                <item name="severities" xsi:type="array">
+                    <item name="success" xsi:type="string">notice</item>
+                    <item name="failure" xsi:type="string">minor</item>
+                    <item name="locked" xsi:type="string">major</item>
+                    <item name="blocked" xsi:type="string">critical</item>
+                </item>
+            </argument>
             <settings>
                 <options class="Softaware\ActivityLog\Model\Source\LoginStatus"/>
+                <fieldClass>
+                    <class name="softaware-activitylog-badge">true</class>
+                </fieldClass>
                 <filter>select</filter>
-                <dataType>select</dataType>
+                <bodyTmpl>ui/grid/cells/html</bodyTmpl>
                 <label translate="true">Result</label>
             </settings>
         </column>
         <column name="reason" sortOrder="50">
             <settings>
+                <fieldClass>
+                    <class name="softaware-activitylog-wrap">true</class>
+                </fieldClass>
                 <filter>text</filter>
                 <label translate="true">Reason</label>
             </settings>
@@ -85,6 +103,9 @@
         </column>
         <column name="user_agent" sortOrder="80">
             <settings>
+                <fieldClass>
+                    <class name="softaware-activitylog-wrap">true</class>
+                </fieldClass>
                 <filter>text</filter>
                 <label translate="true">Browser (User Agent)</label>
             </settings>

@@ -34,6 +34,14 @@
         <index referenceId="SOFTAWARE_ACTIVITY_LOG_IP" indexType="btree">
             <column name="ip"/>
         </index>
+        <index referenceId="SOFTAWARE_ACTIVITY_LOG_FULLTEXT" indexType="fulltext">
+            <column name="username"/>
+            <column name="entity_id"/>
+            <column name="entity_label"/>
+            <column name="ip"/>
+            <column name="request_path"/>
+            <column name="request_id"/>
+        </index>
     </table>
     <table name="softaware_activity_log_login" resource="default" engine="innodb" comment="Softaware admin login log">
         <column xsi:type="int" name="login_id" unsigned="true" nullable="false" identity="true" comment="Login log ID"/>
@@ -62,6 +70,12 @@
         </index>
         <index referenceId="SOFTAWARE_ACTIVITY_LOG_LOGIN_SESSION_INFO_ID" indexType="btree">
             <column name="session_info_id"/>
+        </index>
+        <index referenceId="SOFTAWARE_ACTIVITY_LOG_LOGIN_FULLTEXT" indexType="fulltext">
+            <column name="username"/>
+            <column name="ip"/>
+            <column name="reason"/>
+            <column name="user_agent"/>
         </index>
     </table>
 </schema>

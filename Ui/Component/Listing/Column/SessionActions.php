@@ -49,9 +49,9 @@ class SessionActions extends Column
                     'label' => __('Terminate'),
                     'post' => true,
                     'confirm' => [
-                        'title' => __('Terminate session'),
+                        'title' => __('Terminate Session'),
                         'message' => __(
-                            'Sign out %1 (IP %2)?',
+                            'Sign out %1 (IP %2)? They are signed out on their next click.',
                             htmlspecialchars((string)($item['username'] ?? ''), ENT_QUOTES),
                             htmlspecialchars((string)($item['ip'] ?? ''), ENT_QUOTES)
                         ),

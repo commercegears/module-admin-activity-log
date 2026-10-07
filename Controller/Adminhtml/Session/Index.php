@@ -22,7 +22,7 @@ class Index extends Action implements HttpGetActionInterface
         /** @var Page $page */
         $page = $this->resultFactory->create(ResultFactory::TYPE_PAGE);
         $page->setActiveMenu('Softaware_ActivityLog::sessions');
-        $page->getConfig()->getTitle()->prepend(__('Active Admin Sessions'));
+        $page->getConfig()->getTitle()->prepend(__('Active Sessions'));
         return $page;
     }
 }

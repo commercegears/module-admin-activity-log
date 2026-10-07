@@ -48,10 +48,10 @@ class MassTerminate extends Action implements HttpPostActionInterface
             $this->messageManager->addErrorMessage($e->getMessage());
         }
         if ($done) {
-            $this->messageManager->addSuccessMessage(__('%1 session(s) terminated.', $done));
+            $this->messageManager->addSuccessMessage(__('%1 session(s) terminated. The admins are signed out on their next click.', $done));
         }
         if ($skipped) {
-            $this->messageManager->addNoticeMessage(__('%1 session(s) skipped (your own session or already ended).', $skipped));
+            $this->messageManager->addNoticeMessage(__('%1 session(s) skipped: your own session cannot be terminated, or the session had already ended.', $skipped));
         }
         return $this->resultRedirectFactory->create()->setPath('*/*/index');
     }
