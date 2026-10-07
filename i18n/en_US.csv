@@ -1,10 +1,10 @@
 "Admin Actions","Admin Actions"
 "This log entry no longer exists.","This log entry no longer exists."
 "Admin Action #%1","Admin Action #%1"
-"Admin Login Log","Admin Login Log"
-"Active Admin Sessions","Active Admin Sessions"
-"%1 session(s) terminated.","%1 session(s) terminated."
-"%1 session(s) skipped (your own session or already ended).","%1 session(s) skipped (your own session or already ended)."
+"Login Log","Login Log"
+"Active Sessions","Active Sessions"
+"%1 session(s) terminated. The admins are signed out on their next click.","%1 session(s) terminated. The admins are signed out on their next click."
+"%1 session(s) skipped: your own session cannot be terminated, or the session had already ended.","%1 session(s) skipped: your own session cannot be terminated, or the session had already ended."
 "The session was terminated. The admin is signed out on their next click.","The session was terminated. The admin is signed out on their next click."
 "(use parent scope)","(use parent scope)"
 "Website: %1","Website: %1"
@@ -51,28 +51,27 @@ Failed,Failed
 View,View
 "(this session)","(this session)"
 Terminate,Terminate
-"Terminate session","Terminate session"
-"Sign out %1 (IP %2)?","Sign out %1 (IP %2)?"
-"Back to Admin Actions","Back to Admin Actions"
+"Terminate Session","Terminate Session"
+"Sign out %1 (IP %2)? They are signed out on their next click.","Sign out %1 (IP %2)? They are signed out on their next click."
 Summary,Summary
 Time,Time
-"Admin user","Admin user"
+"Admin User","Admin User"
 "(not signed in)","(not signed in)"
-"IP address","IP address"
+"IP Address","IP Address"
 Action,Action
 Entity,Entity
-open,open
+"Open Record","Open Record"
 Scope,Scope
-"Admin page","Admin page"
+"Admin Page","Admin Page"
 Changes,Changes
-"The record was deleted.","The record was deleted."
+"The record was deleted. Field values are not stored for deletions.","The record was deleted. Field values are not stored for deletions."
 "No field changes were recorded.","No field changes were recorded."
 Field,Field
-"Old value","Old value"
-"New value","New value"
-"Other changes in the same request","Other changes in the same request"
+"Old Value","Old Value"
+"New Value","New Value"
+"Other Changes in the Same Request","Other Changes in the Same Request"
 ID,ID
-"Changed fields","Changed fields"
+"Changed Fields","Changed Fields"
 "Security alert: %title","Security alert: %title"
 Username,Username
 "If you do not recognise this activity, consider adding the admin IP allowlist and changing the affected passwords.","If you do not recognise this activity, consider adding the admin IP allowlist and changing the affected passwords."
@@ -83,8 +82,6 @@ Username,Username
 "View Login Log","View Login Log"
 "Manage Active Sessions","Manage Active Sessions"
 Settings,Settings
-"Login Log","Login Log"
-"Active Sessions","Active Sessions"
 General,General
 Enabled,Enabled
 "When off, nothing is logged, no alerts are sent and the IP allowlist is not enforced.","When off, nothing is logged, no alerts are sent and the IP allowlist is not enforced."
@@ -93,19 +90,15 @@ Enabled,Enabled
 "Log Admin Sign-ins","Log Admin Sign-ins"
 "Successful and failed sign-ins, lockouts, blocked IPs and sign-outs. Required for security notifications.","Successful and failed sign-ins, lockouts, blocked IPs and sign-outs. Required for security notifications."
 "Keep Log Entries For (Days)","Keep Log Entries For (Days)"
-"Older entries are deleted by a daily cron job. 0 keeps everything.","Older entries are deleted by a daily cron job. 0 keeps everything."
 Exclusions,Exclusions
 "Do Not Log These Entities","Do Not Log These Entities"
 "Do Not Log These Configuration Paths","Do Not Log These Configuration Paths"
-"One path per line, <code>*</code> is a wildcard, for example <code>design/*</code> or <code>catalog/frontend/list_per_page</code>. Secret values (passwords, keys, tokens, encrypted fields) are always masked.","One path per line, <code>*</code> is a wildcard, for example <code>design/*</code> or <code>catalog/frontend/list_per_page</code>. Secret values (passwords, keys, tokens, encrypted fields) are always masked."
 "Security Notifications","Security Notifications"
 "Add Admin Notification","Add Admin Notification"
 "Shows the alert in the admin notification inbox (bell icon).","Shows the alert in the admin notification inbox (bell icon)."
 "Email Recipients","Email Recipients"
-"Comma-separated email addresses. Leave empty for admin notifications only.","Comma-separated email addresses. Leave empty for admin notifications only."
 "Email Sender","Email Sender"
 "Alert After Failed Sign-ins From One IP","Alert After Failed Sign-ins From One IP"
-"Lockouts of an admin account are always reported.","Lockouts of an admin account are always reported."
 "Within (Minutes)","Within (Minutes)"
 "Alert on Sign-in From a New IP","Alert on Sign-in From a New IP"
 "When an admin signs in from an IP address they have not used before.","When an admin signs in from an IP address they have not used before."
@@ -116,29 +109,56 @@ Exclusions,Exclusions
 "Failed Sign-in Email Template","Failed Sign-in Email Template"
 "New IP / Country Email Template","New IP / Country Email Template"
 "Admin IP Allowlist","Admin IP Allowlist"
-"Only these IP addresses can use the admin panel. If you lock yourself out, run <code>bin/magento softaware:activity-log:allowlist --disable</code>. Behind a proxy or CDN make sure the web server passes the real client IP (for example nginx <code>real_ip</code> with Cloudflare's ranges).","Only these IP addresses can use the admin panel. If you lock yourself out, run <code>bin/magento softaware:activity-log:allowlist --disable</code>. Behind a proxy or CDN make sure the web server passes the real client IP (for example nginx <code>real_ip</code> with Cloudflare's ranges)."
 "Allowed IP Addresses","Allowed IP Addresses"
-"One IPv4/IPv6 address or CIDR range per line (for example <code>203.0.113.10</code> or <code>198.51.100.0/24</code>). Text after <code>#</code> is a comment. An empty list allows everyone.","One IPv4/IPv6 address or CIDR range per line (for example <code>203.0.113.10</code> or <code>198.51.100.0/24</code>). Text after <code>#</code> is a comment. An empty list allows everyone."
-"Admin User","Admin User"
 "Entity Type","Entity Type"
 "Entity ID","Entity ID"
-"Changed Fields","Changed Fields"
-"IP Address","IP Address"
-"Admin Page","Admin Page"
 "Request ID","Request ID"
 Result,Result
 Reason,Reason
 Country,Country
 "Browser (User Agent)","Browser (User Agent)"
-"Sign out the selected admin sessions? Your own session is skipped.","Sign out the selected admin sessions? Your own session is skipped."
-"Terminate sessions","Terminate sessions"
+"Sign out the selected admins? They are signed out on their next click. Your own session is skipped.","Sign out the selected admins? They are signed out on their next click. Your own session is skipped."
+"Terminate Sessions","Terminate Sessions"
 "First Name","First Name"
 "Last Name","Last Name"
 "Signed In","Signed In"
 "Last Activity","Last Activity"
-Client IP Address From,Client IP Address From
-"Used for the logs, alerts and the IP allowlist. Keep ""Web server"" when the web server already passes the real client IP (for example nginx <code>real_ip</code>). Choose ""Cloudflare"" if the store is behind Cloudflare and the logs show Cloudflare addresses: the CF-Connecting-IP header is then used, but only on requests that come from Cloudflare's own address ranges, so it cannot be faked by connecting to the server directly.","Used for the logs, alerts and the IP allowlist. Keep ""Web server"" when the web server already passes the real client IP (for example nginx <code>real_ip</code>). Choose ""Cloudflare"" if the store is behind Cloudflare and the logs show Cloudflare addresses: the CF-Connecting-IP header is then used, but only on requests that come from Cloudflare's own address ranges, so it cannot be faked by connecting to the server directly."
-"Older entries are deleted by a daily cron job. 0 keeps everything. Changes to these Activity Log settings are always kept, so shortening the retention or switching logging off stays on record.","Older entries are deleted by a daily cron job. 0 keeps everything. Changes to these Activity Log settings are always kept, so shortening the retention or switching logging off stays on record."
+"Client IP Address From","Client IP Address From"
 " (masked, may be a password)"," (masked, may be a password)"
-Web server (REMOTE_ADDR),Web server (REMOTE_ADDR)
-"Cloudflare (CF-Connecting-IP, only from Cloudflare addresses)","Cloudflare (CF-Connecting-IP, only from Cloudflare addresses)"
+"Web server (REMOTE_ADDR)","Web server (REMOTE_ADDR)"
+"Cloudflare (CF-Connecting-IP)","Cloudflare (CF-Connecting-IP)"
+"(command line)","(command line)"
+(empty),(empty)
+Back,Back
+"Import Result","Import Result"
+"Mass Action Parameters","Mass Action Parameters"
+"Open Configuration Section","Open Configuration Section"
+"Saved Values","Saved Values"
+Value,Value
+Values,Values
+"Entries older than %1 days are deleted automatically.","Entries older than %1 days are deleted automatically."
+"Entries are never deleted automatically.","Entries are never deleted automatically."
+"The login log is switched off: sign-ins are not recorded and no security notifications are sent.","The login log is switched off: sign-ins are not recorded and no security notifications are sent."
+"Logging of admin actions is switched off: new changes are not recorded.","Logging of admin actions is switched off: new changes are not recorded."
+"Open Settings","Open Settings"
+"Admin sign-ins, failed attempts, lockouts and sign-outs with IP address and browser, newest first.","Admin sign-ins, failed attempts, lockouts and sign-outs with IP address and browser, newest first."
+"Changes made in the admin panel, newest first. View an entry to see the old and new value of each field.","Changes made in the admin panel, newest first. View an entry to see the old and new value of each field."
+"Your current IP address: %1","Your current IP address: %1"
+"Admins who used the admin panel within the session lifetime (%1). Terminate signs an admin out on their next click; your own session cannot be terminated.","Admins who used the admin panel within the session lifetime (%1). Terminate signs an admin out on their next click; your own session cannot be terminated."
+"Showing the first %1 of %2 entries. Search Admin Actions for %3 to see all of them.","Showing the first %1 of %2 entries. Search Admin Actions for %3 to see all of them."
+"One IPv4/IPv6 address or CIDR range per line, for example %1 or %2. Text after %3 is a note.","One IPv4/IPv6 address or CIDR range per line, for example %1 or %2. Text after %3 is a note."
+Details,Details
+"Used for the logs, alerts and IP allowlist. Default: Web server. Choose Cloudflare only if the logs show Cloudflare addresses; the <code>CF-Connecting-IP</code> header is then trusted on requests from Cloudflare's address ranges only.","Used for the logs, alerts and IP allowlist. Default: Web server. Choose Cloudflare only if the logs show Cloudflare addresses; the <code>CF-Connecting-IP</code> header is then trusted on requests from Cloudflare's address ranges only."
+"Default: 90. Older entries are deleted daily; 0 keeps everything. Changes to these settings are always kept.","Default: 90. Older entries are deleted daily; 0 keeps everything. Changes to these settings are always kept."
+"Changes to the selected record types are not logged. Default: none, so everything is logged. Hold Ctrl (Cmd on a Mac) to select several.","Changes to the selected record types are not logged. Default: none, so everything is logged. Hold Ctrl (Cmd on a Mac) to select several."
+"One path per line, <code>*</code> is a wildcard, for example <code>design/*</code>. Secret values such as passwords and API keys are always masked, so they do not need to be listed here.","One path per line, <code>*</code> is a wildcard, for example <code>design/*</code>. Secret values such as passwords and API keys are always masked, so they do not need to be listed here."
+"Alerts for repeated failed sign-ins, lockouts and sign-ins from a new IP or country. Needs ""Log Admin Sign-ins"".","Alerts for repeated failed sign-ins, lockouts and sign-ins from a new IP or country. Needs ""Log Admin Sign-ins""."
+"Comma-separated, for example security@example.com, it@example.com. Leave empty to send no emails.","Comma-separated, for example security@example.com, it@example.com. Leave empty to send no emails."
+"Store email address the alerts are sent from. Default: General Contact.","Store email address the alerts are sent from. Default: General Contact."
+"Default: 5. Lockouts of an admin account are always reported.","Default: 5. Lockouts of an admin account are always reported."
+"Default: 15.","Default: 15."
+"Used for failed sign-in and lockout alerts. Copy it under Marketing > Email Templates to change the wording.","Used for failed sign-in and lockout alerts. Copy it under Marketing > Email Templates to change the wording."
+"Used for sign-ins from a new IP address or country.","Used for sign-ins from a new IP address or country."
+"Only the listed IP addresses can use the admin panel. Locked out? Run <code>bin/magento softaware:activity-log:allowlist --disable</code>.","Only the listed IP addresses can use the admin panel. Locked out? Run <code>bin/magento softaware:activity-log:allowlist --disable</code>."
+"Default: No. Your own IP address must be on the list before it can be switched on.","Default: No. Your own IP address must be on the list before it can be switched on."
+"IP address","IP address"

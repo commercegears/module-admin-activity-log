@@ -1,5 +1,30 @@
 # Changelog
 
+## 1.3.0 (2026-10-07)
+
+### Added
+- Keyword search on the Admin Actions grid (admin user, entity, entity ID, IP address, admin page, request ID) and the
+  Login Log grid (username, IP address, reason, browser). Adds a full-text index to both log tables.
+- Grid pages start with a one-line explanation (what is listed, how long entries are kept, session lifetime on Active
+  Sessions) and a warning with a link to the settings when the matching log is switched off.
+- "Allowed IP Addresses" shows your current IP address, so you can add it before switching the allowlist on.
+
+### Changed
+- Login Log: the result is shown as a coloured status badge (signed in, failed, locked out, blocked by allowlist).
+- Admin Actions grid: Entity ID is hidden by default (still available under Columns) so the grid fits narrower
+  screens; the link column is headed "Details" instead of a second "Action"; entries from the command line show
+  "(command line)" instead of an empty admin user.
+- Entry detail page: standard Back button; compact two-column summary; old and new values in equal columns that
+  wrap long values and scroll very long ones (such as encoded files) inside the cell; empty values shown as
+  "(empty)"; created records, mass actions and imports are listed as one value column ("Saved Values",
+  "Mass Action Parameters", "Import Result") instead of under "New value" next to an empty "Old value" column;
+  "Open Record" / "Open Configuration Section" links; a note when more than 100 related entries exist.
+- Active Sessions: confirmation dialogs say when the admin is signed out; result messages say what happened;
+  Session ID hidden by default; Country filter added; long browser strings wrap.
+- Page titles match the menu ("Login Log", "Active Sessions"); labels in title case throughout.
+- Settings: shorter field comments with defaults and examples, comments added to every field, email recipients
+  validated, "Allowed IP Addresses" only shown when the allowlist is enabled; the General group is always open.
+
 ## 1.2.0 (2026-10-06)
 
 ### Changed

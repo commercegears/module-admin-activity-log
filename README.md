@@ -28,8 +28,10 @@ Who changed what in the Magento admin, who signed in from where, and who is sign
   M minutes, admin account lockouts, sign-in from a new IP address, sign-in from a new country.
 - **Admin IP allowlist** (single IPs and CIDR ranges, IPv4/IPv6). Refuses to save a list that does not include
   your own IP, and has a CLI way back in.
-- **Grids** with filters (admin user, entity type, action, date range, IP, entity, admin page), **detail view**
-  of each change with links to the record, **CSV/XML export**.
+- **Grids** with keyword search, filters (admin user, entity type, action, date range, IP, entity, admin page),
+  bookmarks and **CSV/XML export**; a **detail view** of each change (old and new value per field) with a link to
+  the record and the other changes made in the same request. Each grid page says how long entries are kept and
+  warns when the matching log is switched off.
 - **Retention**: entries older than N days are deleted by a daily cron job (in batches). Changes to the Activity
   Log's own settings are always kept, so shortening the retention or switching logging off stays on record.
 - **Client IP behind Cloudflare**: "Client IP Address From" can be set to Cloudflare. The `CF-Connecting-IP` header
