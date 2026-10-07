@@ -80,7 +80,7 @@ Other modules can track their own entities by adding an item to the `types` argu
 
 ## Compatibility
 
-Magento Open Source / Adobe Commerce 2.4.7–2.4.9, PHP 8.2–8.5. Requires `softaware/module-core` ^1.2 and
+Magento Open Source / Adobe Commerce 2.4.7–2.4.9, PHP 8.2–8.5. Requires `softaware/module-core` ^1.0 and
 Magento_Security (admin session records). No storefront code.
 
 ## Limitations
