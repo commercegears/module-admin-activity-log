@@ -4,6 +4,8 @@
 
 Who changed what in the Magento admin, who signed in from where, and who is signed in right now.
 
+User guide: [docs/user-guide.md](docs/user-guide.md) · FAQ: [docs/faq.md](docs/faq.md)
+
 ## Features
 
 - **Admin action log** with a field-level diff (old → new) for create, update and delete of:

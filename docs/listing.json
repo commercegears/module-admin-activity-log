@@ -1,0 +1,119 @@
+{
+    "tagline": "See who changed what in the Magento admin, with old and new values, plus every admin sign-in, the active sessions and alerts for suspicious sign-ins.",
+    "key_features": [
+        "Field-level change history (old and new value)",
+        "Catalog, CMS, customers, sales, price rules, configuration and admin users",
+        "Mass actions and imports logged",
+        "Login log with failed sign-ins and reasons",
+        "Active admin sessions with Terminate",
+        "Alerts for failed sign-ins, lockouts and new IPs",
+        "Admin IP allowlist with a CLI way back in",
+        "Passwords and API keys always masked"
+    ],
+    "benefits": [
+        {
+            "icon": "users",
+            "title": "Answer \"who changed this?\"",
+            "text": "Every admin change is recorded with the admin user, time, IP address and the old and new value of each field."
+        },
+        {
+            "icon": "shield",
+            "title": "Spot attacks early",
+            "text": "Repeated failed sign-ins, account lockouts and sign-ins from a new IP address or country raise an alert by email and in the admin."
+        },
+        {
+            "icon": "clock",
+            "title": "Light on the admin",
+            "text": "Tracking runs in the admin only, uses data Magento has already loaded and writes the entries in one insert at the end of the request."
+        }
+    ],
+    "showcase": [
+        {
+            "label": "Admin Actions",
+            "title": "Every change in one grid",
+            "text": "Create, update and delete with admin user, entity, changed fields and IP address. Keyword search, filters, saved views and CSV or XML export.",
+            "image": "docs/images/admin-actions.png"
+        },
+        {
+            "label": "Change detail",
+            "title": "Old and new value per field",
+            "text": "Each entry shows exactly which fields changed, with a link to the record and to other changes made in the same request.",
+            "image": "docs/images/admin-action-detail.png"
+        },
+        {
+            "label": "Login Log",
+            "title": "Every sign-in and failed attempt",
+            "text": "Successful and failed sign-ins with the reason, lockouts, sign-ins blocked by the allowlist and sign-outs, with IP address and browser.",
+            "image": "docs/images/admin-login-log.png"
+        },
+        {
+            "label": "Active Sessions",
+            "title": "See who is signed in now",
+            "text": "Every admin session with IP address, browser, sign-in time and last activity. Terminate one or several; the admin is signed out on their next click.",
+            "image": "docs/images/admin-active-sessions.png"
+        },
+        {
+            "label": "Notifications",
+            "title": "Alerts you can tune",
+            "text": "Choose the failed sign-in threshold and time window, new IP and new country alerts, recipients and email templates.",
+            "image": "docs/images/admin-notifications.png"
+        },
+        {
+            "label": "Settings",
+            "title": "Retention and IP source",
+            "text": "Switch each log on or off, choose how long entries are kept and whether the client IP comes from the web server or Cloudflare.",
+            "image": "docs/images/admin-settings.png"
+        }
+    ],
+    "feature_groups": [
+        {
+            "title": "What is logged",
+            "items": [
+                "Products, categories (including moves), CMS pages and blocks",
+                "Customers, orders, invoices, shipments, credit memos and comments",
+                "Cart and catalog price rules",
+                "Configuration, also from bin/magento config:set",
+                "Admin users, roles and permissions, mass actions and imports"
+            ]
+        },
+        {
+            "title": "Sign-ins and sessions",
+            "items": [
+                "Successful and failed sign-ins with the reason",
+                "Lockouts, blocked IPs and sign-outs",
+                "Country from Cloudflare's CF-IPCountry header",
+                "Active sessions grid with Terminate and mass Terminate"
+            ]
+        },
+        {
+            "title": "Security",
+            "items": [
+                "Alerts for failed sign-ins from one IP and for lockouts",
+                "Alerts for sign-ins from a new IP or country",
+                "Admin IP allowlist with single IPs and CIDR ranges, IPv4 and IPv6",
+                "Passwords, tokens and API keys stored masked",
+                "Changes to the log settings kept by the clean-up"
+            ]
+        },
+        {
+            "title": "Admin and developers",
+            "items": [
+                "Retention in days with a daily clean-up",
+                "Exclusions by entity type and configuration path",
+                "Separate ACL permissions",
+                "CLI: clean and allowlist",
+                "Extension point for your own entities"
+            ]
+        }
+    ],
+    "demo": {
+        "storefront": [],
+        "admin": [
+            {
+                "label": "Admin panel",
+                "url": "https://demo.softawarecommerce.com/try-admin/admin-activity-log",
+                "image": "docs/images/admin-actions.png"
+            }
+        ]
+    }
+}
