@@ -32,7 +32,7 @@
         </settings>
         <bookmark name="bookmarks"/>
         <columnsControls name="columns_controls"/>
-        <filters name="listing_filters"/>
+        <filters name="listing_filters" component="Softaware_ActivityLog/js/grid/filters"/>
         <massaction name="listing_massaction">
             <action name="terminate">
                 <settings>
@@ -48,7 +48,7 @@
         </massaction>
         <paging name="listing_paging"/>
     </listingToolbar>
-    <columns name="softaware_activitylog_session_columns">
+    <columns name="softaware_activitylog_session_columns" component="Softaware_ActivityLog/js/grid/listing" template="Softaware_ActivityLog/grid/listing">
         <selectionsColumn name="ids">
             <settings>
                 <indexField>id</indexField>

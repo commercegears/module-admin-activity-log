@@ -29,3 +29,37 @@
 .softaware-activitylog-empty { color: #666; font-style: italic; }
 .softaware-activitylog-note { margin: 0 0 1.5rem; color: #666; }
 .softaware-activitylog-related { width: 100%; }
+
+/* Grids: filter row under the column headings (Search / Reset Filter buttons in the toolbar). */
+.data-grid thead .softaware-activitylog-filter-row td {
+    background: #f1f1f1;
+    border: 0 solid #d6d6d6;
+    border-bottom-width: 1px;
+    padding: .8rem .6rem;
+    vertical-align: top;
+}
+.softaware-activitylog-filter-row .admin__control-text,
+.softaware-activitylog-filter-row .admin__control-select {
+    width: 100%;
+    min-width: 0;
+    font-size: 1.3rem;
+    height: 3rem;
+    padding-top: .4rem;
+    padding-bottom: .4rem;
+}
+.softaware-activitylog-filter-row .admin__control-select { padding-right: 2.8rem; }
+.softaware-activitylog-filter-range-line { display: flex; align-items: center; gap: .4rem; }
+.softaware-activitylog-filter-range-line + .softaware-activitylog-filter-range-line { margin-top: .4rem; }
+.softaware-activitylog-filter-range-label { flex: 0 0 2.4rem; font-size: 1.2rem; color: #666; }
+.softaware-activitylog-filter-range-line .softaware-activitylog-filter-control { flex: 1 1 auto; min-width: 0; }
+.softaware-activitylog-filter-row ._has-datepicker { padding-right: 3rem; }
+.softaware-activitylog-filter-hidden-label {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+}
+.softaware-activitylog-filter-buttons { display: flex; align-items: center; gap: .4rem; }
+.softaware-activitylog-filter-row .admin__control-select { min-width: 9rem; }

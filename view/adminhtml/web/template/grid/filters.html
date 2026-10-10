@@ -1,0 +1,19 @@
+<!--
+/**
+ * Softaware Admin Activity Log: Search / Reset Filter buttons for the grid's filter row, plus the applied filters.
+ */
+-->
+<div class="data-grid-filters-actions-wrap softaware-activitylog-filter-actions">
+    <div class="softaware-activitylog-filter-buttons">
+        <button class="action-default" type="button" data-action="grid-filter-apply" click="apply"
+                disable="!hasVisible()">
+            <span translate="'Search'"></span>
+        </button>
+        <button class="action-tertiary" type="button" data-action="grid-filter-reset" click="reset"
+                disable="!hasVisible()">
+            <span translate="'Reset Filter'"></span>
+        </button>
+    </div>
+</div>
+
+<scope args="chips" render=""></scope>

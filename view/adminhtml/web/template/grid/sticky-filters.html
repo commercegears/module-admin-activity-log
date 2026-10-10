@@ -1,0 +1,14 @@
+<!--
+/**
+ * Softaware Admin Activity Log: sticky grid header button that scrolls back to the filter row.
+ */
+-->
+<div class="data-grid-filters-actions-wrap">
+    <div class="data-grid-filters-action-wrap">
+        <button class="action-default" type="button" data-action="grid-filter-scroll" click="scrollToFilters"
+                attr="title: $t('Filters')">
+            <span translate="'Filters'"></span>
+        </button>
+        <span class="filters-active" text="countActive() || ''"></span>
+    </div>
+</div>

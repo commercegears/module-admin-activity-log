@@ -34,10 +34,10 @@
         <columnsControls name="columns_controls"/>
         <exportButton name="export_button"/>
         <filterSearch name="fulltext"/>
-        <filters name="listing_filters"/>
+        <filters name="listing_filters" component="Softaware_ActivityLog/js/grid/filters"/>
         <paging name="listing_paging"/>
     </listingToolbar>
-    <columns name="softaware_activitylog_login_columns">
+    <columns name="softaware_activitylog_login_columns" component="Softaware_ActivityLog/js/grid/listing" template="Softaware_ActivityLog/grid/listing">
         <column name="login_id" sortOrder="10">
             <settings>
                 <filter>textRange</filter>
@@ -76,6 +76,7 @@
                     <class name="softaware-activitylog-badge">true</class>
                 </fieldClass>
                 <filter>select</filter>
+                <dataType>select</dataType>
                 <bodyTmpl>ui/grid/cells/html</bodyTmpl>
                 <label translate="true">Action</label>
             </settings>

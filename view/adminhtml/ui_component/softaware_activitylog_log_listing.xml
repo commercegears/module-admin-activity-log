@@ -34,10 +34,10 @@
         <columnsControls name="columns_controls"/>
         <exportButton name="export_button"/>
         <filterSearch name="fulltext"/>
-        <filters name="listing_filters"/>
+        <filters name="listing_filters" component="Softaware_ActivityLog/js/grid/filters"/>
         <paging name="listing_paging"/>
     </listingToolbar>
-    <columns name="softaware_activitylog_log_columns">
+    <columns name="softaware_activitylog_log_columns" component="Softaware_ActivityLog/js/grid/listing" template="Softaware_ActivityLog/grid/listing">
         <column name="log_id" sortOrder="10">
             <settings>
                 <filter>textRange</filter>

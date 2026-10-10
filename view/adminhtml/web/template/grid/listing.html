@@ -1,0 +1,44 @@
+<!--
+/**
+ * Softaware Admin Activity Log: Magento's ui/grid/listing with a filter row under the column headings.
+ */
+-->
+<div class="admin__data-grid-wrap" data-role="grid-wrapper">
+    <table class="data-grid softaware-activitylog-grid" data-role="grid">
+       <thead>
+            <tr each="data: getVisible(), as: '$col'" render="getHeader()"></tr>
+            <tr class="softaware-activitylog-filter-row" data-role="filter-row" keyboard="{ 13: applyFilters }">
+                <!-- ko foreach: { data: getVisible(), as: '$col' } -->
+                <td class="softaware-activitylog-filter-cell">
+                    <!-- ko with: $parent.getColumnFilter($col) -->
+                        <!-- ko if: $data.isRange -->
+                        <div class="softaware-activitylog-filter-range">
+                            <!-- ko foreach: elems -->
+                            <div class="softaware-activitylog-filter-range-line">
+                                <label class="softaware-activitylog-filter-range-label" attr="for: uid" text="label"></label>
+                                <div class="softaware-activitylog-filter-control" render="elementTmpl"></div>
+                            </div>
+                            <!-- /ko -->
+                        </div>
+                        <!-- /ko -->
+                        <!-- ko ifnot: $data.isRange -->
+                        <label class="admin__control-support-text softaware-activitylog-filter-hidden-label"
+                               attr="for: uid" text="label"></label>
+                        <div class="softaware-activitylog-filter-control" render="elementTmpl"></div>
+                        <!-- /ko -->
+                    <!-- /ko -->
+                </td>
+                <!-- /ko -->
+            </tr>
+        </thead>
+        <tbody>
+            <tr if="rows" class="data-row" repeat="foreach: rows, item: '$row'" css="'_odd-row': $index % 2">
+                <td if="$row()" outerfasteach="data: getVisible(), as: '$col'"
+                    css="getFieldClass($row())" click="getFieldHandler($row())" template="getBody()"></td>
+            </tr>
+            <tr ifnot="hasData()" class="data-grid-tr-no-data">
+                <td attr="colspan: countVisible()" translate="'We couldn\'t find any records.'"></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
