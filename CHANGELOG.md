@@ -7,9 +7,9 @@
   in the Adobe Commerce action log report, instead of behind the "Filters" button. Enter or **Search** applies them,
   **Reset Filter** clears them; the applied filters are still listed above the grid, and saved views, the column
   chooser and export keep working. In the sticky header the filter button scrolls back to the filter row.
-- Action names follow the Adobe Commerce action log: Save (was Update), New (was Create), Mass Update and Mass Delete
-  (was one "Mass action"), and Cancel, Hold and Unhold for orders cancelled, put on hold or released (single or from
-  the orders grid). The product "Update attributes" action is recorded as Mass Update.
+- Action names follow the Adobe Commerce action log: Save for created and changed records (was Create and Update;
+  the Action filter lists Save once and it matches both), Mass Update and Mass Delete (was one "Mass action"), and
+  Cancel, Hold and Unhold for orders cancelled, put on hold or released (single or from the orders grid). The product "Update attributes" action is recorded as Mass Update.
 - Login Log: the column is headed Action and reads Login, Login Failed, Account Locked, Login Blocked (IP) and Logout.
 - A data patch converts existing entries during `setup:upgrade`: "mass_action" becomes "mass_delete" (massDelete,
   massRemove) or "mass_update", and order saves made by Cancel / Hold / Unhold get those actions. Stored codes for

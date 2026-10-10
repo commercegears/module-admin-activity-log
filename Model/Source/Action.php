@@ -13,6 +13,10 @@ use Magento\Framework\Data\OptionSourceInterface;
 /**
  * Action codes stored in softaware_activity_log.action and their labels, named as in the Adobe Commerce action log
  * (Save, Delete, Mass Update, ...). The codes stay stable; only the labels follow Adobe Commerce.
+ *
+ * As in Adobe Commerce, created and changed records are both "Save": "create" and "update" share the label. The grid
+ * filter lists "Save" once (duplicate labels are dropped in the filter) and selecting it matches both codes
+ * (see \Softaware\ActivityLog\Ui\DataProvider\LogDataProvider).
  */
 class Action implements OptionSourceInterface
 {
@@ -36,8 +40,8 @@ class Action implements OptionSourceInterface
     public function toOptionArray(): array
     {
         return [
-            ['value' => self::CREATE, 'label' => __('New')],
             ['value' => self::SAVE, 'label' => __('Save')],
+            ['value' => self::CREATE, 'label' => __('Save')],
             ['value' => self::DELETE, 'label' => __('Delete')],
             ['value' => self::MOVE, 'label' => __('Move')],
             ['value' => self::MASS_UPDATE, 'label' => __('Mass Update')],
@@ -47,6 +51,16 @@ class Action implements OptionSourceInterface
             ['value' => self::HOLD, 'label' => __('Hold')],
             ['value' => self::UNHOLD, 'label' => __('Unhold')],
         ];
+    }
+
+    /**
+     * Stored codes a filter on the given code must match ("Save" covers created and changed records).
+     *
+     * @return string[]
+     */
+    public static function getFilterCodes(string $code): array
+    {
+        return $code === self::SAVE || $code === self::CREATE ? [self::SAVE, self::CREATE] : [$code];
     }
 
     public function getLabel(string $code): string

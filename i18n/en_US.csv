@@ -30,7 +30,6 @@ label,label
 "This is your own session. Use ""Sign Out"" instead.","This is your own session. Use ""Sign Out"" instead."
 "The session no longer exists.","The session no longer exists."
 "Session terminated by %1","Session terminated by %1"
-New,New
 Save,Save
 Delete,Delete
 Move,Move

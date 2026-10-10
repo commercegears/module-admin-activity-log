@@ -115,13 +115,12 @@ grid has keyword search (admin user, entity, entity ID, IP address, admin page, 
 chooser and **Export** to CSV or XML. The line above the grid says how long entries are kept, and a warning appears
 when the action log is switched off.
 
-The action names follow the Adobe Commerce action log (Save rather than Update, Mass Update and Mass Delete rather
-than one "Mass action"):
+The action names follow the Adobe Commerce action log (Save for created and changed records, Mass Update and Mass
+Delete rather than one "Mass action"):
 
 | Action | Meaning |
 | --- | --- |
-| New | A record was created. |
-| Save | A record or configuration value was changed. |
+| Save | A record was created or changed, or a configuration value was changed (as in Adobe Commerce, both are Save; the detail page lists a new record's values under "Saved Values"). |
 | Delete | A record was deleted. |
 | Move | A category was moved in the category tree. |
 | Mass Update | A grid mass action other than delete (for example change status), or the product "Update attributes" action. |

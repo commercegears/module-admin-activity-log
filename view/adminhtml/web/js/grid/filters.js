@@ -5,14 +5,51 @@
  * the toolbar shows Search and Reset Filter buttons and the chips of the applied filters.
  */
 define([
+    'underscore',
     'Magento_Ui/js/grid/filters/filters'
-], function (Filters) {
+], function (_, Filters) {
     'use strict';
 
     return Filters.extend({
         defaults: {
             template: 'Softaware_ActivityLog/grid/filters',
             stickyTmpl: 'Softaware_ActivityLog/grid/sticky-filters'
+        },
+
+        /**
+         * Select filters list each label once: several stored codes can share a label (Action "Save" covers created
+         * and changed records; the server matches all codes of the label).
+         *
+         * @param {Object} column
+         * @returns {Object}
+         */
+        buildFilter: function (column) {
+            var filter = this._super(column),
+                options = filter.options,
+                seen = {};
+
+            if (_.isString(options)) {
+                try {
+                    options = JSON.parse(options);
+                } catch (e) {
+                    return filter;
+                }
+            }
+
+            if (_.isArray(options)) {
+                filter.options = _.filter(options, function (option) {
+                    var label = String(option.label);
+
+                    if (_.has(seen, label)) {
+                        return false;
+                    }
+                    seen[label] = true;
+
+                    return true;
+                });
+            }
+
+            return filter;
         },
 
         /**

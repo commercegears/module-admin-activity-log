@@ -12,8 +12,8 @@ User guide: [docs/user-guide.md](docs/user-guide.md) · FAQ: [docs/faq.md](docs/
   products, categories (including moves in the category tree), CMS pages and blocks, customers, orders,
   invoices, shipments, credit memos, order/document comments, cart price rules, catalog price rules,
   configuration (path, scope, old and new value), admin users, admin roles and role permissions.
-- **Action names that follow the Adobe Commerce action log**: New, Save, Delete, Move, Mass Update, Mass Delete,
-  Import, and Cancel, Hold and Unhold for orders. The Login Log shows Login, Login Failed, Account Locked, Login Blocked (IP) and Logout.
+- **Action names that follow the Adobe Commerce action log**: Save (created and changed records), Delete, Move,
+  Mass Update, Mass Delete, Import, and Cancel, Hold and Unhold for orders. The Login Log shows Login, Login Failed, Account Locked, Login Blocked (IP) and Logout.
 - **Mass actions** (`mass*` grid actions, product "Update attributes") are logged with the selection and the
   parameters; records saved by the mass action are logged individually and linked through the request ID.
 - **Imports** (System > Data Transfer > Import): entity, behaviour, processed rows, created/updated/deleted counts.

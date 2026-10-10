@@ -19,7 +19,7 @@
             <updateUrl path="mui/index/render"/>
         </settings>
         <aclResource>Softaware_ActivityLog::actions</aclResource>
-        <dataProvider class="Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider" name="softaware_activitylog_log_listing_data_source">
+        <dataProvider class="Softaware\ActivityLog\Ui\DataProvider\LogDataProvider" name="softaware_activitylog_log_listing_data_source">
             <settings>
                 <requestFieldName>id</requestFieldName>
                 <primaryFieldName>log_id</primaryFieldName>
