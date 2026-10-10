@@ -1,5 +1,26 @@
 # Changelog
 
+## 1.4.0 (2026-10-10)
+
+### Changed
+- Admin Actions, Login Log and Active Sessions grids: the filters sit in a row directly under the column headings, as
+  in the Adobe Commerce action log report, instead of behind the "Filters" button. Enter or **Search** applies them,
+  **Reset Filter** clears them; the applied filters are still listed above the grid, and saved views, the column
+  chooser and export keep working. In the sticky header the filter button scrolls back to the filter row.
+- Action names follow the Adobe Commerce action log: Save (was Update), New (was Create), Mass Update and Mass Delete
+  (was one "Mass action"), and Cancel, Hold and Unhold for orders cancelled, put on hold or released (single or from
+  the orders grid). The product "Update attributes" action is recorded as Mass Update.
+- Login Log: the column is headed Action and reads Login, Login Failed, Account Locked, Login Blocked (IP) and Logout.
+- A data patch converts existing entries during `setup:upgrade`: "mass_action" becomes "mass_delete" (massDelete,
+  massRemove) or "mass_update", and order saves made by Cancel / Hold / Unhold get those actions. Stored codes for
+  create, update and delete are unchanged, so filters, saved views and exports keep working.
+
+### Fixed
+- Security notifications no longer leave Magento's admin URL builder without secret keys for the rest of the request.
+  With "Add Secret Key to URLs" on, a sign-in that triggered a notice could send the admin to the dashboard instead of
+  the page they asked for (for example a redirect after sign-in built later in the same request).
+- Login Log: the Result (now Action) filter had no options to choose from.
+
 ## 1.3.2 (2026-10-08)
 
 ### Added

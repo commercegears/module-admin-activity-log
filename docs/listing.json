@@ -31,7 +31,7 @@
         {
             "label": "Admin Actions",
             "title": "Every change in one grid",
-            "text": "Create, update and delete with admin user, entity, changed fields and IP address. Keyword search, filters, saved views and CSV or XML export.",
+            "text": "New, Save, Delete and mass actions, named as in Adobe Commerce, with admin user, entity, changed fields and IP address. Filters right under the column headings, keyword search, saved views and CSV or XML export.",
             "image": "docs/images/admin-actions.png"
         },
         {

@@ -110,10 +110,33 @@ What is logged:
   deleted counts.
 - **Command line:** configuration changes made with `bin/magento config:set` (admin page "cli: config:set").
 
-Columns: ID, Time, Admin User, Action (Create, Update, Delete, Move, Mass action, Import), Entity Type, Entity ID,
-Entity, Changed Fields, IP Address and Details. The grid has keyword search (admin user, entity, entity ID, IP
-address, admin page, request ID), filters, saved views, a column chooser and **Export** to CSV or XML. The line above
-the grid says how long entries are kept, and a warning appears when the action log is switched off.
+Columns: ID, Time, Admin User, Action, Entity Type, Entity ID, Entity, Changed Fields, IP Address and Details. The
+grid has keyword search (admin user, entity, entity ID, IP address, admin page, request ID), saved views, a column
+chooser and **Export** to CSV or XML. The line above the grid says how long entries are kept, and a warning appears
+when the action log is switched off.
+
+The action names follow the Adobe Commerce action log (Save rather than Update, Mass Update and Mass Delete rather
+than one "Mass action"):
+
+| Action | Meaning |
+| --- | --- |
+| New | A record was created. |
+| Save | A record or configuration value was changed. |
+| Delete | A record was deleted. |
+| Move | A category was moved in the category tree. |
+| Mass Update | A grid mass action other than delete (for example change status), or the product "Update attributes" action. |
+| Mass Delete | A grid mass delete. |
+| Import | An import under System > Data Transfer > Import. |
+| Cancel, Hold, Unhold | An order was cancelled, put on hold or released (single or from the orders grid). |
+
+### Filters
+
+The filter row sits directly under the column headings, as in Adobe Commerce: a from/to range for ID, Time and
+Changed Fields, a list for Action and Entity Type, and a text field for the other columns. Type or choose values and
+press **Enter** or click **Search**; **Reset Filter** clears all filters. The filters in use are listed above the grid
+("Active filters"), where each one can be removed. Columns hidden with **Columns** have no filter field. When you
+scroll down, the filter button in the sticky header takes you back to the filter row. Saved views (**Default View**)
+remember the filters, and **Export** uses them.
 
 ### Entry details
 
@@ -134,23 +157,23 @@ characters.
 
 ## 5. Login Log
 
-**Softaware > Admin Activity Log > Login Log** lists sign-in events, newest first, with time, username, result,
+**Softaware > Admin Activity Log > Login Log** lists sign-in events, newest first, with time, username, action,
 reason, IP address, country and browser.
 
 ![Login Log](images/admin-login-log.png)
 
-| Result | Meaning |
+| Action | Meaning |
 | --- | --- |
-| Signed in | A successful sign-in. |
-| Failed | A failed sign-in, with the reason: Unknown username, Wrong password, Account is inactive, or the account is locked. |
-| Locked out | Magento locked the admin account after too many failed attempts. |
-| Blocked (IP) | The IP address is not on the admin allowlist. |
-| Signed out | The admin signed out. |
+| Login | A successful sign-in. |
+| Login Failed | A failed sign-in, with the reason: Unknown username, Wrong password, Account is inactive, or the account is locked. |
+| Account Locked | Magento locked the admin account after too many failed attempts. |
+| Login Blocked (IP) | The IP address is not on the admin allowlist. |
+| Logout | The admin signed out. |
 
 The country column is filled from Cloudflare's `CF-IPCountry` header when it is present. An unknown username that
 could be a password typed into the wrong field (7 or more characters with letters and digits, not an email address)
-is stored partly masked, for example `Se*** (masked, may be a password)`. The grid has keyword search, filters and
-CSV or XML export.
+is stored partly masked, for example `Se*** (masked, may be a password)`. The grid has keyword search, the same filter
+row under the column headings as Admin Actions, and CSV or XML export.
 
 ## 6. Active Sessions
 

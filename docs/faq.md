@@ -60,5 +60,11 @@ from Cloudflare's published address ranges.
 **Can I export the log?**
 Yes. The Admin Actions and Login Log grids export to CSV and XML, with the filters you have set.
 
+**Why do older entries show "Save" and "Mass Update" after updating to 1.4.0?**
+Since 1.4.0 the action names follow the Adobe Commerce action log ("Save" instead of "Update", "Mass Update" and
+"Mass Delete" instead of "Mass action", "Login" and "Logout" in the Login Log). `bin/magento setup:upgrade` converts
+the stored mass action and order Cancel / Hold / Unhold entries, so filters and exports use the same names for old and
+new entries.
+
 **Which Magento and PHP versions are supported?**
 Magento Open Source and Adobe Commerce 2.4.7 to 2.4.9, PHP 8.2 to 8.5. The module is admin only.

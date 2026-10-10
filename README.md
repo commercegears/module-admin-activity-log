@@ -12,6 +12,8 @@ User guide: [docs/user-guide.md](docs/user-guide.md) · FAQ: [docs/faq.md](docs/
   products, categories (including moves in the category tree), CMS pages and blocks, customers, orders,
   invoices, shipments, credit memos, order/document comments, cart price rules, catalog price rules,
   configuration (path, scope, old and new value), admin users, admin roles and role permissions.
+- **Action names that follow the Adobe Commerce action log**: New, Save, Delete, Move, Mass Update, Mass Delete,
+  Import, and Cancel, Hold and Unhold for orders. The Login Log shows Login, Login Failed, Account Locked, Login Blocked (IP) and Logout.
 - **Mass actions** (`mass*` grid actions, product "Update attributes") are logged with the selection and the
   parameters; records saved by the mass action are logged individually and linked through the request ID.
 - **Imports** (System > Data Transfer > Import): entity, behaviour, processed rows, created/updated/deleted counts.
@@ -30,8 +32,9 @@ User guide: [docs/user-guide.md](docs/user-guide.md) · FAQ: [docs/faq.md](docs/
   M minutes, admin account lockouts, sign-in from a new IP address, sign-in from a new country.
 - **Admin IP allowlist** (single IPs and CIDR ranges, IPv4/IPv6). Refuses to save a list that does not include
   your own IP, and has a CLI way back in.
-- **Grids** with keyword search, filters (admin user, entity type, action, date range, IP, entity, admin page),
-  bookmarks and **CSV/XML export**; a **detail view** of each change (old and new value per field) with a link to
+- **Grids** with keyword search, a **filter row under the column headings** (as in the Adobe Commerce action log:
+  date range, admin user, action, entity type, entity, IP address and the other visible columns; Enter or **Search**
+  applies, **Reset Filter** clears), bookmarks, column chooser and **CSV/XML export**; a **detail view** of each change (old and new value per field) with a link to
   the record and the other changes made in the same request. Each grid page says how long entries are kept and
   warns when the matching log is switched off.
 - **Retention**: entries older than N days are deleted by a daily cron job (in batches). Changes to the Activity

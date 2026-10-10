@@ -30,16 +30,21 @@ label,label
 "This is your own session. Use ""Sign Out"" instead.","This is your own session. Use ""Sign Out"" instead."
 "The session no longer exists.","The session no longer exists."
 "Session terminated by %1","Session terminated by %1"
-Create,Create
-Update,Update
+New,New
+Save,Save
 Delete,Delete
 Move,Move
-"Mass action","Mass action"
+"Mass Update","Mass Update"
+"Mass Delete","Mass Delete"
 Import,Import
-"Signed in","Signed in"
-Failed,Failed
-"Locked out","Locked out"
-"Blocked (IP)","Blocked (IP)"
+Cancel,Cancel
+Hold,Hold
+Unhold,Unhold
+Login,Login
+"Login Failed","Login Failed"
+"Account Locked","Account Locked"
+"Login Blocked (IP)","Login Blocked (IP)"
+Logout,Logout
 "Signed out","Signed out"
 "%1 (%2)","%1 (%2)"
 "%1 selected","%1 selected"
@@ -113,7 +118,6 @@ Exclusions,Exclusions
 "Entity Type","Entity Type"
 "Entity ID","Entity ID"
 "Request ID","Request ID"
-Result,Result
 Reason,Reason
 Country,Country
 "Browser (User Agent)","Browser (User Agent)"
@@ -162,3 +166,6 @@ Details,Details
 "Only the listed IP addresses can use the admin panel. Locked out? Run <code>bin/magento softaware:activity-log:allowlist --disable</code>.","Only the listed IP addresses can use the admin panel. Locked out? Run <code>bin/magento softaware:activity-log:allowlist --disable</code>."
 "Default: No. Your own IP address must be on the list before it can be switched on.","Default: No. Your own IP address must be on the list before it can be switched on."
 "IP address","IP address"
+Search,Search
+"Reset Filter","Reset Filter"
+Filters,Filters
