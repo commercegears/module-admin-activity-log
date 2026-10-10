@@ -119,10 +119,31 @@ class SecurityNotifier
     private function addNotice(string $title, string $description, string $route): void
     {
         try {
-            $url = $this->backendUrl->getUrl($route, ['_nosecret' => true]);
+            $url = $this->getUrlWithoutSecretKey($route);
             $this->notifier->addMajor($title, $description, $url);
         } catch (\Throwable $e) {
             $this->logger->error('Softaware_ActivityLog: could not add admin notice: ' . $e->getMessage());
+        }
+    }
+
+    /**
+     * Admin URL without the secret key (it is only valid in the current session), for notices and emails.
+     *
+     * '_nosecret' switches the shared backend URL model to "no secret key" for the rest of the request, so a later
+     * getUrl() without parameters (for example a redirect after sign-in) would lack the key and Magento would send
+     * the admin to the dashboard. The previous state is restored here. Keys are switched off explicitly first:
+     * Magento caches built URLs per route and parameters, and on a cache hit '_nosecret' alone is not applied.
+     */
+    private function getUrlWithoutSecretKey(string $route): string
+    {
+        $usedSecretKey = $this->backendUrl->useSecretKey();
+        try {
+            $this->backendUrl->turnOffSecretKey();
+            return $this->backendUrl->getUrl($route, ['_nosecret' => true]);
+        } finally {
+            if ($usedSecretKey) {
+                $this->backendUrl->turnOnSecretKey();
+            }
         }
     }
 
@@ -157,7 +178,7 @@ class SecurityNotifier
                     'ip' => $ip,
                     'count' => $count,
                     'time' => gmdate('Y-m-d H:i:s') . ' UTC',
-                    'log_url' => $this->backendUrl->getUrl('softaware_activitylog/login/index', ['_nosecret' => true]),
+                    'log_url' => $this->getUrlWithoutSecretKey('softaware_activitylog/login/index'),
                 ])
                 ->setFromByScope($this->config->getSenderIdentity())
                 ->addTo($recipients)
