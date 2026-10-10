@@ -12,6 +12,7 @@ use Magento\Catalog\Model\Product\Action;
 use Softaware\ActivityLog\Model\Config;
 use Softaware\ActivityLog\Model\DiffBuilder;
 use Softaware\ActivityLog\Model\LogBuffer;
+use Softaware\ActivityLog\Model\Source\Action as ActionSource;
 
 /**
  * Product grid "Update status" and similar bulk attribute updates bypass model saves; log the new values here.
@@ -50,7 +51,7 @@ class ProductActionPlugin
         $changes['product_ids'] = ['', implode(', ', array_slice($ids, 0, 500))];
         $this->buffer->add([
             'key' => 'product_attributes|' . spl_object_id($subject) . '|' . md5(implode(',', $ids)),
-            'action' => 'update',
+            'action' => ActionSource::MASS_UPDATE,
             'entity_type' => 'product',
             'entity_id' => count($ids) === 1 ? $ids[0] : null,
             'entity_label' => (string)__('Bulk attribute update of %1 product(s)', count($ids)),

@@ -14,6 +14,7 @@ use Magento\Framework\Event\ObserverInterface;
 use Softaware\ActivityLog\Model\Config;
 use Softaware\ActivityLog\Model\DiffBuilder;
 use Softaware\ActivityLog\Model\LogBuffer;
+use Softaware\ActivityLog\Model\Source\Action;
 
 /**
  * Logs admin grid mass actions (massDelete, massStatus, massCancel, ...) with the selection and parameters.
@@ -95,7 +96,9 @@ class MassActionPredispatch implements ObserverInterface
         }
         $this->buffer->add([
             'key' => 'mass|' . $fullAction,
-            'action' => 'mass_action',
+            'action' => isset(self::EXTRA_ACTIONS[$fullAction])
+                ? Action::MASS_UPDATE
+                : Action::forMassAction((string)$request->getActionName()),
             'entity_type' => $type,
             'entity_id' => null,
             'entity_label' => (string)__('%1 (%2)', $request->getActionName(), $changes['selection'][1]),

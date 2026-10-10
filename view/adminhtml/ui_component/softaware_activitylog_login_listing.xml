@@ -77,7 +77,7 @@
                 </fieldClass>
                 <filter>select</filter>
                 <bodyTmpl>ui/grid/cells/html</bodyTmpl>
-                <label translate="true">Result</label>
+                <label translate="true">Action</label>
             </settings>
         </column>
         <column name="reason" sortOrder="50">

@@ -31,7 +31,9 @@ class View extends Template
     public const RELATED_LIMIT = 100;
 
     /** Actions whose entries hold old and new values; the others hold a single value per field. */
-    private const DIFF_ACTIONS = ['update', 'move'];
+    private const DIFF_ACTIONS = [
+        ActionSource::SAVE, ActionSource::MOVE, ActionSource::CANCEL, ActionSource::HOLD, ActionSource::UNHOLD,
+    ];
 
     /** Admin edit routes per entity type (ID parameter name in brackets). */
     private const EDIT_ROUTES = [
@@ -89,12 +91,7 @@ class View extends Template
 
     public function getActionLabel(string $action): string
     {
-        foreach ($this->actionSource->toOptionArray() as $option) {
-            if ($option['value'] === $action) {
-                return (string)$option['label'];
-            }
-        }
-        return $action;
+        return $this->actionSource->getLabel($action);
     }
 
     public function formatUtcTime(string $utc): string
@@ -131,9 +128,10 @@ class View extends Template
             return (string)__('Changes');
         }
         return (string)match ((string)$entry->getData('action')) {
-            'create' => __('Saved Values'),
-            'mass_action' => __('Mass Action Parameters'),
-            'import' => __('Import Result'),
+            ActionSource::CREATE => __('Saved Values'),
+            ActionSource::MASS_UPDATE, ActionSource::MASS_DELETE, ActionSource::LEGACY_MASS_ACTION
+                => __('Mass Action Parameters'),
+            ActionSource::IMPORT => __('Import Result'),
             default => __('Values'),
         };
     }

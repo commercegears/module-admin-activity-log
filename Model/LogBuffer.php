@@ -10,6 +10,7 @@ namespace Softaware\ActivityLog\Model;
 
 use Psr\Log\LoggerInterface;
 use Softaware\ActivityLog\Model\ResourceModel\Log as LogResource;
+use Softaware\ActivityLog\Model\Source\Action as ActionSource;
 
 /**
  * Request-scoped buffer. Changes are collected while models are saved, kept only once the database transaction
@@ -107,8 +108,13 @@ class LogBuffer
                 foreach ($changes as $field => [$old, $new]) {
                     $list[] = ['field' => (string)$field, 'old' => $old, 'new' => $new];
                 }
+                $action = (string)$entry['action'];
+                if ($action === ActionSource::SAVE && $entry['entity_type'] === 'order') {
+                    // Order saved by Cancel / Hold / Unhold: named after that action, as in Adobe Commerce.
+                    $action = ActionSource::forOrderRequest($base['request_path']) ?? $action;
+                }
                 $rows[] = $base + [
-                    'action' => (string)$entry['action'],
+                    'action' => $action,
                     'entity_type' => (string)$entry['entity_type'],
                     'entity_id' => isset($entry['entity_id']) ? mb_substr((string)$entry['entity_id'], 0, 64) : null,
                     'entity_label' => mb_substr((string)($entry['entity_label'] ?? ''), 0, 255),
