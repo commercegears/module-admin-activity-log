@@ -85,7 +85,7 @@ Other modules can track their own entities by adding an item to the `types` argu
 
 ## Compatibility
 
-Magento Open Source / Adobe Commerce 2.4.7 to 2.4.9, PHP 8.2 to 8.5. Requires `commercegears/module-core` ^1.3 and
+Magento Open Source / Adobe Commerce 2.4.7 to 2.4.9, PHP 8.2 to 8.5. Requires `commercegears/module-core` ^2.0 and
 Magento_Security (admin session records). No storefront code.
 
 ## Limitations
