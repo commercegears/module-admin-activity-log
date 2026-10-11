@@ -75,12 +75,12 @@ $renderValue = static function (string $value) use ($escaper): string {
                 <tr>
                     <th scope="row"><?= $escaper->escapeHtml(__('Admin User')) ?></th>
                     <td><?= $escaper->escapeHtml($entry->getData('username') ?: (
-                        str_starts_with((string)$entry->getData('request_path'), 'cli:') ? __('(command line)') : __('(not signed in)')
+                        \Softaware\ActivityLog\Model\RequestContext::isCommandLine((string)$entry->getData('request_path')) ? __('(command line)') : __('(not signed in)')
                     )) ?></td>
                 </tr>
                 <tr>
                     <th scope="row"><?= $escaper->escapeHtml(__('IP Address')) ?></th>
-                    <td><?= $escaper->escapeHtml($entry->getData('ip') ?: '–') ?></td>
+                    <td><?= $escaper->escapeHtml($entry->getData('ip') ?: __('none')) ?></td>
                 </tr>
                 <tr>
                     <th scope="row"><?= $escaper->escapeHtml(__('Changed Fields')) ?></th>

@@ -9,6 +9,7 @@ declare(strict_types=1);
 namespace Softaware\ActivityLog\Ui\Component\Listing\Column;
 
 use Magento\Ui\Component\Listing\Columns\Column;
+use Softaware\ActivityLog\Model\RequestContext;
 
 /**
  * Admin user column: says where an entry without an admin user came from instead of leaving the cell empty.
@@ -26,7 +27,7 @@ class AdminUser extends Column
             if ((string)($item[$name] ?? '') !== '') {
                 continue;
             }
-            $dataSource['data']['items'][$i][$name] = str_starts_with((string)($item['request_path'] ?? ''), 'cli:')
+            $dataSource['data']['items'][$i][$name] = RequestContext::isCommandLine((string)($item['request_path'] ?? ''))
                 ? (string)__('(command line)')
                 : (string)__('(not signed in)');
         }

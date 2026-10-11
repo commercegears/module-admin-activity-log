@@ -23,6 +23,9 @@ class DiffBuilder
     public const MASK = '******';
     private const MAX_VALUE_LENGTH = 5000;
 
+    /** Values that mean "nothing set": an empty JSON list or object, null, and Magento's "no image" marker. */
+    private const BLANK_VALUES = ['', '[]', '{}', 'null', 'no_selection'];
+
     /** Never compared for any entity. */
     private const IGNORED_FIELDS = [
         'updated_at', 'update_time', 'created_at', 'creation_time', 'form_key', 'store_id',
@@ -54,6 +57,7 @@ class DiffBuilder
         $allowed = $this->getAllowedFields($object, $type);
         $ignored = array_flip(array_merge(self::IGNORED_FIELDS, $this->typeResolver->getIgnoredFields($type)));
         $extra = array_flip($this->typeResolver->getExtraFields($type));
+        $systemDefaults = $this->typeResolver->getSystemDefaults($type);
         $idField = $object->getIdFieldName();
         $changes = [];
         foreach ($object->getData() as $field => $newValue) {
@@ -69,7 +73,12 @@ class DiffBuilder
             if ($new === null) {
                 continue;
             }
-            if (!$isNew && !array_key_exists($field, $orig) && ($new === '' || $new === '0')) {
+            $isSystemDefault = isset($systemDefaults[$field]) && $new === $systemDefaults[$field];
+            if ($isNew && ($this->isBlank($new) || $isSystemDefault)) {
+                // A new record with nothing set, or a value the system fills in by itself: not a change worth listing.
+                continue;
+            }
+            if (!$isNew && !array_key_exists($field, $orig) && ($this->isBlank($new) || $new === '0' || $isSystemDefault)) {
                 // Attribute had no stored value and the form posted its empty/default value.
                 continue;
             }
@@ -124,7 +133,7 @@ class DiffBuilder
 
     public function isEqual(string $old, string $new): bool
     {
-        if ($old === $new) {
+        if ($old === $new || ($this->isBlank($old) && $this->isBlank($new))) {
             return true;
         }
         if (($old === '' && $new === '0') || ($old === '0' && $new === '')) {
@@ -138,6 +147,14 @@ class DiffBuilder
             return strtotime($old) === strtotime($new);
         }
         return false;
+    }
+
+    /**
+     * Empty, or a value that only means "nothing set" (for example "[]" from a JSON field or "no_selection").
+     */
+    public function isBlank(string $value): bool
+    {
+        return in_array(trim($value), self::BLANK_VALUES, true);
     }
 
     public function isSensitive(string $field): bool

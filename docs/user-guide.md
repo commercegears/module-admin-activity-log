@@ -53,7 +53,7 @@ settings are global (default scope).
 | Log Admin Actions | Default Yes. Create, update and delete of the records listed in section 4, plus mass actions and imports. |
 | Log Admin Sign-ins | Default Yes. Successful and failed sign-ins, lockouts, blocked IPs and sign-outs. Required for security notifications. |
 | Client IP Address From | **Web server** (`REMOTE_ADDR`, default) or **Cloudflare**. With Cloudflare, the `CF-Connecting-IP` and `CF-IPCountry` headers are trusted only on requests from Cloudflare's address ranges. Used for the logs, the alerts and the allowlist. |
-| Keep Log Entries For (Days) | Default 90. Older entries are deleted daily; 0 keeps everything. Changes to these settings are always kept. |
+| Keep Log Entries For (Days) | Default 90. Older entries are deleted daily; 0 keeps everything; at most 3650 (ten years). Changes to these settings are always kept. |
 
 ### Exclusions
 
@@ -72,8 +72,8 @@ settings are global (default scope).
 | Add Admin Notification | Default Yes. Shows the alert in the admin notification inbox (bell icon). |
 | Email Recipients | Comma-separated addresses. Leave empty to send no emails (the admin notification still appears). |
 | Email Sender | Store email identity the alerts are sent from. Default General Contact. |
-| Alert After Failed Sign-ins From One IP | Default 5. Lockouts of an admin account are always reported. |
-| Within (Minutes) | Default 15. |
+| Alert After Failed Sign-ins From One IP | Default 5; 1 to 1000. Lockouts of an admin account are always reported. |
+| Within (Minutes) | Default 15; 1 to 1440 (one day). |
 | Alert on Sign-in From a New IP | Default Yes. When an admin signs in from an IP address they have not used before. |
 | Alert on Sign-in From a New Country | Default Yes. Uses the `CF-IPCountry` header, so it only works behind Cloudflare with IP geolocation on. |
 | Also Email the Admin User | Default No. Sends the new IP or new country alert to the admin account's own email address too. |
@@ -108,7 +108,13 @@ What is logged:
   parameters. Records saved by the mass action are logged individually and linked by the request ID.
 - **Imports** under System > Data Transfer > Import: entity, behaviour, processed rows and the created, updated and
   deleted counts.
-- **Command line:** configuration changes made with `bin/magento config:set` (admin page "cli: config:set").
+- **Command line:** configuration changes made with `bin/magento config:set` (admin page "cli: config:set"), and
+  changes made by commands or PHP scripts that run in the admin area (admin page "cli: <command>" or
+  "cli: script <file name>"). These entries show "(command line)" as the admin user.
+
+Changes that only swap one empty value for another (for example empty for "[]") are not listed, and neither are
+values the system fills in by itself when a product is created (an empty image, "Display Product Options In" left at
+its default).
 
 Columns: ID, Time, Admin User, Action, Entity Type, Entity ID, Entity, Changed Fields, IP Address and Details. The
 grid has keyword search (admin user, entity, entity ID, IP address, admin page, request ID), saved views, a column

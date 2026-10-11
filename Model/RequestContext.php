@@ -109,11 +109,40 @@ class RequestContext
             return mb_substr((string)$this->request->getFullActionName('/'), 0, 255);
         }
         if (PHP_SAPI === 'cli') {
-            // Only the command name: arguments can contain secrets (config:set values).
-            $command = (string)($_SERVER['argv'][1] ?? '');
-            return 'cli' . ($command !== '' && preg_match('/^[a-z0-9:_-]+$/i', $command) ? ': ' . $command : '');
+            return self::describeCommandLine((array)($_SERVER['argv'] ?? []));
         }
         return '';
+    }
+
+    /**
+     * "cli: <command>" for bin/magento (only the command name: arguments can contain secrets, such as
+     * config:set values), "cli: script <file name>" for other PHP scripts, "cli" when nothing is known.
+     *
+     * @param array<int, mixed> $argv
+     */
+    public static function describeCommandLine(array $argv): string
+    {
+        $script = basename((string)($argv[0] ?? ''));
+        if ($script === 'magento' || $script === 'magento.php') {
+            foreach (array_slice($argv, 1) as $arg) {
+                $arg = (string)$arg;
+                if ($arg === '' || $arg[0] === '-') {
+                    continue;
+                }
+                return preg_match('/^[a-z0-9:_-]+$/i', $arg) ? 'cli: ' . $arg : 'cli';
+            }
+            return 'cli';
+        }
+        $script = (string)preg_replace('/[^\w.-]/', '', $script);
+        return $script !== '' ? 'cli: script ' . mb_substr($script, 0, 200) : 'cli';
+    }
+
+    /**
+     * Whether a stored request path belongs to a command-line run (bin/magento, a PHP script or cron).
+     */
+    public static function isCommandLine(string $requestPath): bool
+    {
+        return $requestPath === 'cli' || str_starts_with($requestPath, 'cli:');
     }
 
     public function getRequestId(): string

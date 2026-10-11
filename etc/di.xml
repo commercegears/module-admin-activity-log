@@ -1,6 +1,7 @@
 <?xml version="1.0"?>
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
-    <!-- Tracked entities. Other modules can add items: class (comma-separated), label, label_fields, extra_fields, ignore_fields. -->
+    <!-- Tracked entities. Other modules can add items: class (comma-separated), label, label_fields, extra_fields, ignore_fields,
+         system_defaults (field=value pairs the system fills in by itself; not reported for new records). -->
     <type name="Softaware\ActivityLog\Model\EntityTypeResolver">
         <arguments>
             <argument name="types" xsi:type="array">
@@ -10,6 +11,7 @@
                     <item name="label_fields" xsi:type="string">sku,name</item>
                     <item name="extra_fields" xsi:type="string">category_ids,website_ids</item>
                     <item name="ignore_fields" xsi:type="string">has_options,required_options,url_path,media_gallery,quantity_and_stock_status,image_label,small_image_label,thumbnail_label</item>
+                    <item name="system_defaults" xsi:type="string">options_container=container2,msrp_display_actual_price_type=0,gift_message_available=0</item>
                 </item>
                 <item name="category" xsi:type="array">
                     <item name="class" xsi:type="string">Magento\Catalog\Model\Category</item>

@@ -34,8 +34,8 @@
                 </field>
                 <field id="retention_days" translate="label comment" type="text" sortOrder="40" showInDefault="1" canRestore="1">
                     <label>Keep Log Entries For (Days)</label>
-                    <validate>validate-digits validate-zero-or-greater</validate>
-                    <comment>Default: 90. Older entries are deleted daily; 0 keeps everything. Changes to these settings are always kept.</comment>
+                    <validate>required-entry validate-digits validate-digits-range digits-range-0-3650</validate>
+                    <comment>Default: 90. Older entries are deleted daily; 0 keeps everything; at most 3650 (ten years). Changes to these settings are always kept.</comment>
                     <depends><field id="enabled">1</field></depends>
                 </field>
             </group>
@@ -81,14 +81,14 @@
                 </field>
                 <field id="failed_threshold" translate="label comment" type="text" sortOrder="50" showInDefault="1" canRestore="1">
                     <label>Alert After Failed Sign-ins From One IP</label>
-                    <validate>required-entry validate-digits validate-greater-than-zero</validate>
-                    <comment>Default: 5. Lockouts of an admin account are always reported.</comment>
+                    <validate>required-entry validate-digits validate-digits-range digits-range-1-1000</validate>
+                    <comment>Default: 5; 1 to 1000. Lockouts of an admin account are always reported.</comment>
                     <depends><field id="enabled">1</field></depends>
                 </field>
                 <field id="failed_window" translate="label comment" type="text" sortOrder="60" showInDefault="1" canRestore="1">
                     <label>Within (Minutes)</label>
-                    <validate>required-entry validate-digits validate-greater-than-zero</validate>
-                    <comment>Default: 15.</comment>
+                    <validate>required-entry validate-digits validate-digits-range digits-range-1-1440</validate>
+                    <comment>Default: 15; 1 to 1440 (one day).</comment>
                     <depends><field id="enabled">1</field></depends>
                 </field>
                 <field id="new_ip" translate="label comment" type="select" sortOrder="70" showInDefault="1" canRestore="1">

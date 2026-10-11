@@ -92,6 +92,24 @@ class EntityTypeResolver
     }
 
     /**
+     * Default values the system fills in on its own ("field=value", comma-separated), for example a product's
+     * options_container=container2. They are not reported for new records, nor when the old value was not loaded.
+     *
+     * @return array<string, string> field => default value
+     */
+    public function getSystemDefaults(string $type): array
+    {
+        $defaults = [];
+        foreach ($this->split($this->types[$type]['system_defaults'] ?? '') as $pair) {
+            [$field, $value] = array_pad(explode('=', $pair, 2), 2, '');
+            if (trim($field) !== '') {
+                $defaults[trim($field)] = trim($value);
+            }
+        }
+        return $defaults;
+    }
+
+    /**
      * @return string[]
      */
     private function split(string $value): array

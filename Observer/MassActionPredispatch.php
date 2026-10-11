@@ -90,7 +90,7 @@ class MassActionPredispatch implements ObserverInterface
                     JSON_UNESCAPED_UNICODE | JSON_PARTIAL_OUTPUT_ON_ERROR
                 );
             }
-            if ($normalized !== '') {
+            if (!$this->diffBuilder->isBlank($normalized)) {
                 $changes[(string)$name] = $this->diffBuilder->protect((string)$name, '', $normalized);
             }
         }

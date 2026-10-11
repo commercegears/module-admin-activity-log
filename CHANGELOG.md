@@ -1,93 +1,41 @@
 # Changelog
 
+## 1.4.1 (2026-10-11)
+- Entries from the command line always show "(command line)"; scripts are named on the admin page column.
+- Changes from one empty value to another (such as empty to "[]") are no longer listed.
+- New products no longer list empty images or the default "Display Product Options In" value.
+- Created records show as Save, and the Save filter matches created and changed records.
+- Settings are checked on the server (retention, alert threshold and time window within sensible ranges).
+
 ## 1.4.0 (2026-10-10)
-
-### Changed
-- Admin Actions, Login Log and Active Sessions grids: the filters sit in a row directly under the column headings, as
-  in the Adobe Commerce action log report, instead of behind the "Filters" button. Enter or **Search** applies them,
-  **Reset Filter** clears them; the applied filters are still listed above the grid, and saved views, the column
-  chooser and export keep working. In the sticky header the filter button scrolls back to the filter row.
-- Action names follow the Adobe Commerce action log: Save for created and changed records (was Create and Update;
-  the Action filter lists Save once and it matches both), Mass Update and Mass Delete (was one "Mass action"), and
-  Cancel, Hold and Unhold for orders cancelled, put on hold or released (single or from the orders grid). The product "Update attributes" action is recorded as Mass Update.
-- Login Log: the column is headed Action and reads Login, Login Failed, Account Locked, Login Blocked (IP) and Logout.
-- A data patch converts existing entries during `setup:upgrade`: "mass_action" becomes "mass_delete" (massDelete,
-  massRemove) or "mass_update", and order saves made by Cancel / Hold / Unhold get those actions. Stored codes for
-  create, update and delete are unchanged, so filters, saved views and exports keep working.
-
-### Fixed
-- Security notifications no longer leave Magento's admin URL builder without secret keys for the rest of the request.
-  With "Add Secret Key to URLs" on, a sign-in that triggered a notice could send the admin to the dashboard instead of
-  the page they asked for (for example a redirect after sign-in built later in the same request).
-- Login Log: the Result (now Action) filter had no options to choose from.
+- Filters sit in a row under the column headings, as in the Adobe Commerce action log.
+- Action names as in Adobe Commerce: Save, Mass Update, Mass Delete, Cancel, Hold and Unhold.
+- Login Log actions read Login, Login Failed, Account Locked, Login Blocked (IP) and Logout.
+- Security notices no longer send the admin to the dashboard after sign-in when secret URL keys are on.
+- The Login Log Action filter lists its options.
 
 ## 1.3.2 (2026-10-08)
-
-### Added
-
-- Product listing, FAQ and user guide (docs/).
+- Product listing, FAQ and user guide.
 
 ## 1.3.1 (2026-10-07)
-
-### Fixed
-
-- README: the module requires `softaware/module-core` ^1.0 (the README said ^1.2; composer.json was right).
+- README states the right softaware/module-core version.
 
 ## 1.3.0 (2026-10-07)
-
-### Added
-- Keyword search on the Admin Actions grid (admin user, entity, entity ID, IP address, admin page, request ID) and the
-  Login Log grid (username, IP address, reason, browser). Adds a full-text index to both log tables.
-- Grid pages start with a one-line explanation (what is listed, how long entries are kept, session lifetime on Active
-  Sessions) and a warning with a link to the settings when the matching log is switched off.
-- "Allowed IP Addresses" shows your current IP address, so you can add it before switching the allowlist on.
-
-### Changed
-- Login Log: the result is shown as a coloured status badge (signed in, failed, locked out, blocked by allowlist).
-- Admin Actions grid: Entity ID is hidden by default (still available under Columns) so the grid fits narrower
-  screens; the link column is headed "Details" instead of a second "Action"; entries from the command line show
-  "(command line)" instead of an empty admin user.
-- Entry detail page: standard Back button; compact two-column summary; old and new values in equal columns that
-  wrap long values and scroll very long ones (such as encoded files) inside the cell; empty values shown as
-  "(empty)"; created records, mass actions and imports are listed as one value column ("Saved Values",
-  "Mass Action Parameters", "Import Result") instead of under "New value" next to an empty "Old value" column;
-  "Open Record" / "Open Configuration Section" links; a note when more than 100 related entries exist.
-- Active Sessions: confirmation dialogs say when the admin is signed out; result messages say what happened;
-  Session ID hidden by default; Country filter added; long browser strings wrap.
-- Page titles match the menu ("Login Log", "Active Sessions"); labels in title case throughout.
-- Settings: shorter field comments with defaults and examples, comments added to every field, email recipients
-  validated, "Allowed IP Addresses" only shown when the allowlist is enabled; the General group is always open.
+- Keyword search on the Admin Actions and Login Log grids.
+- Grid pages explain what is listed and warn when the log is switched off.
+- Clearer detail page: equal old and new value columns, "(empty)" values and links to the record.
+- Login Log status badges, tidier Active Sessions and shorter settings comments with defaults.
+- "Allowed IP Addresses" shows your current IP address.
 
 ## 1.2.0 (2026-10-06)
-
-### Changed
-
-- Requires `softaware/module-core` instead of `softaware/module-base`. The admin menu and ACL now sit under `Softaware_Core::core` ("Softaware"); roles that had access keep it (migrated by module-core). After updating all SoftAware modules, `softaware/module-base` can be removed.
+- Requires softaware/module-core instead of module-base; menu and permissions move under "Softaware".
 
 ## 1.1.0 (2026-10-06)
+- "Client IP Address From" setting (web server or Cloudflare, checked against Cloudflare's ranges).
+- Changes to the Activity Log's own settings are kept by the clean-up.
+- More secrets masked, and unknown usernames of failed sign-ins partly masked.
 
-### Added
-- "Client IP Address From" setting: Web server (default, unchanged) or Cloudflare. With Cloudflare, `CF-Connecting-IP`
-  and `CF-IPCountry` are used only on requests from Cloudflare's address ranges, so they cannot be faked by
-  connecting to the server directly. The allowlist's own-IP check uses the IP source being saved.
-
-### Changed
-- Changes to the Activity Log's own settings are kept by the retention clean-up (tamper evidence).
-- Log entries are written every 500 entries during long requests instead of only at the end.
-
-### Security
-- Unknown usernames of failed sign-ins that could be a password typed into the wrong field are stored partly masked
-  (also in alert emails and admin notices).
-- More secrets are masked: API/private/licence keys, passphrases and card fields; config fields of type
-  obscure/password with a custom backend; config paths Magento declares sensitive; nested values in mass-action
-  parameters (were stored as JSON in clear).
-
-## 1.0.0
-
-- Admin action log with field-level diff for catalog, CMS, customers, sales documents and comments, price rules,
-  configuration, admin users, roles and permissions; mass actions and imports.
-- Login log (success, failure with reason, lockout, blocked IP, sign-out) with IP, browser and country.
-- Active admin sessions grid with terminate.
-- Security notifications (failed sign-ins per IP, lockouts, new IP, new country) by email and admin inbox.
-- Admin IP allowlist with CIDR support and CLI fallback.
-- Grids with filters, detail view, CSV/XML export, retention cron, exclusions, CLI commands.
+## 1.0.0 (2026-10-06)
+- First release: admin action log with field-level changes, login log and active sessions.
+- Security notifications by e-mail and admin inbox, and an admin IP allowlist with a CLI way back in.
+- Grids with filters, export, retention clean-up, exclusions and CLI commands.

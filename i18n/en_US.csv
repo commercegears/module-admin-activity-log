@@ -152,14 +152,14 @@ Values,Values
 "One IPv4/IPv6 address or CIDR range per line, for example %1 or %2. Text after %3 is a note.","One IPv4/IPv6 address or CIDR range per line, for example %1 or %2. Text after %3 is a note."
 Details,Details
 "Used for the logs, alerts and IP allowlist. Default: Web server. Choose Cloudflare only if the logs show Cloudflare addresses; the <code>CF-Connecting-IP</code> header is then trusted on requests from Cloudflare's address ranges only.","Used for the logs, alerts and IP allowlist. Default: Web server. Choose Cloudflare only if the logs show Cloudflare addresses; the <code>CF-Connecting-IP</code> header is then trusted on requests from Cloudflare's address ranges only."
-"Default: 90. Older entries are deleted daily; 0 keeps everything. Changes to these settings are always kept.","Default: 90. Older entries are deleted daily; 0 keeps everything. Changes to these settings are always kept."
+"Default: 90. Older entries are deleted daily; 0 keeps everything; at most 3650 (ten years). Changes to these settings are always kept.","Default: 90. Older entries are deleted daily; 0 keeps everything; at most 3650 (ten years). Changes to these settings are always kept."
 "Changes to the selected record types are not logged. Default: none, so everything is logged. Hold Ctrl (Cmd on a Mac) to select several.","Changes to the selected record types are not logged. Default: none, so everything is logged. Hold Ctrl (Cmd on a Mac) to select several."
 "One path per line, <code>*</code> is a wildcard, for example <code>design/*</code>. Secret values such as passwords and API keys are always masked, so they do not need to be listed here.","One path per line, <code>*</code> is a wildcard, for example <code>design/*</code>. Secret values such as passwords and API keys are always masked, so they do not need to be listed here."
 "Alerts for repeated failed sign-ins, lockouts and sign-ins from a new IP or country. Needs ""Log Admin Sign-ins"".","Alerts for repeated failed sign-ins, lockouts and sign-ins from a new IP or country. Needs ""Log Admin Sign-ins""."
 "Comma-separated, for example security@example.com, it@example.com. Leave empty to send no emails.","Comma-separated, for example security@example.com, it@example.com. Leave empty to send no emails."
 "Store email address the alerts are sent from. Default: General Contact.","Store email address the alerts are sent from. Default: General Contact."
-"Default: 5. Lockouts of an admin account are always reported.","Default: 5. Lockouts of an admin account are always reported."
-"Default: 15.","Default: 15."
+"Default: 5; 1 to 1000. Lockouts of an admin account are always reported.","Default: 5; 1 to 1000. Lockouts of an admin account are always reported."
+"Default: 15; 1 to 1440 (one day).","Default: 15; 1 to 1440 (one day)."
 "Used for failed sign-in and lockout alerts. Copy it under Marketing > Email Templates to change the wording.","Used for failed sign-in and lockout alerts. Copy it under Marketing > Email Templates to change the wording."
 "Used for sign-ins from a new IP address or country.","Used for sign-ins from a new IP address or country."
 "Only the listed IP addresses can use the admin panel. Locked out? Run <code>bin/magento softaware:activity-log:allowlist --disable</code>.","Only the listed IP addresses can use the admin panel. Locked out? Run <code>bin/magento softaware:activity-log:allowlist --disable</code>."
@@ -168,3 +168,4 @@ Details,Details
 Search,Search
 "Reset Filter","Reset Filter"
 Filters,Filters
+"none","none"

@@ -61,8 +61,8 @@ User guide: [docs/user-guide.md](docs/user-guide.md) · FAQ: [docs/faq.md](docs/
 | `softaware_activitylog/general/log_logins` | 1 | Login log (needed for alerts) |
 | `softaware_activitylog/general/ip_source` | server | `server` (REMOTE_ADDR) or `cloudflare` (CF-Connecting-IP from Cloudflare ranges only) |
 | `softaware_activitylog/general/retention_days` | 90 | 0 = keep forever |
-| `softaware_activitylog/exclude/entity_types` | – | Comma-separated entity type codes |
-| `softaware_activitylog/exclude/config_paths` | – | One pattern per line, `*` wildcard |
+| `softaware_activitylog/exclude/entity_types` | (empty) | Comma-separated entity type codes |
+| `softaware_activitylog/exclude/config_paths` | (empty) | One pattern per line, `*` wildcard |
 | `softaware_activitylog/notifications/*` | on | Recipients, sender, threshold (5) and window (15 min), new IP/country, templates |
 | `softaware_activitylog/allowlist/enabled`, `.../ips` | off | Admin IP allowlist |
 
@@ -85,13 +85,14 @@ Other modules can track their own entities by adding an item to the `types` argu
 
 ## Compatibility
 
-Magento Open Source / Adobe Commerce 2.4.7–2.4.9, PHP 8.2–8.5. Requires `softaware/module-core` ^1.0 and
+Magento Open Source / Adobe Commerce 2.4.7 to 2.4.9, PHP 8.2 to 8.5. Requires `softaware/module-core` ^1.3 and
 Magento_Security (admin session records). No storefront code.
 
 ## Limitations
 
-- Only changes made in the admin panel (and `config:set` on the CLI) are logged. Changes through the REST/SOAP
-  API, cron jobs, imports from the command line or direct SQL are not.
+- Only changes made in the admin panel, and command-line runs in the admin area (`config:set`, admin-area scripts,
+  shown as "(command line)"), are logged. Changes through the REST/SOAP API, cron jobs, imports from the command line
+  or direct SQL are not.
 - Changes written with direct SQL by Magento or third-party modules (for example stock updates, some
   "Update attributes" paths that run through the message queue) only appear as the mass action that started them.
 - Very large field values are truncated to 5,000 characters in the diff.
