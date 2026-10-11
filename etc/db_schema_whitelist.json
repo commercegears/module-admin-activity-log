@@ -22,7 +22,8 @@
             "COMMERCEGEARS_ACTIVITY_LOG_ENTITY_TYPE_ENTITY_ID": true,
             "COMMERCEGEARS_ACTIVITY_LOG_REQUEST_ID": true,
             "COMMERCEGEARS_ACTIVITY_LOG_IP": true,
-            "FTI_DC61672A47FE761032259D364FD725C4": true
+            "FTI_DC61672A47FE761032259D364FD725C4": true,
+            "FTI_D37BD109E9C3AC0734170F2446419162": true
         },
         "constraint": {
             "PRIMARY": true
