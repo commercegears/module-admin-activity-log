@@ -1,16 +1,16 @@
 <?xml version="1.0"?>
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
     <head>
-        <css src="Softaware_ActivityLog::css/activity-log.css"/>
+        <css src="CommerceGears_ActivityLog::css/activity-log.css"/>
     </head>
     <body>
         <referenceContainer name="content">
-            <block class="Softaware\ActivityLog\Block\Adminhtml\GridIntro" name="softaware_activitylog_log_intro" before="-">
+            <block class="CommerceGears\ActivityLog\Block\Adminhtml\GridIntro" name="commercegears_activitylog_session_intro" before="-">
                 <arguments>
-                    <argument name="page" xsi:type="string">actions</argument>
+                    <argument name="page" xsi:type="string">sessions</argument>
                 </arguments>
             </block>
-            <uiComponent name="softaware_activitylog_log_listing"/>
+            <uiComponent name="commercegears_activitylog_session_listing"/>
         </referenceContainer>
     </body>
 </page>

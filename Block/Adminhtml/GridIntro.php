@@ -1,17 +1,17 @@
 <?php
 /**
- * Softaware Admin Activity Log
+ * CommerceGears Admin Activity Log
  *
- * @copyright Copyright (c) Softaware Commerce (https://www.softawarecommerce.co.uk/)
+ * @copyright Copyright (c) CommerceGears (https://www.commercegearscommerce.co.uk/)
  */
 declare(strict_types=1);
 
-namespace Softaware\ActivityLog\Block\Adminhtml;
+namespace CommerceGears\ActivityLog\Block\Adminhtml;
 
 use Magento\Backend\Block\Template;
 use Magento\Backend\Block\Template\Context;
 use Magento\Security\Model\ConfigInterface as SecurityConfig;
-use Softaware\ActivityLog\Model\Config;
+use CommerceGears\ActivityLog\Model\Config;
 
 /**
  * One-line introduction above the Activity Log grids, with a warning when the matching log is switched off.
@@ -19,7 +19,7 @@ use Softaware\ActivityLog\Model\Config;
  */
 class GridIntro extends Template
 {
-    protected $_template = 'Softaware_ActivityLog::grid/intro.phtml';
+    protected $_template = 'CommerceGears_ActivityLog::grid/intro.phtml';
 
     public function __construct(
         Context $context,
@@ -62,9 +62,9 @@ class GridIntro extends Template
      */
     public function getSettingsUrl(): ?string
     {
-        if (!$this->_authorization->isAllowed('Softaware_ActivityLog::config')) {
+        if (!$this->_authorization->isAllowed('CommerceGears_ActivityLog::config')) {
             return null;
         }
-        return $this->getUrl('adminhtml/system_config/edit', ['section' => 'softaware_activitylog']);
+        return $this->getUrl('adminhtml/system_config/edit', ['section' => 'commercegears_activitylog']);
     }
 }

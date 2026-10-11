@@ -1,16 +1,16 @@
 <?php
 /**
- * Softaware Admin Activity Log
+ * CommerceGears Admin Activity Log
  *
- * @copyright Copyright (c) Softaware Commerce (https://www.softawarecommerce.co.uk/)
+ * @copyright Copyright (c) CommerceGears (https://www.commercegearscommerce.co.uk/)
  */
 declare(strict_types=1);
 
-namespace Softaware\ActivityLog\Setup\Patch\Data;
+namespace CommerceGears\ActivityLog\Setup\Patch\Data;
 
 use Magento\Framework\Setup\ModuleDataSetupInterface;
 use Magento\Framework\Setup\Patch\DataPatchInterface;
-use Softaware\ActivityLog\Model\Source\Action;
+use CommerceGears\ActivityLog\Model\Source\Action;
 
 /**
  * 1.4.0 names actions as Adobe Commerce does. Existing entries are converted so that filters and exports show the
@@ -37,7 +37,7 @@ class AdobeCommerceActionCodes implements DataPatchInterface
     public function apply(): self
     {
         $connection = $this->moduleDataSetup->getConnection();
-        $table = $this->moduleDataSetup->getTable('softaware_activity_log');
+        $table = $this->moduleDataSetup->getTable('commercegears_activity_log');
         $connection->update(
             $table,
             ['action' => Action::MASS_DELETE],

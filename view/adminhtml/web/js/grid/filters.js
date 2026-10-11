@@ -1,5 +1,5 @@
 /**
- * Softaware Admin Activity Log
+ * CommerceGears Admin Activity Log
  *
  * Filters component without the collapsible panel: the fields live in the grid's filter row (see listing.js),
  * the toolbar shows Search and Reset Filter buttons and the chips of the applied filters.
@@ -12,8 +12,8 @@ define([
 
     return Filters.extend({
         defaults: {
-            template: 'Softaware_ActivityLog/grid/filters',
-            stickyTmpl: 'Softaware_ActivityLog/grid/sticky-filters'
+            template: 'CommerceGears_ActivityLog/grid/filters',
+            stickyTmpl: 'CommerceGears_ActivityLog/grid/sticky-filters'
         },
 
         /**

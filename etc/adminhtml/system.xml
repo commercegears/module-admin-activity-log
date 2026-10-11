@@ -1,11 +1,11 @@
 <?xml version="1.0"?>
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
     <system>
-        <section id="softaware_activitylog" translate="label" sortOrder="40" showInDefault="1" showInWebsite="0" showInStore="0">
+        <section id="commercegears_activitylog" translate="label" sortOrder="40" showInDefault="1" showInWebsite="0" showInStore="0">
             <class>separator-top</class>
             <label>Admin Activity Log</label>
-            <tab>softaware</tab>
-            <resource>Softaware_ActivityLog::config</resource>
+            <tab>commercegears</tab>
+            <resource>CommerceGears_ActivityLog::config</resource>
             <group id="general" translate="label" sortOrder="10" showInDefault="1">
                 <attribute type="expanded">1</attribute>
                 <label>General</label>
@@ -28,7 +28,7 @@
                 </field>
                 <field id="ip_source" translate="label comment" type="select" sortOrder="35" showInDefault="1" canRestore="1">
                     <label>Client IP Address From</label>
-                    <source_model>Softaware\ActivityLog\Model\Source\IpSource</source_model>
+                    <source_model>CommerceGears\ActivityLog\Model\Source\IpSource</source_model>
                     <comment><![CDATA[Used for the logs, alerts and IP allowlist. Default: Web server. Choose Cloudflare only if the logs show Cloudflare addresses; the <code>CF-Connecting-IP</code> header is then trusted on requests from Cloudflare's address ranges only.]]></comment>
                     <depends><field id="enabled">1</field></depends>
                 </field>
@@ -41,10 +41,10 @@
             </group>
             <group id="exclude" translate="label" sortOrder="20" showInDefault="1">
                 <label>Exclusions</label>
-                <depends><field id="softaware_activitylog/general/enabled">1</field></depends>
+                <depends><field id="commercegears_activitylog/general/enabled">1</field></depends>
                 <field id="entity_types" translate="label comment" type="multiselect" sortOrder="10" showInDefault="1" canRestore="1">
                     <label>Do Not Log These Entities</label>
-                    <source_model>Softaware\ActivityLog\Model\Source\EntityType</source_model>
+                    <source_model>CommerceGears\ActivityLog\Model\Source\EntityType</source_model>
                     <can_be_empty>1</can_be_empty>
                     <comment>Changes to the selected record types are not logged. Default: none, so everything is logged. Hold Ctrl (Cmd on a Mac) to select several.</comment>
                 </field>
@@ -55,7 +55,7 @@
             </group>
             <group id="notifications" translate="label" sortOrder="30" showInDefault="1">
                 <label>Security Notifications</label>
-                <depends><field id="softaware_activitylog/general/enabled">1</field></depends>
+                <depends><field id="commercegears_activitylog/general/enabled">1</field></depends>
                 <field id="enabled" translate="label comment" type="select" sortOrder="10" showInDefault="1" canRestore="1">
                     <label>Enabled</label>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
@@ -124,8 +124,8 @@
             </group>
             <group id="allowlist" translate="label comment" sortOrder="40" showInDefault="1">
                 <label>Admin IP Allowlist</label>
-                <comment><![CDATA[Only the listed IP addresses can use the admin panel. Locked out? Run <code>bin/magento softaware:activity-log:allowlist --disable</code>.]]></comment>
-                <depends><field id="softaware_activitylog/general/enabled">1</field></depends>
+                <comment><![CDATA[Only the listed IP addresses can use the admin panel. Locked out? Run <code>bin/magento commercegears:activity-log:allowlist --disable</code>.]]></comment>
+                <depends><field id="commercegears_activitylog/general/enabled">1</field></depends>
                 <field id="enabled" translate="label comment" type="select" sortOrder="10" showInDefault="1" canRestore="1">
                     <label>Enabled</label>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
@@ -133,9 +133,9 @@
                 </field>
                 <field id="ips" translate="label" type="textarea" sortOrder="20" showInDefault="1">
                     <label>Allowed IP Addresses</label>
-                    <backend_model>Softaware\ActivityLog\Model\Config\Backend\Allowlist</backend_model>
+                    <backend_model>CommerceGears\ActivityLog\Model\Config\Backend\Allowlist</backend_model>
                     <comment>
-                        <model>Softaware\ActivityLog\Model\Config\Comment\AllowlistIps</model>
+                        <model>CommerceGears\ActivityLog\Model\Config\Comment\AllowlistIps</model>
                     </comment>
                     <depends><field id="enabled">1</field></depends>
                 </field>

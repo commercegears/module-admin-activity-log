@@ -2,24 +2,24 @@
 <listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
     <argument name="data" xsi:type="array">
         <item name="js_config" xsi:type="array">
-            <item name="provider" xsi:type="string">softaware_activitylog_session_listing.softaware_activitylog_session_listing_data_source</item>
+            <item name="provider" xsi:type="string">commercegears_activitylog_session_listing.commercegears_activitylog_session_listing_data_source</item>
         </item>
     </argument>
     <settings>
-        <spinner>softaware_activitylog_session_columns</spinner>
+        <spinner>commercegears_activitylog_session_columns</spinner>
         <deps>
-            <dep>softaware_activitylog_session_listing.softaware_activitylog_session_listing_data_source</dep>
+            <dep>commercegears_activitylog_session_listing.commercegears_activitylog_session_listing_data_source</dep>
         </deps>
     </settings>
-    <dataSource name="softaware_activitylog_session_listing_data_source" component="Magento_Ui/js/grid/provider">
+    <dataSource name="commercegears_activitylog_session_listing_data_source" component="Magento_Ui/js/grid/provider">
         <settings>
             <storageConfig>
                 <param name="indexField" xsi:type="string">id</param>
             </storageConfig>
             <updateUrl path="mui/index/render"/>
         </settings>
-        <aclResource>Softaware_ActivityLog::sessions</aclResource>
-        <dataProvider class="Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider" name="softaware_activitylog_session_listing_data_source">
+        <aclResource>CommerceGears_ActivityLog::sessions</aclResource>
+        <dataProvider class="Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider" name="commercegears_activitylog_session_listing_data_source">
             <settings>
                 <requestFieldName>id</requestFieldName>
                 <primaryFieldName>id</primaryFieldName>
@@ -32,7 +32,7 @@
         </settings>
         <bookmark name="bookmarks"/>
         <columnsControls name="columns_controls"/>
-        <filters name="listing_filters" component="Softaware_ActivityLog/js/grid/filters"/>
+        <filters name="listing_filters" component="CommerceGears_ActivityLog/js/grid/filters"/>
         <massaction name="listing_massaction">
             <action name="terminate">
                 <settings>
@@ -40,7 +40,7 @@
                         <message translate="true">Sign out the selected admins? They are signed out on their next click. Your own session is skipped.</message>
                         <title translate="true">Terminate Sessions</title>
                     </confirm>
-                    <url path="softaware_activitylog/session/massTerminate"/>
+                    <url path="commercegears_activitylog/session/massTerminate"/>
                     <type>terminate</type>
                     <label translate="true">Terminate</label>
                 </settings>
@@ -48,7 +48,7 @@
         </massaction>
         <paging name="listing_paging"/>
     </listingToolbar>
-    <columns name="softaware_activitylog_session_columns" component="Softaware_ActivityLog/js/grid/listing" template="Softaware_ActivityLog/grid/listing">
+    <columns name="commercegears_activitylog_session_columns" component="CommerceGears_ActivityLog/js/grid/listing" template="CommerceGears_ActivityLog/grid/listing">
         <selectionsColumn name="ids">
             <settings>
                 <indexField>id</indexField>
@@ -95,7 +95,7 @@
         <column name="user_agent" sortOrder="70">
             <settings>
                 <fieldClass>
-                    <class name="softaware-activitylog-wrap">true</class>
+                    <class name="commercegears-activitylog-wrap">true</class>
                 </fieldClass>
                 <label translate="true">Browser (User Agent)</label>
             </settings>
@@ -113,7 +113,7 @@
                 <label translate="true">Last Activity</label>
             </settings>
         </column>
-        <actionsColumn name="actions" class="Softaware\ActivityLog\Ui\Component\Listing\Column\SessionActions" sortOrder="200">
+        <actionsColumn name="actions" class="CommerceGears\ActivityLog\Ui\Component\Listing\Column\SessionActions" sortOrder="200">
             <settings>
                 <indexField>id</indexField>
             </settings>

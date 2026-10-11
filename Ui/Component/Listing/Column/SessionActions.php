@@ -1,12 +1,12 @@
 <?php
 /**
- * Softaware Admin Activity Log
+ * CommerceGears Admin Activity Log
  *
- * @copyright Copyright (c) Softaware Commerce (https://www.softawarecommerce.co.uk/)
+ * @copyright Copyright (c) CommerceGears (https://www.commercegearscommerce.co.uk/)
  */
 declare(strict_types=1);
 
-namespace Softaware\ActivityLog\Ui\Component\Listing\Column;
+namespace CommerceGears\ActivityLog\Ui\Component\Listing\Column;
 
 use Magento\Backend\Model\Auth\Session as AuthSession;
 use Magento\Framework\UrlInterface;
@@ -45,7 +45,7 @@ class SessionActions extends Column
             }
             $dataSource['data']['items'][$i][$this->getData('name')] = [
                 'terminate' => [
-                    'href' => $this->urlBuilder->getUrl('softaware_activitylog/session/terminate', ['id' => $id]),
+                    'href' => $this->urlBuilder->getUrl('commercegears_activitylog/session/terminate', ['id' => $id]),
                     'label' => __('Terminate'),
                     'post' => true,
                     'confirm' => [

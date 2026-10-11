@@ -1,15 +1,15 @@
 <?php
 /**
- * Softaware Admin Activity Log
+ * CommerceGears Admin Activity Log
  *
- * @copyright Copyright (c) Softaware Commerce (https://www.softawarecommerce.co.uk/)
+ * @copyright Copyright (c) CommerceGears (https://www.commercegearscommerce.co.uk/)
  */
 declare(strict_types=1);
 
-namespace Softaware\ActivityLog\Console\Command;
+namespace CommerceGears\ActivityLog\Console\Command;
 
-use Softaware\ActivityLog\Model\Cleaner;
-use Softaware\ActivityLog\Model\Config;
+use CommerceGears\ActivityLog\Model\Cleaner;
+use CommerceGears\ActivityLog\Model\Config;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
@@ -26,7 +26,7 @@ class CleanCommand extends Command
 
     protected function configure(): void
     {
-        $this->setName('softaware:activity-log:clean')
+        $this->setName('commercegears:activity-log:clean')
             ->setDescription('Delete admin activity and login log entries older than the retention period')
             ->addOption('days', null, InputOption::VALUE_REQUIRED, 'Keep this many days instead of the configured value');
     }

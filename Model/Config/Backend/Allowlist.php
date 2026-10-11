@@ -1,12 +1,12 @@
 <?php
 /**
- * Softaware Admin Activity Log
+ * CommerceGears Admin Activity Log
  *
- * @copyright Copyright (c) Softaware Commerce (https://www.softawarecommerce.co.uk/)
+ * @copyright Copyright (c) CommerceGears (https://www.commercegearscommerce.co.uk/)
  */
 declare(strict_types=1);
 
-namespace Softaware\ActivityLog\Model\Config\Backend;
+namespace CommerceGears\ActivityLog\Model\Config\Backend;
 
 use Magento\Framework\App\Cache\TypeListInterface;
 use Magento\Framework\App\Config\ScopeConfigInterface;
@@ -16,8 +16,8 @@ use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\Model\Context;
 use Magento\Framework\Model\ResourceModel\AbstractResource;
 use Magento\Framework\Registry;
-use Softaware\ActivityLog\Model\IpMatcher;
-use Softaware\ActivityLog\Model\RequestContext;
+use CommerceGears\ActivityLog\Model\IpMatcher;
+use CommerceGears\ActivityLog\Model\RequestContext;
 
 /**
  * Validates the allowlist and refuses to enable it when the current admin's own IP is not on it.

@@ -1,18 +1,18 @@
 <?php
 /**
- * Softaware Admin Activity Log
+ * CommerceGears Admin Activity Log
  *
- * @copyright Copyright (c) Softaware Commerce (https://www.softawarecommerce.co.uk/)
+ * @copyright Copyright (c) CommerceGears (https://www.commercegearscommerce.co.uk/)
  */
 declare(strict_types=1);
 
-namespace Softaware\ActivityLog\Console\Command;
+namespace CommerceGears\ActivityLog\Console\Command;
 
 use Magento\Framework\App\Cache\TypeListInterface;
 use Magento\Framework\App\Config\ReinitableConfigInterface;
 use Magento\Framework\App\Config\Storage\WriterInterface;
-use Softaware\ActivityLog\Model\Config;
-use Softaware\ActivityLog\Model\IpMatcher;
+use CommerceGears\ActivityLog\Model\Config;
+use CommerceGears\ActivityLog\Model\IpMatcher;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
@@ -35,7 +35,7 @@ class AllowlistCommand extends Command
 
     protected function configure(): void
     {
-        $this->setName('softaware:activity-log:allowlist')
+        $this->setName('commercegears:activity-log:allowlist')
             ->setDescription('Show the admin IP allowlist, add an IP or CIDR range, or disable the allowlist')
             ->addOption('add', null, InputOption::VALUE_REQUIRED, 'IP address or CIDR range to add')
             ->addOption('disable', null, InputOption::VALUE_NONE, 'Turn the allowlist off');

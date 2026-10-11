@@ -2,24 +2,24 @@
 <listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
     <argument name="data" xsi:type="array">
         <item name="js_config" xsi:type="array">
-            <item name="provider" xsi:type="string">softaware_activitylog_log_listing.softaware_activitylog_log_listing_data_source</item>
+            <item name="provider" xsi:type="string">commercegears_activitylog_log_listing.commercegears_activitylog_log_listing_data_source</item>
         </item>
     </argument>
     <settings>
-        <spinner>softaware_activitylog_log_columns</spinner>
+        <spinner>commercegears_activitylog_log_columns</spinner>
         <deps>
-            <dep>softaware_activitylog_log_listing.softaware_activitylog_log_listing_data_source</dep>
+            <dep>commercegears_activitylog_log_listing.commercegears_activitylog_log_listing_data_source</dep>
         </deps>
     </settings>
-    <dataSource name="softaware_activitylog_log_listing_data_source" component="Magento_Ui/js/grid/provider">
+    <dataSource name="commercegears_activitylog_log_listing_data_source" component="Magento_Ui/js/grid/provider">
         <settings>
             <storageConfig>
                 <param name="indexField" xsi:type="string">log_id</param>
             </storageConfig>
             <updateUrl path="mui/index/render"/>
         </settings>
-        <aclResource>Softaware_ActivityLog::actions</aclResource>
-        <dataProvider class="Softaware\ActivityLog\Ui\DataProvider\LogDataProvider" name="softaware_activitylog_log_listing_data_source">
+        <aclResource>CommerceGears_ActivityLog::actions</aclResource>
+        <dataProvider class="CommerceGears\ActivityLog\Ui\DataProvider\LogDataProvider" name="commercegears_activitylog_log_listing_data_source">
             <settings>
                 <requestFieldName>id</requestFieldName>
                 <primaryFieldName>log_id</primaryFieldName>
@@ -34,10 +34,10 @@
         <columnsControls name="columns_controls"/>
         <exportButton name="export_button"/>
         <filterSearch name="fulltext"/>
-        <filters name="listing_filters" component="Softaware_ActivityLog/js/grid/filters"/>
+        <filters name="listing_filters" component="CommerceGears_ActivityLog/js/grid/filters"/>
         <paging name="listing_paging"/>
     </listingToolbar>
-    <columns name="softaware_activitylog_log_columns" component="Softaware_ActivityLog/js/grid/listing" template="Softaware_ActivityLog/grid/listing">
+    <columns name="commercegears_activitylog_log_columns" component="CommerceGears_ActivityLog/js/grid/listing" template="CommerceGears_ActivityLog/grid/listing">
         <column name="log_id" sortOrder="10">
             <settings>
                 <filter>textRange</filter>
@@ -52,7 +52,7 @@
                 <label translate="true">Time</label>
             </settings>
         </column>
-        <column name="username" class="Softaware\ActivityLog\Ui\Component\Listing\Column\AdminUser" sortOrder="30">
+        <column name="username" class="CommerceGears\ActivityLog\Ui\Component\Listing\Column\AdminUser" sortOrder="30">
             <settings>
                 <filter>text</filter>
                 <label translate="true">Admin User</label>
@@ -60,7 +60,7 @@
         </column>
         <column name="action" component="Magento_Ui/js/grid/columns/select" sortOrder="40">
             <settings>
-                <options class="Softaware\ActivityLog\Model\Source\Action"/>
+                <options class="CommerceGears\ActivityLog\Model\Source\Action"/>
                 <filter>select</filter>
                 <dataType>select</dataType>
                 <label translate="true">Action</label>
@@ -68,7 +68,7 @@
         </column>
         <column name="entity_type" component="Magento_Ui/js/grid/columns/select" sortOrder="50">
             <settings>
-                <options class="Softaware\ActivityLog\Model\Source\EntityType"/>
+                <options class="CommerceGears\ActivityLog\Model\Source\EntityType"/>
                 <filter>select</filter>
                 <dataType>select</dataType>
                 <label translate="true">Entity Type</label>
@@ -84,7 +84,7 @@
         <column name="entity_label" sortOrder="70">
             <settings>
                 <fieldClass>
-                    <class name="softaware-activitylog-wrap">true</class>
+                    <class name="commercegears-activitylog-wrap">true</class>
                 </fieldClass>
                 <filter>text</filter>
                 <label translate="true">Entity</label>
@@ -112,7 +112,7 @@
         <column name="request_path" sortOrder="110">
             <settings>
                 <fieldClass>
-                    <class name="softaware-activitylog-wrap">true</class>
+                    <class name="commercegears-activitylog-wrap">true</class>
                 </fieldClass>
                 <filter>text</filter>
                 <label translate="true">Admin Page</label>
@@ -126,7 +126,7 @@
                 <visible>false</visible>
             </settings>
         </column>
-        <actionsColumn name="actions" class="Softaware\ActivityLog\Ui\Component\Listing\Column\LogActions" sortOrder="200">
+        <actionsColumn name="actions" class="CommerceGears\ActivityLog\Ui\Component\Listing\Column\LogActions" sortOrder="200">
             <settings>
                 <indexField>log_id</indexField>
                 <label translate="true">Details</label>

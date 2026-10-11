@@ -1,17 +1,17 @@
 <?php
 /**
- * Softaware Admin Activity Log
+ * CommerceGears Admin Activity Log
  *
- * @copyright Copyright (c) Softaware Commerce (https://www.softawarecommerce.co.uk/)
+ * @copyright Copyright (c) CommerceGears (https://www.commercegearscommerce.co.uk/)
  */
 declare(strict_types=1);
 
-namespace Softaware\ActivityLog\Plugin;
+namespace CommerceGears\ActivityLog\Plugin;
 
 use Magento\Authorization\Model\ResourceModel\Rules as RulesResource;
 use Magento\Authorization\Model\Rules;
-use Softaware\ActivityLog\Model\Config;
-use Softaware\ActivityLog\Model\LogBuffer;
+use CommerceGears\ActivityLog\Model\Config;
+use CommerceGears\ActivityLog\Model\LogBuffer;
 
 /**
  * Role resources (permissions) are written straight to the table, so the added/removed ACL resources are logged here.

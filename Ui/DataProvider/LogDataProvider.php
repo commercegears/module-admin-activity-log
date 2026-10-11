@@ -1,16 +1,16 @@
 <?php
 /**
- * Softaware Admin Activity Log
+ * CommerceGears Admin Activity Log
  *
- * @copyright Copyright (c) Softaware Commerce (https://www.softawarecommerce.co.uk/)
+ * @copyright Copyright (c) CommerceGears (https://www.commercegearscommerce.co.uk/)
  */
 declare(strict_types=1);
 
-namespace Softaware\ActivityLog\Ui\DataProvider;
+namespace CommerceGears\ActivityLog\Ui\DataProvider;
 
 use Magento\Framework\Api\Filter;
 use Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider;
-use Softaware\ActivityLog\Model\Source\Action;
+use CommerceGears\ActivityLog\Model\Source\Action;
 
 /**
  * Admin Actions grid data: the "Save" action filter matches created and changed records (stored as create / update),

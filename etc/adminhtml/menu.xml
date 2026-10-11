@@ -1,19 +1,19 @@
 <?xml version="1.0"?>
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
     <menu>
-        <add id="Softaware_ActivityLog::activity_log" title="Admin Activity Log" translate="title" module="Softaware_ActivityLog"
-             sortOrder="40" parent="Softaware_Core::core" resource="Softaware_ActivityLog::activity_log"/>
-        <add id="Softaware_ActivityLog::actions" title="Admin Actions" translate="title" module="Softaware_ActivityLog"
-             sortOrder="10" parent="Softaware_ActivityLog::activity_log" action="softaware_activitylog/log/index"
-             resource="Softaware_ActivityLog::actions"/>
-        <add id="Softaware_ActivityLog::logins" title="Login Log" translate="title" module="Softaware_ActivityLog"
-             sortOrder="20" parent="Softaware_ActivityLog::activity_log" action="softaware_activitylog/login/index"
-             resource="Softaware_ActivityLog::logins"/>
-        <add id="Softaware_ActivityLog::sessions" title="Active Sessions" translate="title" module="Softaware_ActivityLog"
-             sortOrder="30" parent="Softaware_ActivityLog::activity_log" action="softaware_activitylog/session/index"
-             resource="Softaware_ActivityLog::sessions"/>
-        <add id="Softaware_ActivityLog::config" title="Settings" translate="title" module="Softaware_ActivityLog"
-             sortOrder="40" parent="Softaware_ActivityLog::activity_log"
-             action="adminhtml/system_config/edit/section/softaware_activitylog" resource="Softaware_ActivityLog::config"/>
+        <add id="CommerceGears_ActivityLog::activity_log" title="Admin Activity Log" translate="title" module="CommerceGears_ActivityLog"
+             sortOrder="40" parent="CommerceGears_Core::core" resource="CommerceGears_ActivityLog::activity_log"/>
+        <add id="CommerceGears_ActivityLog::actions" title="Admin Actions" translate="title" module="CommerceGears_ActivityLog"
+             sortOrder="10" parent="CommerceGears_ActivityLog::activity_log" action="commercegears_activitylog/log/index"
+             resource="CommerceGears_ActivityLog::actions"/>
+        <add id="CommerceGears_ActivityLog::logins" title="Login Log" translate="title" module="CommerceGears_ActivityLog"
+             sortOrder="20" parent="CommerceGears_ActivityLog::activity_log" action="commercegears_activitylog/login/index"
+             resource="CommerceGears_ActivityLog::logins"/>
+        <add id="CommerceGears_ActivityLog::sessions" title="Active Sessions" translate="title" module="CommerceGears_ActivityLog"
+             sortOrder="30" parent="CommerceGears_ActivityLog::activity_log" action="commercegears_activitylog/session/index"
+             resource="CommerceGears_ActivityLog::sessions"/>
+        <add id="CommerceGears_ActivityLog::config" title="Settings" translate="title" module="CommerceGears_ActivityLog"
+             sortOrder="40" parent="CommerceGears_ActivityLog::activity_log"
+             action="adminhtml/system_config/edit/section/commercegears_activitylog" resource="CommerceGears_ActivityLog::config"/>
     </menu>
 </config>

@@ -1,5 +1,5 @@
 /**
- * Softaware Admin Activity Log
+ * CommerceGears Admin Activity Log
  *
  * Grid with a filter row under the column headings (as in the Adobe Commerce action log report): the filters of
  * the toolbar's filters component are rendered in the row of the column they belong to and applied with Enter or
@@ -13,7 +13,7 @@ define([
 
     return Listing.extend({
         defaults: {
-            template: 'Softaware_ActivityLog/grid/listing',
+            template: 'CommerceGears_ActivityLog/grid/listing',
             filtersProvider: '${ $.ns }.${ $.ns }.listing_top.listing_filters',
             filterElems: [],
             imports: {

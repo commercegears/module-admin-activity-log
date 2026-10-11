@@ -1,12 +1,12 @@
 <?php
 /**
- * Softaware Admin Activity Log
+ * CommerceGears Admin Activity Log
  *
- * @copyright Copyright (c) Softaware Commerce (https://www.softawarecommerce.co.uk/)
+ * @copyright Copyright (c) CommerceGears (https://www.commercegearscommerce.co.uk/)
  */
 declare(strict_types=1);
 
-namespace Softaware\ActivityLog\Ui\Component\Listing\Column;
+namespace CommerceGears\ActivityLog\Ui\Component\Listing\Column;
 
 use Magento\Framework\UrlInterface;
 use Magento\Framework\View\Element\UiComponent\ContextInterface;
@@ -37,7 +37,7 @@ class LogActions extends Column
             }
             $dataSource['data']['items'][$i][$this->getData('name')] = [
                 'view' => [
-                    'href' => $this->urlBuilder->getUrl('softaware_activitylog/log/view', ['id' => $item['log_id']]),
+                    'href' => $this->urlBuilder->getUrl('commercegears_activitylog/log/view', ['id' => $item['log_id']]),
                     'label' => __('View'),
                 ],
             ];

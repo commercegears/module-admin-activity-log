@@ -1,16 +1,16 @@
 <?php
 /**
- * Softaware Admin Activity Log
+ * CommerceGears Admin Activity Log
  *
- * @copyright Copyright (c) Softaware Commerce (https://www.softawarecommerce.co.uk/)
+ * @copyright Copyright (c) CommerceGears (https://www.commercegearscommerce.co.uk/)
  */
 declare(strict_types=1);
 
-namespace Softaware\ActivityLog\Plugin;
+namespace CommerceGears\ActivityLog\Plugin;
 
 use Magento\Backend\Model\Auth\Session as AuthSession;
 use Magento\Security\Model\AdminSessionsManager;
-use Softaware\ActivityLog\Model\LoginLogger;
+use CommerceGears\ActivityLog\Model\LoginLogger;
 
 /**
  * Links the login log row to Magento's admin session record, so the Active Sessions grid can show browser/country.

@@ -1,12 +1,12 @@
 <?php
 /**
- * Softaware Admin Activity Log
+ * CommerceGears Admin Activity Log
  *
- * @copyright Copyright (c) Softaware Commerce (https://www.softawarecommerce.co.uk/)
+ * @copyright Copyright (c) CommerceGears (https://www.commercegearscommerce.co.uk/)
  */
 declare(strict_types=1);
 
-namespace Softaware\ActivityLog\Model;
+namespace CommerceGears\ActivityLog\Model;
 
 use Magento\Backend\Model\Auth\Session as AuthSession;
 use Magento\Framework\Exception\State\UserLockedException;
@@ -14,7 +14,7 @@ use Magento\User\Model\ResourceModel\User as UserResource;
 use Magento\User\Model\User;
 use Magento\User\Model\UserFactory;
 use Psr\Log\LoggerInterface;
-use Softaware\ActivityLog\Model\ResourceModel\Login as LoginResource;
+use CommerceGears\ActivityLog\Model\ResourceModel\Login as LoginResource;
 
 /**
  * Writes the admin login log and triggers the security notifications.
@@ -69,7 +69,7 @@ class LoginLogger
                     ['login_id = ?' => $this->lastSuccessId]
                 );
             } catch (\Throwable $e) {
-                $this->logger->error('Softaware_ActivityLog: could not link admin session: ' . $e->getMessage());
+                $this->logger->error('CommerceGears_ActivityLog: could not link admin session: ' . $e->getMessage());
             }
             $this->lastSuccessId = 0;
         }
@@ -179,7 +179,7 @@ class LoginLogger
                 'user_agent' => $this->context->getUserAgent(),
             ]);
         } catch (\Throwable $e) {
-            $this->logger->error('Softaware_ActivityLog: could not write login log: ' . $e->getMessage());
+            $this->logger->error('CommerceGears_ActivityLog: could not write login log: ' . $e->getMessage());
             return 0;
         }
     }

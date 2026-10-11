@@ -1,8 +1,8 @@
 <?php
 /**
- * Softaware Admin Activity Log
+ * CommerceGears Admin Activity Log
  *
- * @var \Softaware\ActivityLog\Block\Adminhtml\GridIntro $block
+ * @var \CommerceGears\ActivityLog\Block\Adminhtml\GridIntro $block
  * @var \Magento\Framework\Escaper $escaper
  */
 $page = $block->getPage();
@@ -26,7 +26,7 @@ $retention = $days > 0
         </div>
     </div>
 <?php endif; ?>
-<p class="softaware-activitylog-intro">
+<p class="commercegears-activitylog-intro">
     <?php if ($page === 'sessions'): ?>
         <?php $minutes = $block->getSessionLifetimeMinutes(); ?>
         <?= $escaper->escapeHtml(__(

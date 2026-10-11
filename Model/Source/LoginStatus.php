@@ -1,15 +1,15 @@
 <?php
 /**
- * Softaware Admin Activity Log
+ * CommerceGears Admin Activity Log
  *
- * @copyright Copyright (c) Softaware Commerce (https://www.softawarecommerce.co.uk/)
+ * @copyright Copyright (c) CommerceGears (https://www.commercegearscommerce.co.uk/)
  */
 declare(strict_types=1);
 
-namespace Softaware\ActivityLog\Model\Source;
+namespace CommerceGears\ActivityLog\Model\Source;
 
 use Magento\Framework\Data\OptionSourceInterface;
-use Softaware\ActivityLog\Model\Login;
+use CommerceGears\ActivityLog\Model\Login;
 
 /**
  * Login log entry types, named as in the Adobe Commerce action log (Login, Logout); the stored codes are unchanged.

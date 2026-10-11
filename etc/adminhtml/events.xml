@@ -1,33 +1,33 @@
 <?xml version="1.0"?>
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
     <event name="model_save_before">
-        <observer name="softaware_activitylog" instance="Softaware\ActivityLog\Observer\ModelSaveBefore"/>
+        <observer name="commercegears_activitylog" instance="CommerceGears\ActivityLog\Observer\ModelSaveBefore"/>
     </event>
     <event name="model_save_after">
-        <observer name="softaware_activitylog" instance="Softaware\ActivityLog\Observer\ModelSaveAfter"/>
+        <observer name="commercegears_activitylog" instance="CommerceGears\ActivityLog\Observer\ModelSaveAfter"/>
     </event>
     <event name="model_save_commit_after">
-        <observer name="softaware_activitylog" instance="Softaware\ActivityLog\Observer\ModelCommitAfter"/>
+        <observer name="commercegears_activitylog" instance="CommerceGears\ActivityLog\Observer\ModelCommitAfter"/>
     </event>
     <event name="model_delete_after">
-        <observer name="softaware_activitylog" instance="Softaware\ActivityLog\Observer\ModelDeleteAfter"/>
+        <observer name="commercegears_activitylog" instance="CommerceGears\ActivityLog\Observer\ModelDeleteAfter"/>
     </event>
     <event name="model_delete_commit_after">
-        <observer name="softaware_activitylog" instance="Softaware\ActivityLog\Observer\ModelCommitAfter"/>
+        <observer name="commercegears_activitylog" instance="CommerceGears\ActivityLog\Observer\ModelCommitAfter"/>
     </event>
     <event name="catalog_category_move_after">
-        <observer name="softaware_activitylog" instance="Softaware\ActivityLog\Observer\CategoryMove"/>
+        <observer name="commercegears_activitylog" instance="CommerceGears\ActivityLog\Observer\CategoryMove"/>
     </event>
     <event name="controller_action_predispatch">
-        <observer name="softaware_activitylog_mass_action" instance="Softaware\ActivityLog\Observer\MassActionPredispatch"/>
+        <observer name="commercegears_activitylog_mass_action" instance="CommerceGears\ActivityLog\Observer\MassActionPredispatch"/>
     </event>
-    <event name="softaware_customer_approval_status_changed">
-        <observer name="softaware_activitylog" instance="Softaware\ActivityLog\Observer\CustomerApprovalChange"/>
+    <event name="commercegears_customer_approval_status_changed">
+        <observer name="commercegears_activitylog" instance="CommerceGears\ActivityLog\Observer\CustomerApprovalChange"/>
     </event>
     <event name="backend_auth_user_login_success">
-        <observer name="softaware_activitylog" instance="Softaware\ActivityLog\Observer\LoginSuccess"/>
+        <observer name="commercegears_activitylog" instance="CommerceGears\ActivityLog\Observer\LoginSuccess"/>
     </event>
     <event name="backend_auth_user_login_failed">
-        <observer name="softaware_activitylog" instance="Softaware\ActivityLog\Observer\LoginFailed"/>
+        <observer name="commercegears_activitylog" instance="CommerceGears\ActivityLog\Observer\LoginFailed"/>
     </event>
 </config>

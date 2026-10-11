@@ -1,8 +1,8 @@
 <?php
 /**
- * Softaware Admin Activity Log
+ * CommerceGears Admin Activity Log
  *
- * @var \Softaware\ActivityLog\Block\Adminhtml\Log\View $block
+ * @var \CommerceGears\ActivityLog\Block\Adminhtml\Log\View $block
  * @var \Magento\Framework\Escaper $escaper
  */
 $entry = $block->getEntry();
@@ -17,17 +17,17 @@ $related = $block->getRelatedEntries($entry);
 $relatedCount = $related ? $block->getRelatedCount($entry) : 0;
 $renderValue = static function (string $value) use ($escaper): string {
     if ($value === '') {
-        return '<span class="softaware-activitylog-empty">' . $escaper->escapeHtml(__('(empty)')) . '</span>';
+        return '<span class="commercegears-activitylog-empty">' . $escaper->escapeHtml(__('(empty)')) . '</span>';
     }
     // Long values scroll inside the cell; make them reachable by keyboard.
     $focusable = strlen($value) > 400 ? ' tabindex="0"' : '';
-    return '<div class="softaware-activitylog-value"' . $focusable . '>' . $escaper->escapeHtml($value) . '</div>';
+    return '<div class="commercegears-activitylog-value"' . $focusable . '>' . $escaper->escapeHtml($value) . '</div>';
 };
 ?>
-<div class="softaware-activitylog-view">
+<div class="commercegears-activitylog-view">
     <section class="admin__page-section">
         <div class="admin__page-section-title"><span class="title"><?= $escaper->escapeHtml(__('Summary')) ?></span></div>
-        <div class="softaware-activitylog-summary">
+        <div class="commercegears-activitylog-summary">
             <table class="admin__table-secondary">
                 <tbody>
                 <tr>
@@ -75,7 +75,7 @@ $renderValue = static function (string $value) use ($escaper): string {
                 <tr>
                     <th scope="row"><?= $escaper->escapeHtml(__('Admin User')) ?></th>
                     <td><?= $escaper->escapeHtml($entry->getData('username') ?: (
-                        \Softaware\ActivityLog\Model\RequestContext::isCommandLine((string)$entry->getData('request_path')) ? __('(command line)') : __('(not signed in)')
+                        \CommerceGears\ActivityLog\Model\RequestContext::isCommandLine((string)$entry->getData('request_path')) ? __('(command line)') : __('(not signed in)')
                     )) ?></td>
                 </tr>
                 <tr>
@@ -102,10 +102,10 @@ $renderValue = static function (string $value) use ($escaper): string {
                     : __('No field changes were recorded.')
             ) ?></p>
         <?php else: ?>
-            <table class="data-table admin__table-primary softaware-activitylog-diff<?= $isDiff ? '' : ' softaware-activitylog-values' ?>">
+            <table class="data-table admin__table-primary commercegears-activitylog-diff<?= $isDiff ? '' : ' commercegears-activitylog-values' ?>">
                 <thead>
                 <tr>
-                    <th scope="col" class="softaware-activitylog-field"><?= $escaper->escapeHtml(__('Field')) ?></th>
+                    <th scope="col" class="commercegears-activitylog-field"><?= $escaper->escapeHtml(__('Field')) ?></th>
                     <?php if ($isDiff): ?>
                         <th scope="col"><?= $escaper->escapeHtml(__('Old Value')) ?></th>
                         <th scope="col"><?= $escaper->escapeHtml(__('New Value')) ?></th>
@@ -117,11 +117,11 @@ $renderValue = static function (string $value) use ($escaper): string {
                 <tbody>
                 <?php foreach ($changes as $change): ?>
                     <tr>
-                        <td class="softaware-activitylog-field"><code><?= /* @noEscape */ str_replace('/', '/<wbr>', $escaper->escapeHtml((string)($change['field'] ?? ''))) ?></code></td>
+                        <td class="commercegears-activitylog-field"><code><?= /* @noEscape */ str_replace('/', '/<wbr>', $escaper->escapeHtml((string)($change['field'] ?? ''))) ?></code></td>
                         <?php if ($isDiff): ?>
-                            <td class="softaware-activitylog-old"><?= /* @noEscape */ $renderValue((string)($change['old'] ?? '')) ?></td>
+                            <td class="commercegears-activitylog-old"><?= /* @noEscape */ $renderValue((string)($change['old'] ?? '')) ?></td>
                         <?php endif; ?>
-                        <td class="softaware-activitylog-new"><?= /* @noEscape */ $renderValue((string)($change['new'] ?? '')) ?></td>
+                        <td class="commercegears-activitylog-new"><?= /* @noEscape */ $renderValue((string)($change['new'] ?? '')) ?></td>
                     </tr>
                 <?php endforeach; ?>
                 </tbody>
@@ -135,14 +135,14 @@ $renderValue = static function (string $value) use ($escaper): string {
                 <span class="title"><?= $escaper->escapeHtml(__('Other Changes in the Same Request')) ?></span>
             </div>
             <?php if ($relatedCount > count($related)): ?>
-                <p class="softaware-activitylog-note"><?= $escaper->escapeHtml(__(
+                <p class="commercegears-activitylog-note"><?= $escaper->escapeHtml(__(
                     'Showing the first %1 of %2 entries. Search Admin Actions for %3 to see all of them.',
                     $block->formatNumber(count($related)),
                     $block->formatNumber($relatedCount),
                     (string)$entry->getData('request_id')
                 )) ?></p>
             <?php endif; ?>
-            <table class="data-table admin__table-primary softaware-activitylog-related">
+            <table class="data-table admin__table-primary commercegears-activitylog-related">
                 <thead>
                 <tr>
                     <th scope="col"><?= $escaper->escapeHtml(__('ID')) ?></th>

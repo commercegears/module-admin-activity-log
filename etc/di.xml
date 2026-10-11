@@ -2,7 +2,7 @@
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
     <!-- Tracked entities. Other modules can add items: class (comma-separated), label, label_fields, extra_fields, ignore_fields,
          system_defaults (field=value pairs the system fills in by itself; not reported for new records). -->
-    <type name="Softaware\ActivityLog\Model\EntityTypeResolver">
+    <type name="CommerceGears\ActivityLog\Model\EntityTypeResolver">
         <arguments>
             <argument name="types" xsi:type="array">
                 <item name="product" xsi:type="array">
@@ -104,38 +104,38 @@
     <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
         <arguments>
             <argument name="collections" xsi:type="array">
-                <item name="softaware_activitylog_log_listing_data_source" xsi:type="string">Softaware\ActivityLog\Model\ResourceModel\Log\Grid\Collection</item>
-                <item name="softaware_activitylog_login_listing_data_source" xsi:type="string">Softaware\ActivityLog\Model\ResourceModel\Login\Grid\Collection</item>
-                <item name="softaware_activitylog_session_listing_data_source" xsi:type="string">Softaware\ActivityLog\Model\ResourceModel\Session\Grid\Collection</item>
+                <item name="commercegears_activitylog_log_listing_data_source" xsi:type="string">CommerceGears\ActivityLog\Model\ResourceModel\Log\Grid\Collection</item>
+                <item name="commercegears_activitylog_login_listing_data_source" xsi:type="string">CommerceGears\ActivityLog\Model\ResourceModel\Login\Grid\Collection</item>
+                <item name="commercegears_activitylog_session_listing_data_source" xsi:type="string">CommerceGears\ActivityLog\Model\ResourceModel\Session\Grid\Collection</item>
             </argument>
         </arguments>
     </type>
-    <virtualType name="Softaware\ActivityLog\Model\ResourceModel\Log\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+    <virtualType name="CommerceGears\ActivityLog\Model\ResourceModel\Log\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
         <arguments>
-            <argument name="mainTable" xsi:type="string">softaware_activity_log</argument>
-            <argument name="resourceModel" xsi:type="string">Softaware\ActivityLog\Model\ResourceModel\Log</argument>
+            <argument name="mainTable" xsi:type="string">commercegears_activity_log</argument>
+            <argument name="resourceModel" xsi:type="string">CommerceGears\ActivityLog\Model\ResourceModel\Log</argument>
             <argument name="identifierName" xsi:type="string">log_id</argument>
         </arguments>
     </virtualType>
-    <virtualType name="Softaware\ActivityLog\Model\ResourceModel\Login\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+    <virtualType name="CommerceGears\ActivityLog\Model\ResourceModel\Login\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
         <arguments>
-            <argument name="mainTable" xsi:type="string">softaware_activity_log_login</argument>
-            <argument name="resourceModel" xsi:type="string">Softaware\ActivityLog\Model\ResourceModel\Login</argument>
+            <argument name="mainTable" xsi:type="string">commercegears_activity_log_login</argument>
+            <argument name="resourceModel" xsi:type="string">CommerceGears\ActivityLog\Model\ResourceModel\Login</argument>
             <argument name="identifierName" xsi:type="string">login_id</argument>
         </arguments>
     </virtualType>
 
-    <type name="Softaware\ActivityLog\Model\RequestContext">
+    <type name="CommerceGears\ActivityLog\Model\RequestContext">
         <arguments>
             <argument name="authSession" xsi:type="object">Magento\Backend\Model\Auth\Session\Proxy</argument>
         </arguments>
     </type>
-    <type name="Softaware\ActivityLog\Model\LoginLogger">
+    <type name="CommerceGears\ActivityLog\Model\LoginLogger">
         <arguments>
             <argument name="authSession" xsi:type="object">Magento\Backend\Model\Auth\Session\Proxy</argument>
         </arguments>
     </type>
-    <type name="Softaware\ActivityLog\Model\SessionTerminator">
+    <type name="CommerceGears\ActivityLog\Model\SessionTerminator">
         <arguments>
             <argument name="authSession" xsi:type="object">Magento\Backend\Model\Auth\Session\Proxy</argument>
         </arguments>
@@ -144,14 +144,14 @@
     <type name="Magento\Framework\Console\CommandListInterface">
         <arguments>
             <argument name="commands" xsi:type="array">
-                <item name="softaware_activitylog_clean" xsi:type="object">Softaware\ActivityLog\Console\Command\CleanCommand</item>
-                <item name="softaware_activitylog_allowlist" xsi:type="object">Softaware\ActivityLog\Console\Command\AllowlistCommand\Proxy</item>
+                <item name="commercegears_activitylog_clean" xsi:type="object">CommerceGears\ActivityLog\Console\Command\CleanCommand</item>
+                <item name="commercegears_activitylog_allowlist" xsi:type="object">CommerceGears\ActivityLog\Console\Command\AllowlistCommand\Proxy</item>
             </argument>
         </arguments>
     </type>
-    <type name="Softaware\ActivityLog\Console\Command\CleanCommand">
+    <type name="CommerceGears\ActivityLog\Console\Command\CleanCommand">
         <arguments>
-            <argument name="cleaner" xsi:type="object">Softaware\ActivityLog\Model\Cleaner\Proxy</argument>
+            <argument name="cleaner" xsi:type="object">CommerceGears\ActivityLog\Model\Cleaner\Proxy</argument>
         </arguments>
     </type>
 </config>

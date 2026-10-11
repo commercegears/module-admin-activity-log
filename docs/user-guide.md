@@ -4,7 +4,7 @@ See who changed what in the Magento admin, with the old and new value of every f
 attempt, and the admin sessions that are active right now. Get alerts for suspicious sign-ins and, if you want, limit
 the admin to a list of IP addresses. This guide covers installation, configuration and day-to-day use.
 
-- Admin demo: https://demo.softawarecommerce.com/try-admin/admin-activity-log
+- Admin demo: https://demo.commercegears.com/try-admin/admin-activity-log
 - Changelog: [CHANGELOG.md](../CHANGELOG.md) · Questions: [FAQ](faq.md)
 
 ![Admin Actions grid](images/admin-actions.png)
@@ -16,31 +16,31 @@ the admin to a list of IP addresses. This guide covers installation, configurati
 | Magento | Open Source or Adobe Commerce 2.4.7 to 2.4.9 |
 | PHP | 8.2 to 8.5 |
 | Storefront | None: the module is admin only |
-| Other | `softaware/module-core` (installed automatically) and Magento_Security (part of Magento) |
+| Other | `commercegears/module-core` (installed automatically) and Magento_Security (part of Magento) |
 
 ## 2. Installation
 
-Install with Composer from repo.softawarecommerce.com. The access keys are in your account on
-softawarecommerce.com; see [Composer access](https://softawarecommerce.com/shop/composer-access/) for details.
+Install with Composer from repo.commercegears.com. The access keys are in your account on
+commercegears.com; see [Composer access](https://commercegears.com/shop/composer-access/) for details.
 
 ```bash
-composer config repositories.softaware composer https://repo.softawarecommerce.com
-composer config --auth http-basic.repo.softawarecommerce.com PUBLIC_KEY PRIVATE_KEY
-composer require softaware/module-admin-activity-log
+composer config repositories.commercegears composer https://repo.commercegears.com
+composer config --auth http-basic.repo.commercegears.com PUBLIC_KEY PRIVATE_KEY
+composer require commercegears/module-admin-activity-log
 bin/magento setup:upgrade
 bin/magento setup:di:compile            # production mode only
 bin/magento setup:static-content:deploy # production mode only
 bin/magento cache:flush
 ```
 
-To update later: `composer update softaware/module-admin-activity-log`, then the same `bin/magento` commands.
+To update later: `composer update commercegears/module-admin-activity-log`, then the same `bin/magento` commands.
 
-Logging starts straight after installation. The admin menu has **Softaware > Admin Activity Log** with **Admin
+Logging starts straight after installation. The admin menu has **CommerceGears > Admin Activity Log** with **Admin
 Actions**, **Login Log**, **Active Sessions** and **Settings**.
 
 ## 3. Settings
 
-**Stores > Configuration > Softaware > Admin Activity Log** (also **Softaware > Admin Activity Log > Settings**). All
+**Stores > Configuration > CommerceGears > Admin Activity Log** (also **CommerceGears > Admin Activity Log > Settings**). All
 settings are global (default scope).
 
 ![General settings](images/admin-settings.png)
@@ -96,7 +96,7 @@ are locked out anyway (for example after your IP address changed), see section 9
 
 ## 4. Admin Actions
 
-**Softaware > Admin Activity Log > Admin Actions** lists every recorded change, newest first.
+**CommerceGears > Admin Activity Log > Admin Actions** lists every recorded change, newest first.
 
 What is logged:
 
@@ -162,7 +162,7 @@ characters.
 
 ## 5. Login Log
 
-**Softaware > Admin Activity Log > Login Log** lists sign-in events, newest first, with time, username, action,
+**CommerceGears > Admin Activity Log > Login Log** lists sign-in events, newest first, with time, username, action,
 reason, IP address, country and browser.
 
 ![Login Log](images/admin-login-log.png)
@@ -182,7 +182,7 @@ row under the column headings as Admin Actions, and CSV or XML export.
 
 ## 6. Active Sessions
 
-**Softaware > Admin Activity Log > Active Sessions** shows every admin who used the admin panel within the session
+**CommerceGears > Admin Activity Log > Active Sessions** shows every admin who used the admin panel within the session
 lifetime: username, name, IP address, country, browser, sign-in time and last activity. Your own session is marked
 "(this session)".
 
@@ -206,17 +206,17 @@ you entered. New IP and new country alerts can also go to the admin user's own e
 
 ## 8. Retention and clean-up
 
-The cron job `softaware_activitylog_cleanup` runs daily at 03:17 and deletes entries older than "Keep Log Entries For
+The cron job `commercegears_activitylog_cleanup` runs daily at 03:17 and deletes entries older than "Keep Log Entries For
 (Days)" in batches. Entries that record changes to the Activity Log's own settings are always kept, so switching
 logging off or shortening the retention stays on record. Magento's cron must be running.
 
 ## 9. Command line
 
 ```bash
-bin/magento softaware:activity-log:clean [--days=N]
-bin/magento softaware:activity-log:allowlist
-bin/magento softaware:activity-log:allowlist --add=203.0.113.4
-bin/magento softaware:activity-log:allowlist --disable
+bin/magento commercegears:activity-log:clean [--days=N]
+bin/magento commercegears:activity-log:allowlist
+bin/magento commercegears:activity-log:allowlist --add=203.0.113.4
+bin/magento commercegears:activity-log:allowlist --disable
 ```
 
 - `clean`: deletes entries older than the retention period, or older than N days with `--days`.
@@ -225,7 +225,7 @@ bin/magento softaware:activity-log:allowlist --disable
 
 ## 10. Permissions (ACL)
 
-Under **System > Permissions > User Roles > Role Resources > Softaware > Admin Activity Log**:
+Under **System > Permissions > User Roles > Role Resources > CommerceGears > Admin Activity Log**:
 
 | Resource | Allows |
 | --- | --- |
@@ -237,7 +237,7 @@ Under **System > Permissions > User Roles > Role Resources > Softaware > Admin A
 ## 11. For developers
 
 Other modules can have their own entities tracked by adding an item to the `types` argument of
-`Softaware\ActivityLog\Model\EntityTypeResolver` in their `di.xml`, with the keys `class`, `label`, `label_fields`,
+`CommerceGears\ActivityLog\Model\EntityTypeResolver` in their `di.xml`, with the keys `class`, `label`, `label_fields`,
 `extra_fields` and `ignore_fields`.
 
 ## 12. Troubleshooting
@@ -248,17 +248,17 @@ Other modules can have their own entities tracked by adding an item to the `type
 | All IP addresses are the same (a proxy or Cloudflare address) | Configure the web server to pass the real client IP, or set **Client IP Address From** to Cloudflare if the store is behind Cloudflare. |
 | The country column is empty, or there are no new country alerts | These need Cloudflare with IP geolocation, which sends the `CF-IPCountry` header. |
 | No alert emails | Enter **Email Recipients** and check that the store can send email. Alerts still appear in the admin notification inbox. |
-| Locked out by the allowlist | Run `bin/magento softaware:activity-log:allowlist --disable` on the server, or add your new IP address with `--add`. |
+| Locked out by the allowlist | Run `bin/magento commercegears:activity-log:allowlist --disable` on the server, or add your new IP address with `--add`. |
 | A terminated admin still sees the admin page | They are signed out on their next click. |
 | Entries disappear after some time | That is the retention period (default 90 days). Set 0 to keep everything. |
 
 ## 13. Uninstall
 
 ```bash
-bin/magento module:disable Softaware_ActivityLog
-composer remove softaware/module-admin-activity-log
+bin/magento module:disable CommerceGears_ActivityLog
+composer remove commercegears/module-admin-activity-log
 bin/magento setup:upgrade
 ```
 
-Switch the allowlist off before you remove the module. The log tables `softaware_activity_log` and
-`softaware_activity_log_login` stay in the database; drop them yourself if you no longer need the history.
+Switch the allowlist off before you remove the module. The log tables `commercegears_activity_log` and
+`commercegears_activity_log_login` stay in the database; drop them yourself if you no longer need the history.

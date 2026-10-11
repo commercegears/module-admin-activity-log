@@ -1,12 +1,12 @@
 <?php
 /**
- * Softaware Admin Activity Log
+ * CommerceGears Admin Activity Log
  *
- * @copyright Copyright (c) Softaware Commerce (https://www.softawarecommerce.co.uk/)
+ * @copyright Copyright (c) CommerceGears (https://www.commercegearscommerce.co.uk/)
  */
 declare(strict_types=1);
 
-namespace Softaware\ActivityLog\Controller\Adminhtml\Log;
+namespace CommerceGears\ActivityLog\Controller\Adminhtml\Log;
 
 use Magento\Backend\App\Action;
 use Magento\Backend\App\Action\Context;
@@ -14,13 +14,13 @@ use Magento\Framework\App\Action\HttpGetActionInterface;
 use Magento\Framework\Controller\ResultFactory;
 use Magento\Framework\Controller\ResultInterface;
 use Magento\Framework\Registry;
-use Softaware\ActivityLog\Model\LogFactory;
-use Softaware\ActivityLog\Model\ResourceModel\Log as LogResource;
+use CommerceGears\ActivityLog\Model\LogFactory;
+use CommerceGears\ActivityLog\Model\ResourceModel\Log as LogResource;
 
 class View extends Action implements HttpGetActionInterface
 {
-    public const ADMIN_RESOURCE = 'Softaware_ActivityLog::actions';
-    public const REGISTRY_KEY = 'softaware_activitylog_entry';
+    public const ADMIN_RESOURCE = 'CommerceGears_ActivityLog::actions';
+    public const REGISTRY_KEY = 'commercegears_activitylog_entry';
 
     public function __construct(
         Context $context,
@@ -42,7 +42,7 @@ class View extends Action implements HttpGetActionInterface
         $this->registry->register(self::REGISTRY_KEY, $log);
         /** @var \Magento\Framework\View\Result\Page $page */
         $page = $this->resultFactory->create(ResultFactory::TYPE_PAGE);
-        $page->setActiveMenu('Softaware_ActivityLog::actions');
+        $page->setActiveMenu('CommerceGears_ActivityLog::actions');
         $page->getConfig()->getTitle()->prepend(__('Admin Action #%1', $log->getId()));
         return $page;
     }

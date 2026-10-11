@@ -1,16 +1,16 @@
 <?php
 /**
- * Softaware Admin Activity Log
+ * CommerceGears Admin Activity Log
  *
- * @copyright Copyright (c) Softaware Commerce (https://www.softawarecommerce.co.uk/)
+ * @copyright Copyright (c) CommerceGears (https://www.commercegearscommerce.co.uk/)
  */
 declare(strict_types=1);
 
-namespace Softaware\ActivityLog\Plugin;
+namespace CommerceGears\ActivityLog\Plugin;
 
 use Magento\Backend\Model\Auth\Session as AuthSession;
-use Softaware\ActivityLog\Model\Allowlist;
-use Softaware\ActivityLog\Model\RequestContext;
+use CommerceGears\ActivityLog\Model\Allowlist;
+use CommerceGears\ActivityLog\Model\RequestContext;
 
 /**
  * An existing admin session used from an IP outside the allowlist is treated as signed out

@@ -1,46 +1,46 @@
 <?php
 /**
- * Softaware Admin Activity Log
+ * CommerceGears Admin Activity Log
  *
- * @copyright Copyright (c) Softaware Commerce (https://www.softawarecommerce.co.uk/)
+ * @copyright Copyright (c) CommerceGears (https://www.commercegearscommerce.co.uk/)
  */
 declare(strict_types=1);
 
-namespace Softaware\ActivityLog\Model;
+namespace CommerceGears\ActivityLog\Model;
 
 use Magento\Framework\App\Config\ScopeConfigInterface;
 
 /**
- * Typed access to the module settings (Stores > Configuration > Softaware > Admin Activity Log).
+ * Typed access to the module settings (Stores > Configuration > CommerceGears > Admin Activity Log).
  * All settings are global because the admin panel is global.
  */
 class Config
 {
-    public const SECTION = 'softaware_activitylog';
+    public const SECTION = 'commercegears_activitylog';
 
     public const IP_SOURCE_SERVER = 'server';
     public const IP_SOURCE_CLOUDFLARE = 'cloudflare';
 
-    private const XML_ENABLED = 'softaware_activitylog/general/enabled';
-    private const XML_LOG_ACTIONS = 'softaware_activitylog/general/log_actions';
-    private const XML_LOG_LOGINS = 'softaware_activitylog/general/log_logins';
-    private const XML_IP_SOURCE = 'softaware_activitylog/general/ip_source';
-    private const XML_RETENTION_DAYS = 'softaware_activitylog/general/retention_days';
-    private const XML_EXCLUDE_TYPES = 'softaware_activitylog/exclude/entity_types';
-    private const XML_EXCLUDE_PATHS = 'softaware_activitylog/exclude/config_paths';
-    private const XML_NOTIFY_ENABLED = 'softaware_activitylog/notifications/enabled';
-    private const XML_NOTIFY_ADMIN_NOTICE = 'softaware_activitylog/notifications/admin_notice';
-    private const XML_NOTIFY_RECIPIENTS = 'softaware_activitylog/notifications/recipients';
-    private const XML_NOTIFY_SENDER = 'softaware_activitylog/notifications/sender';
-    private const XML_NOTIFY_THRESHOLD = 'softaware_activitylog/notifications/failed_threshold';
-    private const XML_NOTIFY_WINDOW = 'softaware_activitylog/notifications/failed_window';
-    private const XML_NOTIFY_NEW_IP = 'softaware_activitylog/notifications/new_ip';
-    private const XML_NOTIFY_NEW_COUNTRY = 'softaware_activitylog/notifications/new_country';
-    private const XML_NOTIFY_USER = 'softaware_activitylog/notifications/notify_user';
-    private const XML_NOTIFY_FAILED_TEMPLATE = 'softaware_activitylog/notifications/failed_template';
-    private const XML_NOTIFY_NEW_IP_TEMPLATE = 'softaware_activitylog/notifications/new_ip_template';
-    public const XML_ALLOWLIST_ENABLED = 'softaware_activitylog/allowlist/enabled';
-    public const XML_ALLOWLIST_IPS = 'softaware_activitylog/allowlist/ips';
+    private const XML_ENABLED = 'commercegears_activitylog/general/enabled';
+    private const XML_LOG_ACTIONS = 'commercegears_activitylog/general/log_actions';
+    private const XML_LOG_LOGINS = 'commercegears_activitylog/general/log_logins';
+    private const XML_IP_SOURCE = 'commercegears_activitylog/general/ip_source';
+    private const XML_RETENTION_DAYS = 'commercegears_activitylog/general/retention_days';
+    private const XML_EXCLUDE_TYPES = 'commercegears_activitylog/exclude/entity_types';
+    private const XML_EXCLUDE_PATHS = 'commercegears_activitylog/exclude/config_paths';
+    private const XML_NOTIFY_ENABLED = 'commercegears_activitylog/notifications/enabled';
+    private const XML_NOTIFY_ADMIN_NOTICE = 'commercegears_activitylog/notifications/admin_notice';
+    private const XML_NOTIFY_RECIPIENTS = 'commercegears_activitylog/notifications/recipients';
+    private const XML_NOTIFY_SENDER = 'commercegears_activitylog/notifications/sender';
+    private const XML_NOTIFY_THRESHOLD = 'commercegears_activitylog/notifications/failed_threshold';
+    private const XML_NOTIFY_WINDOW = 'commercegears_activitylog/notifications/failed_window';
+    private const XML_NOTIFY_NEW_IP = 'commercegears_activitylog/notifications/new_ip';
+    private const XML_NOTIFY_NEW_COUNTRY = 'commercegears_activitylog/notifications/new_country';
+    private const XML_NOTIFY_USER = 'commercegears_activitylog/notifications/notify_user';
+    private const XML_NOTIFY_FAILED_TEMPLATE = 'commercegears_activitylog/notifications/failed_template';
+    private const XML_NOTIFY_NEW_IP_TEMPLATE = 'commercegears_activitylog/notifications/new_ip_template';
+    public const XML_ALLOWLIST_ENABLED = 'commercegears_activitylog/allowlist/enabled';
+    public const XML_ALLOWLIST_IPS = 'commercegears_activitylog/allowlist/ips';
 
     /** @var string[]|null */
     private ?array $excludedTypes = null;

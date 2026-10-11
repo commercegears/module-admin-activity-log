@@ -1,6 +1,6 @@
-# Softaware Admin Activity Log
+# CommerceGears Admin Activity Log
 
-`softaware/module-admin-activity-log` (Magento module `Softaware_ActivityLog`)
+`commercegears/module-admin-activity-log` (Magento module `CommerceGears_ActivityLog`)
 
 Who changed what in the Magento admin, who signed in from where, and who is signed in right now.
 
@@ -48,44 +48,44 @@ User guide: [docs/user-guide.md](docs/user-guide.md) · FAQ: [docs/faq.md](docs/
 
 ## Where in the admin
 
-- Softaware > Admin Activity Log > Admin Actions / Login Log / Active Sessions / Settings
-- Settings: Stores > Configuration > Softaware > Admin Activity Log (`softaware_activitylog/*`, default scope)
-- ACL: Softaware > Admin Activity Log > View Admin Actions / View Login Log / Manage Active Sessions / Settings
+- CommerceGears > Admin Activity Log > Admin Actions / Login Log / Active Sessions / Settings
+- Settings: Stores > Configuration > CommerceGears > Admin Activity Log (`commercegears_activitylog/*`, default scope)
+- ACL: CommerceGears > Admin Activity Log > View Admin Actions / View Login Log / Manage Active Sessions / Settings
 
 ## Configuration
 
 | Path | Default | |
 |---|---|---|
-| `softaware_activitylog/general/enabled` | 1 | Master switch (logging, alerts and allowlist) |
-| `softaware_activitylog/general/log_actions` | 1 | Admin action log |
-| `softaware_activitylog/general/log_logins` | 1 | Login log (needed for alerts) |
-| `softaware_activitylog/general/ip_source` | server | `server` (REMOTE_ADDR) or `cloudflare` (CF-Connecting-IP from Cloudflare ranges only) |
-| `softaware_activitylog/general/retention_days` | 90 | 0 = keep forever |
-| `softaware_activitylog/exclude/entity_types` | (empty) | Comma-separated entity type codes |
-| `softaware_activitylog/exclude/config_paths` | (empty) | One pattern per line, `*` wildcard |
-| `softaware_activitylog/notifications/*` | on | Recipients, sender, threshold (5) and window (15 min), new IP/country, templates |
-| `softaware_activitylog/allowlist/enabled`, `.../ips` | off | Admin IP allowlist |
+| `commercegears_activitylog/general/enabled` | 1 | Master switch (logging, alerts and allowlist) |
+| `commercegears_activitylog/general/log_actions` | 1 | Admin action log |
+| `commercegears_activitylog/general/log_logins` | 1 | Login log (needed for alerts) |
+| `commercegears_activitylog/general/ip_source` | server | `server` (REMOTE_ADDR) or `cloudflare` (CF-Connecting-IP from Cloudflare ranges only) |
+| `commercegears_activitylog/general/retention_days` | 90 | 0 = keep forever |
+| `commercegears_activitylog/exclude/entity_types` | (empty) | Comma-separated entity type codes |
+| `commercegears_activitylog/exclude/config_paths` | (empty) | One pattern per line, `*` wildcard |
+| `commercegears_activitylog/notifications/*` | on | Recipients, sender, threshold (5) and window (15 min), new IP/country, templates |
+| `commercegears_activitylog/allowlist/enabled`, `.../ips` | off | Admin IP allowlist |
 
 Email templates: "Admin Activity Log: Failed Sign-ins / Lockout" and "Admin Activity Log: Sign-in From New IP or Country".
 
 ## CLI
 
 ```
-bin/magento softaware:activity-log:clean [--days=N]           # delete entries older than the retention period (or N days)
-bin/magento softaware:activity-log:allowlist                  # show the admin IP allowlist
-bin/magento softaware:activity-log:allowlist --add=203.0.113.4
-bin/magento softaware:activity-log:allowlist --disable        # way back in after a lock-out
+bin/magento commercegears:activity-log:clean [--days=N]           # delete entries older than the retention period (or N days)
+bin/magento commercegears:activity-log:allowlist                  # show the admin IP allowlist
+bin/magento commercegears:activity-log:allowlist --add=203.0.113.4
+bin/magento commercegears:activity-log:allowlist --disable        # way back in after a lock-out
 ```
 
 ## Extending
 
 Other modules can track their own entities by adding an item to the `types` argument of
-`Softaware\ActivityLog\Model\EntityTypeResolver` in their `di.xml` (keys: `class`, `label`, `label_fields`,
+`CommerceGears\ActivityLog\Model\EntityTypeResolver` in their `di.xml` (keys: `class`, `label`, `label_fields`,
 `extra_fields`, `ignore_fields`).
 
 ## Compatibility
 
-Magento Open Source / Adobe Commerce 2.4.7 to 2.4.9, PHP 8.2 to 8.5. Requires `softaware/module-core` ^1.3 and
+Magento Open Source / Adobe Commerce 2.4.7 to 2.4.9, PHP 8.2 to 8.5. Requires `commercegears/module-core` ^1.3 and
 Magento_Security (admin session records). No storefront code.
 
 ## Limitations

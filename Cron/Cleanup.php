@@ -1,15 +1,15 @@
 <?php
 /**
- * Softaware Admin Activity Log
+ * CommerceGears Admin Activity Log
  *
- * @copyright Copyright (c) Softaware Commerce (https://www.softawarecommerce.co.uk/)
+ * @copyright Copyright (c) CommerceGears (https://www.commercegearscommerce.co.uk/)
  */
 declare(strict_types=1);
 
-namespace Softaware\ActivityLog\Cron;
+namespace CommerceGears\ActivityLog\Cron;
 
-use Softaware\ActivityLog\Model\Cleaner;
-use Softaware\ActivityLog\Model\Config;
+use CommerceGears\ActivityLog\Model\Cleaner;
+use CommerceGears\ActivityLog\Model\Config;
 
 class Cleanup
 {

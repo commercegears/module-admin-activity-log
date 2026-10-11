@@ -1,18 +1,18 @@
 <?php
 /**
- * Softaware Admin Activity Log
+ * CommerceGears Admin Activity Log
  *
- * @copyright Copyright (c) Softaware Commerce (https://www.softawarecommerce.co.uk/)
+ * @copyright Copyright (c) CommerceGears (https://www.commercegearscommerce.co.uk/)
  */
 declare(strict_types=1);
 
-namespace Softaware\ActivityLog\Plugin;
+namespace CommerceGears\ActivityLog\Plugin;
 
 use Magento\Catalog\Model\Product\Action;
-use Softaware\ActivityLog\Model\Config;
-use Softaware\ActivityLog\Model\DiffBuilder;
-use Softaware\ActivityLog\Model\LogBuffer;
-use Softaware\ActivityLog\Model\Source\Action as ActionSource;
+use CommerceGears\ActivityLog\Model\Config;
+use CommerceGears\ActivityLog\Model\DiffBuilder;
+use CommerceGears\ActivityLog\Model\LogBuffer;
+use CommerceGears\ActivityLog\Model\Source\Action as ActionSource;
 
 /**
  * Product grid "Update status" and similar bulk attribute updates bypass model saves; log the new values here.

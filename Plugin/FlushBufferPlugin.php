@@ -1,15 +1,15 @@
 <?php
 /**
- * Softaware Admin Activity Log
+ * CommerceGears Admin Activity Log
  *
- * @copyright Copyright (c) Softaware Commerce (https://www.softawarecommerce.co.uk/)
+ * @copyright Copyright (c) CommerceGears (https://www.commercegearscommerce.co.uk/)
  */
 declare(strict_types=1);
 
-namespace Softaware\ActivityLog\Plugin;
+namespace CommerceGears\ActivityLog\Plugin;
 
 use Magento\Framework\App\FrontControllerInterface;
-use Softaware\ActivityLog\Model\LogBuffer;
+use CommerceGears\ActivityLog\Model\LogBuffer;
 
 /**
  * Writes the collected log entries once, after the admin controller has finished.

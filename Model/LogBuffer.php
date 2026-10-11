@@ -1,16 +1,16 @@
 <?php
 /**
- * Softaware Admin Activity Log
+ * CommerceGears Admin Activity Log
  *
- * @copyright Copyright (c) Softaware Commerce (https://www.softawarecommerce.co.uk/)
+ * @copyright Copyright (c) CommerceGears (https://www.commercegearscommerce.co.uk/)
  */
 declare(strict_types=1);
 
-namespace Softaware\ActivityLog\Model;
+namespace CommerceGears\ActivityLog\Model;
 
 use Psr\Log\LoggerInterface;
-use Softaware\ActivityLog\Model\ResourceModel\Log as LogResource;
-use Softaware\ActivityLog\Model\Source\Action as ActionSource;
+use CommerceGears\ActivityLog\Model\ResourceModel\Log as LogResource;
+use CommerceGears\ActivityLog\Model\Source\Action as ActionSource;
 
 /**
  * Request-scoped buffer. Changes are collected while models are saved, kept only once the database transaction
@@ -128,7 +128,7 @@ class LogBuffer
             }
         } catch (\Throwable $e) {
             // Logging must never break an admin save.
-            $this->logger->error('Softaware_ActivityLog: could not write activity log: ' . $e->getMessage());
+            $this->logger->error('CommerceGears_ActivityLog: could not write activity log: ' . $e->getMessage());
         }
     }
 

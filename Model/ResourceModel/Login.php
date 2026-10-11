@@ -1,18 +1,18 @@
 <?php
 /**
- * Softaware Admin Activity Log
+ * CommerceGears Admin Activity Log
  *
- * @copyright Copyright (c) Softaware Commerce (https://www.softawarecommerce.co.uk/)
+ * @copyright Copyright (c) CommerceGears (https://www.commercegearscommerce.co.uk/)
  */
 declare(strict_types=1);
 
-namespace Softaware\ActivityLog\Model\ResourceModel;
+namespace CommerceGears\ActivityLog\Model\ResourceModel;
 
 use Magento\Framework\Model\ResourceModel\Db\AbstractDb;
 
 class Login extends AbstractDb
 {
-    public const TABLE = 'softaware_activity_log_login';
+    public const TABLE = 'commercegears_activity_log_login';
 
     protected function _construct(): void
     {

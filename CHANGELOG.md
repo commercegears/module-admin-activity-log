@@ -1,5 +1,8 @@
 # Changelog
 
+## 2.0.0 (2026-10-11)
+- Improvement: renamed to CommerceGears (new Composer package, admin menu and settings paths)
+
 ## 1.4.1 (2026-10-11)
 - Fix: changes from one empty value to another (such as empty to "[]") are no longer listed.
 - Fix: new products no longer list empty images or the default "Display Product Options In" value.
@@ -17,7 +20,7 @@
 - New: product listing, FAQ and user guide.
 
 ## 1.3.1 (2026-10-07)
-- Fix: the README states the right Softaware Core version.
+- Fix: the README states the right CommerceGears Core version.
 
 ## 1.3.0 (2026-10-07)
 - New: keyword search on the Admin Actions and Login Log grids.
@@ -27,7 +30,7 @@
 - Improvement: Login Log status badges, tidier Active Sessions and shorter settings comments.
 
 ## 1.2.0 (2026-10-06)
-- Improvement: requires Softaware Core instead of Softaware Base; menu and permissions move under "Softaware".
+- Improvement: requires CommerceGears Core instead of CommerceGears Base; menu and permissions move under "CommerceGears".
 
 ## 1.1.0 (2026-10-06)
 - New: "Client IP Address From" setting (web server or Cloudflare, checked against Cloudflare's ranges).

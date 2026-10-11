@@ -1,32 +1,32 @@
 <?xml version="1.0"?>
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
     <type name="Magento\Framework\App\FrontControllerInterface">
-        <plugin name="softaware_activitylog_flush" type="Softaware\ActivityLog\Plugin\FlushBufferPlugin" sortOrder="1000"/>
+        <plugin name="commercegears_activitylog_flush" type="CommerceGears\ActivityLog\Plugin\FlushBufferPlugin" sortOrder="1000"/>
     </type>
     <type name="Magento\Backend\Model\Auth">
-        <plugin name="softaware_activitylog_auth" type="Softaware\ActivityLog\Plugin\AuthPlugin"/>
+        <plugin name="commercegears_activitylog_auth" type="CommerceGears\ActivityLog\Plugin\AuthPlugin"/>
     </type>
     <type name="Magento\Backend\Model\Auth\Session">
-        <plugin name="softaware_activitylog_allowlist" type="Softaware\ActivityLog\Plugin\AuthSessionAllowlistPlugin"/>
+        <plugin name="commercegears_activitylog_allowlist" type="CommerceGears\ActivityLog\Plugin\AuthSessionAllowlistPlugin"/>
     </type>
     <type name="Magento\Authorization\Model\ResourceModel\Rules">
-        <plugin name="softaware_activitylog_rules" type="Softaware\ActivityLog\Plugin\RulesPlugin"/>
+        <plugin name="commercegears_activitylog_rules" type="CommerceGears\ActivityLog\Plugin\RulesPlugin"/>
     </type>
     <type name="Magento\ImportExport\Model\Import">
-        <plugin name="softaware_activitylog_import" type="Softaware\ActivityLog\Plugin\ImportPlugin"/>
+        <plugin name="commercegears_activitylog_import" type="CommerceGears\ActivityLog\Plugin\ImportPlugin"/>
     </type>
     <type name="Magento\Catalog\Model\Product\Action">
-        <plugin name="softaware_activitylog_product_action" type="Softaware\ActivityLog\Plugin\ProductActionPlugin"/>
+        <plugin name="commercegears_activitylog_product_action" type="CommerceGears\ActivityLog\Plugin\ProductActionPlugin"/>
     </type>
     <type name="Magento\Security\Model\AdminSessionsManager">
-        <plugin name="softaware_activitylog_session_link" type="Softaware\ActivityLog\Plugin\SessionsManagerPlugin"/>
+        <plugin name="commercegears_activitylog_session_link" type="CommerceGears\ActivityLog\Plugin\SessionsManagerPlugin"/>
     </type>
-    <type name="Softaware\ActivityLog\Plugin\SessionsManagerPlugin">
+    <type name="CommerceGears\ActivityLog\Plugin\SessionsManagerPlugin">
         <arguments>
             <argument name="authSession" xsi:type="object">Magento\Backend\Model\Auth\Session\Proxy</argument>
         </arguments>
     </type>
-    <type name="Softaware\ActivityLog\Plugin\AuthPlugin">
+    <type name="CommerceGears\ActivityLog\Plugin\AuthPlugin">
         <arguments>
             <argument name="authSession" xsi:type="object">Magento\Backend\Model\Auth\Session\Proxy</argument>
         </arguments>

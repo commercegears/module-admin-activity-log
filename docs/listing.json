@@ -111,7 +111,7 @@
         "admin": [
             {
                 "label": "Admin panel",
-                "url": "https://demo.softawarecommerce.com/try-admin/admin-activity-log",
+                "url": "https://demo.commercegears.com/try-admin/admin-activity-log",
                 "image": "docs/images/admin-actions.png"
             }
         ]

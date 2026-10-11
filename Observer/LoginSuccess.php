@@ -1,17 +1,17 @@
 <?php
 /**
- * Softaware Admin Activity Log
+ * CommerceGears Admin Activity Log
  *
- * @copyright Copyright (c) Softaware Commerce (https://www.softawarecommerce.co.uk/)
+ * @copyright Copyright (c) CommerceGears (https://www.commercegearscommerce.co.uk/)
  */
 declare(strict_types=1);
 
-namespace Softaware\ActivityLog\Observer;
+namespace CommerceGears\ActivityLog\Observer;
 
 use Magento\Framework\Event\Observer;
 use Magento\Framework\Event\ObserverInterface;
 use Magento\User\Model\User;
-use Softaware\ActivityLog\Model\LoginLogger;
+use CommerceGears\ActivityLog\Model\LoginLogger;
 
 class LoginSuccess implements ObserverInterface
 {

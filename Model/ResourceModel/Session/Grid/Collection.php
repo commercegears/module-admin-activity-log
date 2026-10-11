@@ -1,12 +1,12 @@
 <?php
 /**
- * Softaware Admin Activity Log
+ * CommerceGears Admin Activity Log
  *
- * @copyright Copyright (c) Softaware Commerce (https://www.softawarecommerce.co.uk/)
+ * @copyright Copyright (c) CommerceGears (https://www.commercegearscommerce.co.uk/)
  */
 declare(strict_types=1);
 
-namespace Softaware\ActivityLog\Model\ResourceModel\Session\Grid;
+namespace CommerceGears\ActivityLog\Model\ResourceModel\Session\Grid;
 
 use Magento\Framework\Data\Collection\Db\FetchStrategyInterface as FetchStrategy;
 use Magento\Framework\Data\Collection\EntityFactoryInterface as EntityFactory;
@@ -15,7 +15,7 @@ use Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult;
 use Magento\Security\Model\AdminSessionInfo;
 use Magento\Security\Model\ConfigInterface as SecurityConfig;
 use Psr\Log\LoggerInterface as Logger;
-use Softaware\ActivityLog\Model\ResourceModel\Login;
+use CommerceGears\ActivityLog\Model\ResourceModel\Login;
 
 /**
  * Active admin sessions: Magento's admin_user_session records that are signed in and not expired,

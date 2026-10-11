@@ -1,16 +1,16 @@
 <?php
 /**
- * Softaware Admin Activity Log
+ * CommerceGears Admin Activity Log
  *
- * @copyright Copyright (c) Softaware Commerce (https://www.softawarecommerce.co.uk/)
+ * @copyright Copyright (c) CommerceGears (https://www.commercegearscommerce.co.uk/)
  */
 declare(strict_types=1);
 
-namespace Softaware\ActivityLog\Model\ResourceModel\Login;
+namespace CommerceGears\ActivityLog\Model\ResourceModel\Login;
 
 use Magento\Framework\Model\ResourceModel\Db\Collection\AbstractCollection;
-use Softaware\ActivityLog\Model\Login;
-use Softaware\ActivityLog\Model\ResourceModel\Login as LoginResource;
+use CommerceGears\ActivityLog\Model\Login;
+use CommerceGears\ActivityLog\Model\ResourceModel\Login as LoginResource;
 
 class Collection extends AbstractCollection
 {

@@ -1,15 +1,15 @@
 <?php
 /**
- * Softaware Admin Activity Log
+ * CommerceGears Admin Activity Log
  *
- * @copyright Copyright (c) Softaware Commerce (https://www.softawarecommerce.co.uk/)
+ * @copyright Copyright (c) CommerceGears (https://www.commercegearscommerce.co.uk/)
  */
 declare(strict_types=1);
 
-namespace Softaware\ActivityLog\Ui\Component\Listing\Column;
+namespace CommerceGears\ActivityLog\Ui\Component\Listing\Column;
 
 use Magento\Ui\Component\Listing\Columns\Column;
-use Softaware\ActivityLog\Model\RequestContext;
+use CommerceGears\ActivityLog\Model\RequestContext;
 
 /**
  * Admin user column: says where an entry without an admin user came from instead of leaving the cell empty.

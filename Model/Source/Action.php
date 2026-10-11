@@ -1,22 +1,22 @@
 <?php
 /**
- * Softaware Admin Activity Log
+ * CommerceGears Admin Activity Log
  *
- * @copyright Copyright (c) Softaware Commerce (https://www.softawarecommerce.co.uk/)
+ * @copyright Copyright (c) CommerceGears (https://www.commercegearscommerce.co.uk/)
  */
 declare(strict_types=1);
 
-namespace Softaware\ActivityLog\Model\Source;
+namespace CommerceGears\ActivityLog\Model\Source;
 
 use Magento\Framework\Data\OptionSourceInterface;
 
 /**
- * Action codes stored in softaware_activity_log.action and their labels, named as in the Adobe Commerce action log
+ * Action codes stored in commercegears_activity_log.action and their labels, named as in the Adobe Commerce action log
  * (Save, Delete, Mass Update, ...). The codes stay stable; only the labels follow Adobe Commerce.
  *
  * As in Adobe Commerce, created and changed records are both "Save": "create" and "update" share the label. The grid
  * filter lists "Save" once (duplicate labels are dropped in the filter) and selecting it matches both codes
- * (see \Softaware\ActivityLog\Ui\DataProvider\LogDataProvider).
+ * (see \CommerceGears\ActivityLog\Ui\DataProvider\LogDataProvider).
  */
 class Action implements OptionSourceInterface
 {

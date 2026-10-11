@@ -1,12 +1,12 @@
 <?php
 /**
- * Softaware Admin Activity Log
+ * CommerceGears Admin Activity Log
  *
- * @copyright Copyright (c) Softaware Commerce (https://www.softawarecommerce.co.uk/)
+ * @copyright Copyright (c) CommerceGears (https://www.commercegearscommerce.co.uk/)
  */
 declare(strict_types=1);
 
-namespace Softaware\ActivityLog\Block\Adminhtml\Log;
+namespace CommerceGears\ActivityLog\Block\Adminhtml\Log;
 
 use Magento\Backend\Block\Template;
 use Magento\Backend\Block\Template\Context;
@@ -14,18 +14,18 @@ use Magento\Backend\Block\Widget\Button;
 use Magento\Framework\Locale\ResolverInterface;
 use Magento\Framework\Registry;
 use Magento\Framework\Stdlib\DateTime\TimezoneInterface;
-use Softaware\ActivityLog\Controller\Adminhtml\Log\View as ViewController;
-use Softaware\ActivityLog\Model\EntityTypeResolver;
-use Softaware\ActivityLog\Model\Log;
-use Softaware\ActivityLog\Model\ResourceModel\Log\CollectionFactory;
-use Softaware\ActivityLog\Model\Source\Action as ActionSource;
+use CommerceGears\ActivityLog\Controller\Adminhtml\Log\View as ViewController;
+use CommerceGears\ActivityLog\Model\EntityTypeResolver;
+use CommerceGears\ActivityLog\Model\Log;
+use CommerceGears\ActivityLog\Model\ResourceModel\Log\CollectionFactory;
+use CommerceGears\ActivityLog\Model\Source\Action as ActionSource;
 
 /**
  * Detail page of one admin action: who, when, where, and the field-level diff.
  */
 class View extends Template
 {
-    protected $_template = 'Softaware_ActivityLog::log/view.phtml';
+    protected $_template = 'CommerceGears_ActivityLog::log/view.phtml';
 
     /** Number of related entries listed on the page. */
     public const RELATED_LIMIT = 100;
@@ -69,7 +69,7 @@ class View extends Template
     {
         $toolbar = $this->getLayout()->getBlock('page.actions.toolbar');
         if ($toolbar) {
-            $toolbar->addChild('softaware_activitylog_back', Button::class, [
+            $toolbar->addChild('commercegears_activitylog_back', Button::class, [
                 'label' => __('Back'),
                 'class' => 'back',
                 'on_click' => sprintf("setLocation('%s')", $this->_escaper->escapeJs($this->getBackUrl())),

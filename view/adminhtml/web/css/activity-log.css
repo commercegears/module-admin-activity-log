@@ -1,45 +1,45 @@
-/* Softaware Admin Activity Log: grid pages and entry detail. Colours from the Magento admin palette. */
+/* CommerceGears Admin Activity Log: grid pages and entry detail. Colours from the Magento admin palette. */
 
-.softaware-activitylog-intro { margin: 0 0 2rem; color: #303030; }
-.softaware-activitylog-intro a { margin-left: .3rem; }
+.commercegears-activitylog-intro { margin: 0 0 2rem; color: #303030; }
+.commercegears-activitylog-intro a { margin-left: .3rem; }
 
 /* Grids: long values such as browser strings and admin paths wrap instead of widening the table. */
-.data-grid td.softaware-activitylog-wrap { overflow-wrap: break-word; word-break: normal; }
-.data-grid td.softaware-activitylog-badge > div { white-space: nowrap; }
+.data-grid td.commercegears-activitylog-wrap { overflow-wrap: break-word; word-break: normal; }
+.data-grid td.commercegears-activitylog-badge > div { white-space: nowrap; }
 
 /* Entry detail */
-.softaware-activitylog-summary {
+.commercegears-activitylog-summary {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(32rem, 1fr));
     column-gap: 4rem;
 }
-.softaware-activitylog-summary .admin__table-secondary { margin-bottom: 0; }
-.softaware-activitylog-summary .admin__table-secondary th { width: 14rem; }
-.softaware-activitylog-summary td { overflow-wrap: anywhere; }
+.commercegears-activitylog-summary .admin__table-secondary { margin-bottom: 0; }
+.commercegears-activitylog-summary .admin__table-secondary th { width: 14rem; }
+.commercegears-activitylog-summary td { overflow-wrap: anywhere; }
 
-.softaware-activitylog-diff { table-layout: fixed; width: 100%; }
-.softaware-activitylog-diff th.softaware-activitylog-field { width: 26%; }
-.softaware-activitylog-diff td { vertical-align: top; overflow-wrap: anywhere; }
-.softaware-activitylog-diff td.softaware-activitylog-field code { overflow-wrap: break-word; }
-.softaware-activitylog-diff td.softaware-activitylog-old { background: #fae5e5; }
-.softaware-activitylog-diff td.softaware-activitylog-new { background: #e5efe5; }
-.softaware-activitylog-values td.softaware-activitylog-new { background: transparent; }
-.softaware-activitylog-value { white-space: pre-wrap; max-height: 24rem; overflow-y: auto; }
-.softaware-activitylog-value:focus { outline: 2px solid #007bdb; outline-offset: 2px; }
-.softaware-activitylog-empty { color: #666; font-style: italic; }
-.softaware-activitylog-note { margin: 0 0 1.5rem; color: #666; }
-.softaware-activitylog-related { width: 100%; }
+.commercegears-activitylog-diff { table-layout: fixed; width: 100%; }
+.commercegears-activitylog-diff th.commercegears-activitylog-field { width: 26%; }
+.commercegears-activitylog-diff td { vertical-align: top; overflow-wrap: anywhere; }
+.commercegears-activitylog-diff td.commercegears-activitylog-field code { overflow-wrap: break-word; }
+.commercegears-activitylog-diff td.commercegears-activitylog-old { background: #fae5e5; }
+.commercegears-activitylog-diff td.commercegears-activitylog-new { background: #e5efe5; }
+.commercegears-activitylog-values td.commercegears-activitylog-new { background: transparent; }
+.commercegears-activitylog-value { white-space: pre-wrap; max-height: 24rem; overflow-y: auto; }
+.commercegears-activitylog-value:focus { outline: 2px solid #007bdb; outline-offset: 2px; }
+.commercegears-activitylog-empty { color: #666; font-style: italic; }
+.commercegears-activitylog-note { margin: 0 0 1.5rem; color: #666; }
+.commercegears-activitylog-related { width: 100%; }
 
 /* Grids: filter row under the column headings (Search / Reset Filter buttons in the toolbar). */
-.data-grid thead .softaware-activitylog-filter-row td {
+.data-grid thead .commercegears-activitylog-filter-row td {
     background: #f1f1f1;
     border: 0 solid #d6d6d6;
     border-bottom-width: 1px;
     padding: .8rem .6rem;
     vertical-align: top;
 }
-.softaware-activitylog-filter-row .admin__control-text,
-.softaware-activitylog-filter-row .admin__control-select {
+.commercegears-activitylog-filter-row .admin__control-text,
+.commercegears-activitylog-filter-row .admin__control-select {
     width: 100%;
     min-width: 0;
     font-size: 1.3rem;
@@ -47,13 +47,13 @@
     padding-top: .4rem;
     padding-bottom: .4rem;
 }
-.softaware-activitylog-filter-row .admin__control-select { padding-right: 2.8rem; }
-.softaware-activitylog-filter-range-line { display: flex; align-items: center; gap: .4rem; }
-.softaware-activitylog-filter-range-line + .softaware-activitylog-filter-range-line { margin-top: .4rem; }
-.softaware-activitylog-filter-range-label { flex: 0 0 2.4rem; font-size: 1.2rem; color: #666; }
-.softaware-activitylog-filter-range-line .softaware-activitylog-filter-control { flex: 1 1 auto; min-width: 0; }
-.softaware-activitylog-filter-row ._has-datepicker { padding-right: 3rem; }
-.softaware-activitylog-filter-hidden-label {
+.commercegears-activitylog-filter-row .admin__control-select { padding-right: 2.8rem; }
+.commercegears-activitylog-filter-range-line { display: flex; align-items: center; gap: .4rem; }
+.commercegears-activitylog-filter-range-line + .commercegears-activitylog-filter-range-line { margin-top: .4rem; }
+.commercegears-activitylog-filter-range-label { flex: 0 0 2.4rem; font-size: 1.2rem; color: #666; }
+.commercegears-activitylog-filter-range-line .commercegears-activitylog-filter-control { flex: 1 1 auto; min-width: 0; }
+.commercegears-activitylog-filter-row ._has-datepicker { padding-right: 3rem; }
+.commercegears-activitylog-filter-hidden-label {
     position: absolute;
     width: 1px;
     height: 1px;
@@ -61,5 +61,5 @@
     clip: rect(0 0 0 0);
     white-space: nowrap;
 }
-.softaware-activitylog-filter-buttons { display: flex; align-items: center; gap: .4rem; }
-.softaware-activitylog-filter-row .admin__control-select { min-width: 9rem; }
+.commercegears-activitylog-filter-buttons { display: flex; align-items: center; gap: .4rem; }
+.commercegears-activitylog-filter-row .admin__control-select { min-width: 9rem; }

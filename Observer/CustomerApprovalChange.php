@@ -1,20 +1,20 @@
 <?php
 /**
- * Softaware Admin Activity Log
+ * CommerceGears Admin Activity Log
  *
- * @copyright Copyright (c) Softaware Commerce (https://www.softawarecommerce.co.uk/)
+ * @copyright Copyright (c) CommerceGears (https://www.commercegearscommerce.co.uk/)
  */
 declare(strict_types=1);
 
-namespace Softaware\ActivityLog\Observer;
+namespace CommerceGears\ActivityLog\Observer;
 
 use Magento\Framework\Event\Observer;
 use Magento\Framework\Event\ObserverInterface;
-use Softaware\ActivityLog\Model\Config;
-use Softaware\ActivityLog\Model\LogBuffer;
+use CommerceGears\ActivityLog\Model\Config;
+use CommerceGears\ActivityLog\Model\LogBuffer;
 
 /**
- * Logs approvals/rejections made with Softaware Customer Approval (event softaware_customer_approval_status_changed).
+ * Logs approvals/rejections made with CommerceGears Customer Approval (event commercegears_customer_approval_status_changed).
  * The status is written without a customer save, so the model observers do not see it. No-op without that module.
  */
 class CustomerApprovalChange implements ObserverInterface

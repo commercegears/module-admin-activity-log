@@ -3,12 +3,12 @@
     <acl>
         <resources>
             <resource id="Magento_Backend::admin">
-                <resource id="Softaware_Core::core">
-                    <resource id="Softaware_ActivityLog::activity_log" title="Admin Activity Log" translate="title" sortOrder="40">
-                        <resource id="Softaware_ActivityLog::actions" title="View Admin Actions" translate="title" sortOrder="10"/>
-                        <resource id="Softaware_ActivityLog::logins" title="View Login Log" translate="title" sortOrder="20"/>
-                        <resource id="Softaware_ActivityLog::sessions" title="Manage Active Sessions" translate="title" sortOrder="30"/>
-                        <resource id="Softaware_ActivityLog::config" title="Settings" translate="title" sortOrder="40"/>
+                <resource id="CommerceGears_Core::core">
+                    <resource id="CommerceGears_ActivityLog::activity_log" title="Admin Activity Log" translate="title" sortOrder="40">
+                        <resource id="CommerceGears_ActivityLog::actions" title="View Admin Actions" translate="title" sortOrder="10"/>
+                        <resource id="CommerceGears_ActivityLog::logins" title="View Login Log" translate="title" sortOrder="20"/>
+                        <resource id="CommerceGears_ActivityLog::sessions" title="Manage Active Sessions" translate="title" sortOrder="30"/>
+                        <resource id="CommerceGears_ActivityLog::config" title="Settings" translate="title" sortOrder="40"/>
                     </resource>
                 </resource>
             </resource>

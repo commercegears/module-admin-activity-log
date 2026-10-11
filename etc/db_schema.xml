@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
-    <table name="softaware_activity_log" resource="default" engine="innodb" comment="Softaware admin activity log">
+    <table name="commercegears_activity_log" resource="default" engine="innodb" comment="CommerceGears admin activity log">
         <column xsi:type="int" name="log_id" unsigned="true" nullable="false" identity="true" comment="Log ID"/>
         <column xsi:type="timestamp" name="created_at" on_update="false" nullable="false" default="CURRENT_TIMESTAMP" comment="Created at (UTC)"/>
         <column xsi:type="int" name="user_id" unsigned="true" nullable="true" comment="Admin user ID"/>
@@ -18,23 +18,23 @@
         <constraint xsi:type="primary" referenceId="PRIMARY">
             <column name="log_id"/>
         </constraint>
-        <index referenceId="SOFTAWARE_ACTIVITY_LOG_CREATED_AT" indexType="btree">
+        <index referenceId="COMMERCEGEARS_ACTIVITY_LOG_CREATED_AT" indexType="btree">
             <column name="created_at"/>
         </index>
-        <index referenceId="SOFTAWARE_ACTIVITY_LOG_USER_ID" indexType="btree">
+        <index referenceId="COMMERCEGEARS_ACTIVITY_LOG_USER_ID" indexType="btree">
             <column name="user_id"/>
         </index>
-        <index referenceId="SOFTAWARE_ACTIVITY_LOG_ENTITY_TYPE_ENTITY_ID" indexType="btree">
+        <index referenceId="COMMERCEGEARS_ACTIVITY_LOG_ENTITY_TYPE_ENTITY_ID" indexType="btree">
             <column name="entity_type"/>
             <column name="entity_id"/>
         </index>
-        <index referenceId="SOFTAWARE_ACTIVITY_LOG_REQUEST_ID" indexType="btree">
+        <index referenceId="COMMERCEGEARS_ACTIVITY_LOG_REQUEST_ID" indexType="btree">
             <column name="request_id"/>
         </index>
-        <index referenceId="SOFTAWARE_ACTIVITY_LOG_IP" indexType="btree">
+        <index referenceId="COMMERCEGEARS_ACTIVITY_LOG_IP" indexType="btree">
             <column name="ip"/>
         </index>
-        <index referenceId="SOFTAWARE_ACTIVITY_LOG_FULLTEXT" indexType="fulltext">
+        <index referenceId="COMMERCEGEARS_ACTIVITY_LOG_FULLTEXT" indexType="fulltext">
             <column name="username"/>
             <column name="entity_id"/>
             <column name="entity_label"/>
@@ -43,7 +43,7 @@
             <column name="request_id"/>
         </index>
     </table>
-    <table name="softaware_activity_log_login" resource="default" engine="innodb" comment="Softaware admin login log">
+    <table name="commercegears_activity_log_login" resource="default" engine="innodb" comment="CommerceGears admin login log">
         <column xsi:type="int" name="login_id" unsigned="true" nullable="false" identity="true" comment="Login log ID"/>
         <column xsi:type="timestamp" name="created_at" on_update="false" nullable="false" default="CURRENT_TIMESTAMP" comment="Created at (UTC)"/>
         <column xsi:type="int" name="user_id" unsigned="true" nullable="true" comment="Admin user ID"/>
@@ -57,21 +57,21 @@
         <constraint xsi:type="primary" referenceId="PRIMARY">
             <column name="login_id"/>
         </constraint>
-        <index referenceId="SOFTAWARE_ACTIVITY_LOG_LOGIN_CREATED_AT" indexType="btree">
+        <index referenceId="COMMERCEGEARS_ACTIVITY_LOG_LOGIN_CREATED_AT" indexType="btree">
             <column name="created_at"/>
         </index>
-        <index referenceId="SOFTAWARE_ACTIVITY_LOG_LOGIN_USER_ID_STATUS" indexType="btree">
+        <index referenceId="COMMERCEGEARS_ACTIVITY_LOG_LOGIN_USER_ID_STATUS" indexType="btree">
             <column name="user_id"/>
             <column name="status"/>
         </index>
-        <index referenceId="SOFTAWARE_ACTIVITY_LOG_LOGIN_IP_CREATED_AT" indexType="btree">
+        <index referenceId="COMMERCEGEARS_ACTIVITY_LOG_LOGIN_IP_CREATED_AT" indexType="btree">
             <column name="ip"/>
             <column name="created_at"/>
         </index>
-        <index referenceId="SOFTAWARE_ACTIVITY_LOG_LOGIN_SESSION_INFO_ID" indexType="btree">
+        <index referenceId="COMMERCEGEARS_ACTIVITY_LOG_LOGIN_SESSION_INFO_ID" indexType="btree">
             <column name="session_info_id"/>
         </index>
-        <index referenceId="SOFTAWARE_ACTIVITY_LOG_LOGIN_FULLTEXT" indexType="fulltext">
+        <index referenceId="COMMERCEGEARS_ACTIVITY_LOG_LOGIN_FULLTEXT" indexType="fulltext">
             <column name="username"/>
             <column name="ip"/>
             <column name="reason"/>

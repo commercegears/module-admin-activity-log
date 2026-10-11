@@ -1,30 +1,30 @@
 <!--
 /**
- * Softaware Admin Activity Log: Magento's ui/grid/listing with a filter row under the column headings.
+ * CommerceGears Admin Activity Log: Magento's ui/grid/listing with a filter row under the column headings.
  */
 -->
 <div class="admin__data-grid-wrap" data-role="grid-wrapper">
-    <table class="data-grid softaware-activitylog-grid" data-role="grid">
+    <table class="data-grid commercegears-activitylog-grid" data-role="grid">
        <thead>
             <tr each="data: getVisible(), as: '$col'" render="getHeader()"></tr>
-            <tr class="softaware-activitylog-filter-row" data-role="filter-row" keyboard="{ 13: applyFilters }">
+            <tr class="commercegears-activitylog-filter-row" data-role="filter-row" keyboard="{ 13: applyFilters }">
                 <!-- ko foreach: { data: getVisible(), as: '$col' } -->
-                <td class="softaware-activitylog-filter-cell">
+                <td class="commercegears-activitylog-filter-cell">
                     <!-- ko with: $parent.getColumnFilter($col) -->
                         <!-- ko if: $data.isRange -->
-                        <div class="softaware-activitylog-filter-range">
+                        <div class="commercegears-activitylog-filter-range">
                             <!-- ko foreach: elems -->
-                            <div class="softaware-activitylog-filter-range-line">
-                                <label class="softaware-activitylog-filter-range-label" attr="for: uid" text="label"></label>
-                                <div class="softaware-activitylog-filter-control" render="elementTmpl"></div>
+                            <div class="commercegears-activitylog-filter-range-line">
+                                <label class="commercegears-activitylog-filter-range-label" attr="for: uid" text="label"></label>
+                                <div class="commercegears-activitylog-filter-control" render="elementTmpl"></div>
                             </div>
                             <!-- /ko -->
                         </div>
                         <!-- /ko -->
                         <!-- ko ifnot: $data.isRange -->
-                        <label class="admin__control-support-text softaware-activitylog-filter-hidden-label"
+                        <label class="admin__control-support-text commercegears-activitylog-filter-hidden-label"
                                attr="for: uid" text="label"></label>
-                        <div class="softaware-activitylog-filter-control" render="elementTmpl"></div>
+                        <div class="commercegears-activitylog-filter-control" render="elementTmpl"></div>
                         <!-- /ko -->
                     <!-- /ko -->
                 </td>

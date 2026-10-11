@@ -50,7 +50,7 @@ own session cannot be terminated; use Sign Out instead.
 **How does the IP allowlist work, and can I lock myself out?**
 When the allowlist is on, only the listed IP addresses and CIDR ranges (IPv4 and IPv6) can sign in and use the admin.
 The module refuses to save a list that does not include your current IP address. If you are locked out anyway, for
-example after your IP address changed, run `bin/magento softaware:activity-log:allowlist --disable` on the server.
+example after your IP address changed, run `bin/magento commercegears:activity-log:allowlist --disable` on the server.
 
 **My store is behind Cloudflare and the log shows Cloudflare IP addresses. What should I do?**
 Either configure the web server to pass the real visitor IP (for example nginx `real_ip` with Cloudflare's ranges), or

@@ -1,12 +1,12 @@
 <?php
 /**
- * Softaware Admin Activity Log
+ * CommerceGears Admin Activity Log
  *
- * @copyright Copyright (c) Softaware Commerce (https://www.softawarecommerce.co.uk/)
+ * @copyright Copyright (c) CommerceGears (https://www.commercegearscommerce.co.uk/)
  */
 declare(strict_types=1);
 
-namespace Softaware\ActivityLog\Model;
+namespace CommerceGears\ActivityLog\Model;
 
 use Magento\Backend\Model\UrlInterface as BackendUrl;
 use Magento\Framework\App\Area;
@@ -17,7 +17,7 @@ use Magento\Framework\Translate\Inline\StateInterface as InlineTranslation;
 use Magento\Store\Model\StoreManagerInterface;
 use Magento\User\Model\User;
 use Psr\Log\LoggerInterface;
-use Softaware\ActivityLog\Model\ResourceModel\Login as LoginResource;
+use CommerceGears\ActivityLog\Model\ResourceModel\Login as LoginResource;
 
 /**
  * Security alerts: repeated failed sign-ins from one IP, account lockouts and sign-ins from a new IP or country.
@@ -25,7 +25,7 @@ use Softaware\ActivityLog\Model\ResourceModel\Login as LoginResource;
  */
 class SecurityNotifier
 {
-    private const CACHE_PREFIX = 'softaware_activitylog_alert_';
+    private const CACHE_PREFIX = 'commercegears_activitylog_alert_';
 
     public function __construct(
         private readonly Config $config,
@@ -96,14 +96,14 @@ class SecurityNotifier
         $title = (string)__('Admin "%1" signed in from a %2', $username, implode(' / ', $reasons));
         $description = (string)__(
             'Sign-in by %1 from IP %2%3. If this was not expected, terminate the session under '
-            . 'Softaware > Admin Activity Log > Active Sessions and change the password.',
+            . 'CommerceGears > Admin Activity Log > Active Sessions and change the password.',
             $username,
             $ip,
             $country ? ' (' . $country . ')' : ''
         );
         $extra = $this->config->isNotifyUserEnabled() && $user->getEmail() ? [(string)$user->getEmail()] : [];
         if ($this->config->isAdminNoticeEnabled()) {
-            $this->addNotice($title, $description, 'softaware_activitylog/login/index');
+            $this->addNotice($title, $description, 'commercegears_activitylog/login/index');
         }
         $this->sendEmail($this->config->getNewIpTemplate(), $title, $description, $username, $ip, $extra);
     }
@@ -111,7 +111,7 @@ class SecurityNotifier
     private function alert(string $title, string $description, string $username, string $ip, int $count): void
     {
         if ($this->config->isAdminNoticeEnabled()) {
-            $this->addNotice($title, $description, 'softaware_activitylog/login/index');
+            $this->addNotice($title, $description, 'commercegears_activitylog/login/index');
         }
         $this->sendEmail($this->config->getFailedLoginTemplate(), $title, $description, $username, $ip, [], $count);
     }
@@ -122,7 +122,7 @@ class SecurityNotifier
             $url = $this->getUrlWithoutSecretKey($route);
             $this->notifier->addMajor($title, $description, $url);
         } catch (\Throwable $e) {
-            $this->logger->error('Softaware_ActivityLog: could not add admin notice: ' . $e->getMessage());
+            $this->logger->error('CommerceGears_ActivityLog: could not add admin notice: ' . $e->getMessage());
         }
     }
 
@@ -178,14 +178,14 @@ class SecurityNotifier
                     'ip' => $ip,
                     'count' => $count,
                     'time' => gmdate('Y-m-d H:i:s') . ' UTC',
-                    'log_url' => $this->getUrlWithoutSecretKey('softaware_activitylog/login/index'),
+                    'log_url' => $this->getUrlWithoutSecretKey('commercegears_activitylog/login/index'),
                 ])
                 ->setFromByScope($this->config->getSenderIdentity())
                 ->addTo($recipients)
                 ->getTransport();
             $transport->sendMessage();
         } catch (\Throwable $e) {
-            $this->logger->error('Softaware_ActivityLog: could not send security email: ' . $e->getMessage());
+            $this->logger->error('CommerceGears_ActivityLog: could not send security email: ' . $e->getMessage());
         } finally {
             $this->inlineTranslation->resume();
         }

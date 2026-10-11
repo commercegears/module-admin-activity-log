@@ -26,7 +26,7 @@ label,label
 "new IP address %1","new IP address %1"
 "new country %1","new country %1"
 "Admin ""%1"" signed in from a %2","Admin ""%1"" signed in from a %2"
-"Sign-in by %1 from IP %2%3. If this was not expected, terminate the session under Softaware > Admin Activity Log > Active Sessions and change the password.","Sign-in by %1 from IP %2%3. If this was not expected, terminate the session under Softaware > Admin Activity Log > Active Sessions and change the password."
+"Sign-in by %1 from IP %2%3. If this was not expected, terminate the session under CommerceGears > Admin Activity Log > Active Sessions and change the password.","Sign-in by %1 from IP %2%3. If this was not expected, terminate the session under CommerceGears > Admin Activity Log > Active Sessions and change the password."
 "This is your own session. Use ""Sign Out"" instead.","This is your own session. Use ""Sign Out"" instead."
 "The session no longer exists.","The session no longer exists."
 "Session terminated by %1","Session terminated by %1"
@@ -162,7 +162,7 @@ Details,Details
 "Default: 15; 1 to 1440 (one day).","Default: 15; 1 to 1440 (one day)."
 "Used for failed sign-in and lockout alerts. Copy it under Marketing > Email Templates to change the wording.","Used for failed sign-in and lockout alerts. Copy it under Marketing > Email Templates to change the wording."
 "Used for sign-ins from a new IP address or country.","Used for sign-ins from a new IP address or country."
-"Only the listed IP addresses can use the admin panel. Locked out? Run <code>bin/magento softaware:activity-log:allowlist --disable</code>.","Only the listed IP addresses can use the admin panel. Locked out? Run <code>bin/magento softaware:activity-log:allowlist --disable</code>."
+"Only the listed IP addresses can use the admin panel. Locked out? Run <code>bin/magento commercegears:activity-log:allowlist --disable</code>.","Only the listed IP addresses can use the admin panel. Locked out? Run <code>bin/magento commercegears:activity-log:allowlist --disable</code>."
 "Default: No. Your own IP address must be on the list before it can be switched on.","Default: No. Your own IP address must be on the list before it can be switched on."
 "IP address","IP address"
 Search,Search
