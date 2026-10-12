@@ -21,7 +21,7 @@ the admin to a list of IP addresses. This guide covers installation, configurati
 ## 2. Installation
 
 Install with Composer from repo.commercegears.com. The access keys are in your account on
-commercegears.com; see [Composer access](https://commercegears.com/shop/composer-access/) for details.
+commercegears.com; see [Composer access](https://commercegears.com/composer-access/) for details.
 
 ```bash
 composer config repositories.commercegears composer https://repo.commercegears.com
