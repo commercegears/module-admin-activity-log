@@ -27,9 +27,9 @@
                     <depends><field id="enabled">1</field></depends>
                 </field>
                 <field id="ip_source" translate="label comment" type="select" sortOrder="35" showInDefault="1" canRestore="1">
-                    <label>Client IP Address From</label>
+                    <label>Country Header Accepted From</label>
                     <source_model>CommerceGears\ActivityLog\Model\Source\IpSource</source_model>
-                    <comment><![CDATA[Used for the logs, alerts and IP allowlist. Default: Web server. Choose Cloudflare only if the logs show Cloudflare addresses; the <code>CF-Connecting-IP</code> header is then trusted on requests from Cloudflare's address ranges only.]]></comment>
+                    <comment><![CDATA[For the country column and the new country alert (Cloudflare's <code>CF-IPCountry</code> header). Default: Any request. Choose Cloudflare's addresses only if requests reach the store straight from Cloudflare; a visitor who bypasses Cloudflare then cannot make up a country. IP addresses are read as set under CommerceGears > General > Visitor Addresses.]]></comment>
                     <depends><field id="enabled">1</field></depends>
                 </field>
                 <field id="retention_days" translate="label comment" type="text" sortOrder="40" showInDefault="1" canRestore="1">

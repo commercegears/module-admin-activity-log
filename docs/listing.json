@@ -60,8 +60,8 @@
         },
         {
             "label": "Settings",
-            "title": "Retention and IP source",
-            "text": "Switch each log on or off, choose how long entries are kept and whether the client IP comes from the web server or Cloudflare.",
+            "title": "Retention and sign-in country",
+            "text": "Switch each log on or off, choose how long entries are kept and where the sign-in country header is accepted from.",
             "image": "docs/images/admin-settings.png"
         }
     ],

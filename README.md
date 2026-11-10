@@ -39,8 +39,11 @@ User guide: [docs/user-guide.md](docs/user-guide.md) · FAQ: [docs/faq.md](docs/
   warns when the matching log is switched off.
 - **Retention**: entries older than N days are deleted by a daily cron job (in batches). Changes to the Activity
   Log's own settings are always kept, so shortening the retention or switching logging off stays on record.
-- **Client IP behind Cloudflare**: "Client IP Address From" can be set to Cloudflare. The `CF-Connecting-IP` header
-  (and `CF-IPCountry`) is then trusted only on requests that come from Cloudflare's published address ranges.
+- **Client IP behind proxies**: the IP address is read by CommerceGears Core. `X-Forwarded-For` is only followed on
+  requests from Cloudflare, from proxies on a private network and from the proxies under Stores > Configuration >
+  CommerceGears > General > Visitor Addresses > Trusted Proxies, so a made-up header cannot fake an address or get
+  past the allowlist. "Country Header Accepted From" can limit Cloudflare's `CF-IPCountry` header to requests from
+  Cloudflare's published address ranges.
 - **Exclusions**: entity types and configuration paths (with `*` wildcards) that are never logged.
 - **Low overhead**: tracking runs in the admin area only; the diff is built from data Magento already loaded
   (one extra load only for repositories that build a fresh model, such as customers); entries are kept in memory,
@@ -59,7 +62,7 @@ User guide: [docs/user-guide.md](docs/user-guide.md) · FAQ: [docs/faq.md](docs/
 | `commercegears_activitylog/general/enabled` | 1 | Master switch (logging, alerts and allowlist) |
 | `commercegears_activitylog/general/log_actions` | 1 | Admin action log |
 | `commercegears_activitylog/general/log_logins` | 1 | Login log (needed for alerts) |
-| `commercegears_activitylog/general/ip_source` | server | `server` (REMOTE_ADDR) or `cloudflare` (CF-Connecting-IP from Cloudflare ranges only) |
+| `commercegears_activitylog/general/ip_source` | server | `CF-IPCountry` accepted from any request (`server`) or from Cloudflare's ranges only (`cloudflare`) |
 | `commercegears_activitylog/general/retention_days` | 90 | 0 = keep forever |
 | `commercegears_activitylog/exclude/entity_types` | (empty) | Comma-separated entity type codes |
 | `commercegears_activitylog/exclude/config_paths` | (empty) | One pattern per line, `*` wildcard |
@@ -85,7 +88,7 @@ Other modules can track their own entities by adding an item to the `types` argu
 
 ## Compatibility
 
-Magento Open Source / Adobe Commerce 2.4.6 to 2.4.9, PHP 8.2 to 8.5 (Magento 2.4.6: PHP 8.2). Requires `commercegears/module-core` ^2.0 and
+Magento Open Source / Adobe Commerce 2.4.6 to 2.4.9, PHP 8.2 to 8.5 (Magento 2.4.6: PHP 8.2). Requires `commercegears/module-core` ^2.3 and
 Magento_Security (admin session records). No storefront code.
 
 ## Limitations
@@ -96,10 +99,11 @@ Magento_Security (admin session records). No storefront code.
 - Changes written with direct SQL by Magento or third-party modules (for example stock updates, some
   "Update attributes" paths that run through the message queue) only appear as the mass action that started them.
 - Very large field values are truncated to 5,000 characters in the diff.
-- By default the client IP is taken from `REMOTE_ADDR`. Behind Cloudflare either configure the web server to pass the
-  real IP (nginx `real_ip` with Cloudflare's ranges) or set "Client IP Address From" to Cloudflare. Behind other
-  proxies or CDNs configure the web server; otherwise the allowlist and IP alerts see the proxy IP. The built-in list
-  of Cloudflare ranges is updated with the module.
+- The client IP is the web server's `REMOTE_ADDR`, or the visitor's address from `X-Forwarded-For` when the request
+  comes from Cloudflare, a proxy on a private network or a proxy under Trusted Proxies (see above). Behind a CDN or
+  load balancer with public addresses other than Cloudflare, add it there or configure the web server to pass the real
+  IP; otherwise the allowlist and IP alerts see the proxy IP. The built-in lists of Cloudflare ranges are updated with
+  the modules.
 - Entries are written in groups of up to 500 during long requests (bulk saves in the admin area, CLI runs in the
   admin area), so memory stays flat.
 - "New country" alerts need Cloudflare with IP geolocation (`CF-IPCountry`).

@@ -8,10 +8,10 @@ declare(strict_types=1);
 
 namespace CommerceGears\ActivityLog\Model;
 
+use CommerceGears\Core\Model\Http\ClientIp;
 use Magento\Backend\Model\Auth\Session as AuthSession;
 use Magento\Framework\App\Request\Http as HttpRequest;
 use Magento\Framework\App\RequestInterface;
-use Magento\Framework\HTTP\PhpEnvironment\RemoteAddress;
 
 /**
  * Who, from where and through which admin action the current request runs.
@@ -21,8 +21,8 @@ class RequestContext
     private ?string $requestId = null;
 
     /**
-     * Cloudflare's published edge ranges (https://www.cloudflare.com/ips/). CF-Connecting-IP and CF-IPCountry are
-     * only trusted from these addresses when the IP source is "Cloudflare".
+     * Cloudflare's published edge ranges (https://www.cloudflare.com/ips/). With the setting "Country Header Accepted
+     * From: Cloudflare's addresses only", CF-IPCountry is only trusted on connections from these addresses.
      */
     public const CLOUDFLARE_RANGES = [
         '173.245.48.0/20', '103.21.244.0/22', '103.22.200.0/22', '103.31.4.0/22', '141.101.64.0/18',
@@ -34,7 +34,7 @@ class RequestContext
 
     public function __construct(
         private readonly AuthSession $authSession,
-        private readonly RemoteAddress $remoteAddress,
+        private readonly ClientIp $clientIp,
         private readonly RequestInterface $request,
         private readonly Config $config,
         private readonly IpMatcher $ipMatcher
@@ -54,19 +54,12 @@ class RequestContext
     }
 
     /**
-     * Client IP. With the IP source "Cloudflare", the CF-Connecting-IP header is used when the request comes
-     * from a Cloudflare edge address; otherwise (and by default) the web server's REMOTE_ADDR.
-     *
-     * @param string|null $source IP source to use instead of the configured one (for checks before saving it)
+     * Client IP, as CommerceGears Core reads it: X-Forwarded-For is only followed from Cloudflare, private networks
+     * and the proxies under CommerceGears > General > Visitor Addresses, so a visitor cannot make up an address.
      */
-    public function getIp(?string $source = null): string
+    public function getIp(): string
     {
-        $remote = (string)$this->remoteAddress->getRemoteAddress();
-        if (($source ?? $this->config->getIpSource()) !== Config::IP_SOURCE_CLOUDFLARE || !$this->isFromCloudflare()) {
-            return $remote;
-        }
-        $header = trim((string)$this->request->getHeader('CF-Connecting-IP'));
-        return filter_var($header, FILTER_VALIDATE_IP) ? $header : $remote;
+        return $this->clientIp->getAddress();
     }
 
     /**
@@ -77,7 +70,7 @@ class RequestContext
         if (!$this->request instanceof HttpRequest) {
             return false;
         }
-        $remote = (string)$this->remoteAddress->getRemoteAddress();
+        $remote = trim((string)$this->request->getServer('REMOTE_ADDR'));
         return $remote !== '' && $this->ipMatcher->matches($remote, self::CLOUDFLARE_RANGES);
     }
 

@@ -126,10 +126,10 @@ Country,Country
 "Last Name","Last Name"
 "Signed In","Signed In"
 "Last Activity","Last Activity"
-"Client IP Address From","Client IP Address From"
+"Country Header Accepted From","Country Header Accepted From"
 " (masked, may be a password)"," (masked, may be a password)"
-"Web server (REMOTE_ADDR)","Web server (REMOTE_ADDR)"
-"Cloudflare (CF-Connecting-IP)","Cloudflare (CF-Connecting-IP)"
+"Any request","Any request"
+"Cloudflare's addresses only","Cloudflare's addresses only"
 "(command line)","(command line)"
 (empty),(empty)
 Back,Back
@@ -151,7 +151,7 @@ Values,Values
 "Showing the first %1 of %2 entries. Search Admin Actions for %3 to see all of them.","Showing the first %1 of %2 entries. Search Admin Actions for %3 to see all of them."
 "One IPv4/IPv6 address or CIDR range per line, for example %1 or %2. Text after %3 is a note.","One IPv4/IPv6 address or CIDR range per line, for example %1 or %2. Text after %3 is a note."
 Details,Details
-"Used for the logs, alerts and IP allowlist. Default: Web server. Choose Cloudflare only if the logs show Cloudflare addresses; the <code>CF-Connecting-IP</code> header is then trusted on requests from Cloudflare's address ranges only.","Used for the logs, alerts and IP allowlist. Default: Web server. Choose Cloudflare only if the logs show Cloudflare addresses; the <code>CF-Connecting-IP</code> header is then trusted on requests from Cloudflare's address ranges only."
+"For the country column and the new country alert (Cloudflare's <code>CF-IPCountry</code> header). Default: Any request. Choose Cloudflare's addresses only if requests reach the store straight from Cloudflare; a visitor who bypasses Cloudflare then cannot make up a country. IP addresses are read as set under CommerceGears > General > Visitor Addresses.","For the country column and the new country alert (Cloudflare's <code>CF-IPCountry</code> header). Default: Any request. Choose Cloudflare's addresses only if requests reach the store straight from Cloudflare; a visitor who bypasses Cloudflare then cannot make up a country. IP addresses are read as set under CommerceGears > General > Visitor Addresses."
 "Default: 90. Older entries are deleted daily; 0 keeps everything; at most 3650 (ten years). Changes to these settings are always kept.","Default: 90. Older entries are deleted daily; 0 keeps everything; at most 3650 (ten years). Changes to these settings are always kept."
 "Changes to the selected record types are not logged. Default: none, so everything is logged. Hold Ctrl (Cmd on a Mac) to select several.","Changes to the selected record types are not logged. Default: none, so everything is logged. Hold Ctrl (Cmd on a Mac) to select several."
 "One path per line, <code>*</code> is a wildcard, for example <code>design/*</code>. Secret values such as passwords and API keys are always masked, so they do not need to be listed here.","One path per line, <code>*</code> is a wildcard, for example <code>design/*</code>. Secret values such as passwords and API keys are always masked, so they do not need to be listed here."

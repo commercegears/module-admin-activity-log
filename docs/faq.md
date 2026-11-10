@@ -52,10 +52,11 @@ When the allowlist is on, only the listed IP addresses and CIDR ranges (IPv4 and
 The module refuses to save a list that does not include your current IP address. If you are locked out anyway, for
 example after your IP address changed, run `bin/magento commercegears:activity-log:allowlist --disable` on the server.
 
-**My store is behind Cloudflare and the log shows Cloudflare IP addresses. What should I do?**
-Either configure the web server to pass the real visitor IP (for example nginx `real_ip` with Cloudflare's ranges), or
-set "Client IP Address From" to Cloudflare. The `CF-Connecting-IP` header is then trusted only on requests that come
-from Cloudflare's published address ranges.
+**My store is behind a proxy or CDN and the log shows its IP addresses. What should I do?**
+Cloudflare and proxies on a private network (load balancer, Varnish) are recognised automatically. For other CDNs or
+load balancers with public addresses, enter their addresses under Stores > Configuration > CommerceGears > General >
+Visitor Addresses > Trusted Proxies, or configure the web server to pass the real visitor IP (for example nginx
+`real_ip`). The `X-Forwarded-For` header is only read from these proxies, so a visitor cannot make up an address.
 
 **Can I export the log?**
 Yes. The Admin Actions and Login Log grids export to CSV and XML, with the filters you have set.

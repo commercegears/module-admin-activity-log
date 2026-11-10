@@ -66,7 +66,8 @@ class Config
     }
 
     /**
-     * Where the client IP comes from: the web server (REMOTE_ADDR) or Cloudflare's CF-Connecting-IP header.
+     * Where Cloudflare's CF-IPCountry header is accepted from: any request (server) or Cloudflare's addresses only
+     * (cloudflare). The setting is still called ip_source: it chose the client IP before CommerceGears Core read it.
      */
     public function getIpSource(): string
     {

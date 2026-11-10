@@ -52,9 +52,7 @@ class Allowlist extends Value
             $rules[] = $rule;
         }
         $enabled = (bool)$this->getFieldsetDataValue('enabled');
-        // Check with the IP source that is being saved in the same form, so switching it cannot lock you out.
-        $postedSource = $this->getData('groups')['general']['fields']['ip_source']['value'] ?? null;
-        $ip = $this->requestContext->getIp(is_string($postedSource) ? $postedSource : null);
+        $ip = $this->requestContext->getIp();
         if ($enabled && $rules !== [] && $ip !== '' && !$this->ipMatcher->matches($ip, $rules)) {
             throw new LocalizedException(
                 __('Your current IP address %1 is not on the allowlist. Add it first so you do not lock yourself out.', $ip)

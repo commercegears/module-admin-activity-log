@@ -1,5 +1,10 @@
 # Changelog
 
+## 2.0.4 (2026-11-10)
+- Fix: the admin IP allowlist and the logs can no longer be fooled with a made-up proxy header.
+- Improvement: the setting "Client IP Address From" is now "Country Header Accepted From".
+- Improvement: CDNs other than Cloudflare can be added under CommerceGears > General > Visitor Addresses.
+
 ## 2.0.3 (2026-10-21)
 - Improvement: the module is now free.
 

@@ -19,8 +19,8 @@ class IpSource implements OptionSourceInterface
     public function toOptionArray(): array
     {
         return [
-            ['value' => Config::IP_SOURCE_SERVER, 'label' => __('Web server (REMOTE_ADDR)')],
-            ['value' => Config::IP_SOURCE_CLOUDFLARE, 'label' => __('Cloudflare (CF-Connecting-IP)')],
+            ['value' => Config::IP_SOURCE_SERVER, 'label' => __('Any request')],
+            ['value' => Config::IP_SOURCE_CLOUDFLARE, 'label' => __("Cloudflare's addresses only")],
         ];
     }
 }

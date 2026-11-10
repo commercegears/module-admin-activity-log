@@ -52,7 +52,7 @@ settings are global (default scope).
 | Enabled | Default Yes. When No, nothing is logged, no alerts are sent and the IP allowlist is not enforced. |
 | Log Admin Actions | Default Yes. Create, update and delete of the records listed in section 4, plus mass actions and imports. |
 | Log Admin Sign-ins | Default Yes. Successful and failed sign-ins, lockouts, blocked IPs and sign-outs. Required for security notifications. |
-| Client IP Address From | **Web server** (`REMOTE_ADDR`, default) or **Cloudflare**. With Cloudflare, the `CF-Connecting-IP` and `CF-IPCountry` headers are trusted only on requests from Cloudflare's address ranges. Used for the logs, the alerts and the allowlist. |
+| Country Header Accepted From | **Any request** (default) or **Cloudflare's addresses only**: where Cloudflare's `CF-IPCountry` header (country column, new country alerts) is accepted from. Choose Cloudflare's addresses only if requests reach the store straight from Cloudflare; a visitor who bypasses Cloudflare then cannot make up a country. The IP address itself is read as set under Stores > Configuration > CommerceGears > General > Visitor Addresses > Trusted Proxies (Cloudflare and proxies on a private network are recognised automatically). |
 | Keep Log Entries For (Days) | Default 90. Older entries are deleted daily; 0 keeps everything; at most 3650 (ten years). Changes to these settings are always kept. |
 
 ### Exclusions
@@ -245,10 +245,10 @@ Other modules can have their own entities tracked by adding an item to the `type
 | Problem | Solution |
 | --- | --- |
 | Nothing is logged | Check **Enabled** and **Log Admin Actions** / **Log Admin Sign-ins**, and that the record type is not under **Do Not Log These Entities**. Changes made through the API, cron or direct SQL are not logged. |
-| All IP addresses are the same (a proxy or Cloudflare address) | Configure the web server to pass the real client IP, or set **Client IP Address From** to Cloudflare if the store is behind Cloudflare. |
+| All IP addresses are the same (a proxy or CDN address) | Add the proxy's or CDN's addresses under Stores > Configuration > CommerceGears > General > Visitor Addresses > Trusted Proxies, or configure the web server to pass the real client IP. Cloudflare and proxies on a private network are recognised automatically. |
 | The country column is empty, or there are no new country alerts | These need Cloudflare with IP geolocation, which sends the `CF-IPCountry` header. |
 | No alert emails | Enter **Email Recipients** and check that the store can send email. Alerts still appear in the admin notification inbox. |
-| Locked out by the allowlist | Run `bin/magento commercegears:activity-log:allowlist --disable` on the server, or add your new IP address with `--add`. |
+| Locked out by the allowlist | Run `bin/magento commercegears:activity-log:allowlist --disable` on the server, or add your new IP address with `--add`. If it happened after an update and the store is behind a CDN or load balancer other than Cloudflare, add its addresses under Stores > Configuration > CommerceGears > General > Visitor Addresses > Trusted Proxies. |
 | A terminated admin still sees the admin page | They are signed out on their next click. |
 | Entries disappear after some time | That is the retention period (default 90 days). Set 0 to keep everything. |
 
